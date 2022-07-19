@@ -122,24 +122,32 @@
                 name: "Research Intern",
                 posX: 370,
                 posY: 700,
+                width: 0,
+                height: 0,
                 neighbor: ["Research Associate", "Venture Capital Associate", "Biomenufacturing Associate"]
             },
             {
                 name: "Research Associate",
                 posX: 370,
                 posY: 500,
+                width: 0,
+                height: 0,
                 neighbor: ["Venture Capital Associate"]
             },
             {
                 name: "Venture Capital Associate",
                 posX: 70,
                 posY: 500,
+                width: 0,
+                height: 0,
                 neighbor: ["Biomenufacturing Associate"]
             },
             {
                 name: "Biomenufacturing Associate",
                 posX: 630,
                 posY: 500,
+                width: 0,
+                height: 0,
                 neighbor: ["Research Intern"]
             },
         ],
@@ -197,15 +205,14 @@
             .text(function (d) { return d.name })
             .each(function(d){
                 console.log(this);
-                
                 let currnetText = d3.select(this);
                 let objectToAppend = d3.select(this.parentNode);
                 let bbox = objectToAppend.node().getBBox();
                 objectToAppend.append("rect")
                     .attr("x", bbox.x)
                     .attr("y", bbox.y)
-                    .attr("width",bbox.width)
-                    .attr("height", bbox.height)
+                    .attr("width",function(d){d.width = bbox.width; return bbox.width})
+                    .attr("height", function(d){d.height = bbox.height; return bbox.height})
                     .attr("id","jobBox")
                     .style("fill","white")
                     .style("stroke","black")
@@ -215,27 +222,15 @@
 
             })
             .raise();
-
-        
-        // let enteringRects = svg.selectAll("#jobBox")
-        //     .data(enteringText.nodes())
-        //     .enter()
-        //     .append("rect")
-        //     .attr("x",function(node){; return node.getBBox().x})
-        //     .attr("y",function(node){return node.getBBox().y})
-        //     .attr("width",function(node){return node.getBBox().width})
-        //     .attr("height",function(node){return node.getBBox().height})
-        //     .attr("id","jobBox")
-        //     .style("fill","white")
-        //     .style("stroke","black")
-        //     .style("stroke-width","1.5px")
-        //     .on("click",clicked);
+            d3.selectAll("#job")
+                .on("click",clicked);
 
 
 
         
         function clicked(){
-            console.log("clicked!");
+            console.log(this);
+            //console.log("clicked!");
         }
 
 
@@ -245,10 +240,10 @@
             .enter()
             .append("line")
             .attr("class","link")
-            .attr("x1",function(d){return data.jobs[d.source].posX})
-            .attr("y1",function(d){return data.jobs[d.source].posY})
-            .attr("x2",function(d){return data.jobs[d.target].posX})
-            .attr("y2",function(d){return data.jobs[d.target].posY})
+            .attr("x1",function(d){return (data.jobs[d.source].posX + (data.jobs[d.source].width/2))})
+            .attr("y1",function(d){return (data.jobs[d.source].posY - (data.jobs[d.source].height/2)-7)})
+            .attr("x2",function(d){return (data.jobs[d.target].posX + (data.jobs[d.target].width/2))})
+            .attr("y2",function(d){return (data.jobs[d.target].posY - (data.jobs[d.target].height/2))})
             .attr("fill","none")
             .attr("stroke","white")
     }
@@ -390,8 +385,9 @@
     swimingLaneCreation(4, 3);
     topLabels();
     sideLabel();
-    lineCreation();
+    
     jobsCreation();
+    lineCreation();
     d3.selectAll("#job").raise();
 
 
