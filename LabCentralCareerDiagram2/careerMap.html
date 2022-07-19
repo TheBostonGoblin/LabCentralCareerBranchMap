@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .active {
+            stroke: #000;
+            stroke-width: 2px;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+    const width = 1200;
+    const height = 800;
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    const data = {
+        segments:
+            [
+                {
+                    name: "Venture Capital / Business Development-A",
+                    color: "#00a0a0"
+                },
+                {
+                    name: "Research & Design-A",
+                    color: "#a00000"
+                },
+                {
+                    name: "Biomanufacturing-A",
+                    color: "#1fb75c"
+                },
+                {
+                    name: "Lab Administration / Lab Operations-A",
+                    color: "#e8b923"
+                },
+                {
+                    name: "Venture Capital / Business Development-M",
+                    color: "#008080"
+                },
+                {
+                    name: "Research & Design-M",
+                    color: "#800000"
+                },
+                {
+                    name: "Biomanufacturing-M",
+                    color: "#2ea85f"
+                },
+                {
+                    name: "Lab Administration / Lab Operations-M",
+                    color: "#d4af37"
+                },
+                {
+                    name: "Venture Capital / Business Development-E",
+                    color: "#0d7373"
+                },
+                {
+                    name: "Research & Design-E",
+                    color: "#730d0d"
+                },
+                {
+                    name: "Biomanufacturing-E",
+                    color: "#3a9c61"
+                },
+                {
+                    name: "Lab Administration / Lab Operations-E",
+                    color: "#c4a747"
+                },
+            ],
+        careerPaths: [
+            {
+                name: "Venture Capital / Business Development",
+                posX: 0,
+                posY: 0
+            },
+            {
+                name: "Research & Design",
+                posX: 0,
+                posY: 0
+            },
+            {
+                name: "Biomanufacturing",
+                posX: 0,
+                posY: 0
+            },
+            {
+                name: "Lab Administration / Lab Operations",
+                posX: 0,
+                posY: 0
+            }
+        ],
+        careerStage: [
+            {
+                name: "Advanced",
+                posX: 0,
+                posY: 0
+            },
+            {
+                name: "Middle",
+                posX: 0,
+                posY: 0
+            },
+            {
+                name: "Entry",
+                posX: 0,
+                posY: 0
+            }
+
+        ],
+        jobs: [
+            {
+                name: "Research Intern",
+                posX: 370,
+                posY: 700,
+                neighbor: ["Research Associate", "Venture Capital Associate", "Biomenufacturing Associate"]
+            },
+            {
+                name: "Research Associate",
+                posX: 370,
+                posY: 500,
+                neighbor: ["Venture Capital Associate"]
+            },
+            {
+                name: "Venture Capital Associate",
+                posX: 70,
+                posY: 500,
+                neighbor: ["Biomenufacturing Associate"]
+            },
+            {
+                name: "Biomenufacturing Associate",
+                posX: 630,
+                posY: 500,
+                neighbor: ["Research Intern"]
+            },
+        ],
+        links: [
+            {
+                source : 0,
+                target : 1
+            },
+            {
+                source : 0,
+                target : 2
+            },
+            {
+                source : 0,
+                target : 3
+            }
+        ]
+    }
+
+    const dataSegments = svg.selectAll("segment").data(data.segments);
+    const dataTopLabel = svg.selectAll("tLabel").data(data.careerPaths);
+    const dataSideLabel = svg.selectAll("sLabel").data(data.careerStage);
+    const dataJobs = svg.selectAll("job").data(data.jobs);
+    const dataLinks = svg.selectAll("link").data(data.links);
+    let globaLaneWidth;
+    let globalLaneHeight;
+
+    function bBoxGenerator(text) {
+        let bbox = text.node().getBBox();
+
+
+        let rect = svg.append("rect")
+            .attr("x", bbox.x)
+            .attr("y", bbox.y)
+            .attr("width", bbox.width)
+            .attr("height", bbox.height)
+            .attr("id", "nodeBox")
+            .style("fill", "white")
+            .style("stroke", "black")
+            .style("stroke-width", "1.5px");
+    }
+    function jobsCreation() {
+        let currentGElement = null;
+        let enteringText = dataJobs
+            .enter()
+            .append("g")
+            .attr("x", function (d) { return d.posX })
+            .attr("y", function (d) { return d.posY })
+            .attr("id","job")
+            .each(function(){console.log(this)})
+            .append("text")
+            .attr("x", function (d) { return d.posX })
+            .attr("y", function (d) { return d.posY })
+            .attr("id", "jobText")
+            .text(function (d) { return d.name })
+            .each(function(d){
+                console.log(this);
+                
+                let currnetText = d3.select(this);
+                let objectToAppend = d3.select(this.parentNode);
+                let bbox = objectToAppend.node().getBBox();
+                objectToAppend.append("rect")
+                    .attr("x", bbox.x)
+                    .attr("y", bbox.y)
+                    .attr("width",bbox.width)
+                    .attr("height", bbox.height)
+                    .attr("id","jobBox")
+                    .style("fill","white")
+                    .style("stroke","black")
+                    .style("stroke-width","1.5px")
+
+
+
+            })
+            .raise();
+
+        
+        // let enteringRects = svg.selectAll("#jobBox")
+        //     .data(enteringText.nodes())
+        //     .enter()
+        //     .append("rect")
+        //     .attr("x",function(node){; return node.getBBox().x})
+        //     .attr("y",function(node){return node.getBBox().y})
+        //     .attr("width",function(node){return node.getBBox().width})
+        //     .attr("height",function(node){return node.getBBox().height})
+        //     .attr("id","jobBox")
+        //     .style("fill","white")
+        //     .style("stroke","black")
+        //     .style("stroke-width","1.5px")
+        //     .on("click",clicked);
+
+
+
+        
+        function clicked(){
+            console.log("clicked!");
+        }
+
+
+    }
+    function lineCreation(source){
+        let connections = dataLinks
+            .enter()
+            .append("line")
+            .attr("class","link")
+            .attr("x1",function(d){return data.jobs[d.source].posX})
+            .attr("y1",function(d){return data.jobs[d.source].posY})
+            .attr("x2",function(d){return data.jobs[d.target].posX})
+            .attr("y2",function(d){return data.jobs[d.target].posY})
+            .attr("fill","none")
+            .attr("stroke","white")
+    }
+    function swimingLaneCreation(vertLaneNum, horiLaneNum) {
+        let currentPosX = 0;
+        let currentPosY = 50;
+        const laneWidth = (width - 80) / vertLaneNum;
+        const laneHeight = (height - 80) / horiLaneNum;
+        globaLaneWidth = laneWidth;
+        globalLaneHeight = laneHeight;
+        const numOfLanes = vertLaneNum * horiLaneNum;
+        let modeCounter = horiLaneNum;
+        const firstRowHeight = laneHeight + 50;
+        const firstColumnWidth = laneWidth + 50;
+        let entering = dataSegments
+            .enter()
+            .append("rect")
+            .attr("x", function (a, i) {
+                if (i == 0) {
+                    //console.log(currentPosX);
+                    return currentPosX;
+                }
+                else if (i % vertLaneNum == 0) {
+                    currentPosX = 0;
+                    return currentPosX;
+                }
+                else {
+                    currentPosX += laneWidth;
+                    //console.log(currentPosX);
+                    return currentPosX;
+                }
+            })
+            .attr("y", function (a, i) {
+                if (i == 0) {
+                    return currentPosY;
+                }
+                else if (i % vertLaneNum == 0) {
+                    currentPosY += laneHeight;
+
+                    return currentPosY;
+                }
+                else {
+                    return currentPosY;
+                }
+            })
+            .attr("width", `${laneWidth}`)
+            .attr("height", `${laneHeight}`)
+            .attr("fill", function (d) {
+                return d.color;
+            })
+            .attr("stroke-width", "2px")
+            .attr("stroke", "black")
+            .attr("id", "diagram");
+    };
+    function topLabels() {
+        let currentPosX = 0;
+        const currentPosY = 0;
+        let currentWidth = globaLaneWidth;
+        const currentHeight = 50;
+
+
+
+        let entering = dataTopLabel
+            .enter()
+            .append("g")
+            .attr("class", "careerLabel")
+            .attr("id", "diagram")
+            .attr("class", "careerLabel");
+
+        entering.append("rect")
+            .attr("x", function (d, i) {
+                if (i == 0) {
+                    d.posY = currentPosY;
+                    d.posX = currentPosX;
+                    return currentPosX;
+                }
+                else {
+                    currentPosX += currentWidth;
+                    d.posX = currentPosX;
+                    return currentPosX;
+                }
+            })
+            .attr("y", currentPosY)
+            .attr("width", currentWidth)
+            .attr("height", currentHeight)
+            .attr("fill", "white")
+            .attr("stroke-width", "2px")
+            .attr("stroke", "black")
+
+        entering
+            .append("text")
+            .text(function (d) { return d.name })
+            .attr("x", function (d, i) { return d.posX })
+            .attr("y", 25)
+
+        d3.selectAll(".careerLabel")
+    }
+    function sideLabel() {
+        const currentPosX = width - 80;
+        let currentPosY = 50;
+        const currentHeight = globalLaneHeight;
+        const currentWidth = 50;
+        let entering = dataSideLabel
+            .enter()
+            .append("g")
+            .attr("class", "careerLabel")
+            .attr("id", "diagram")
+            .attr("class", "careerLabel");
+
+        entering.append("rect")
+            .attr("x", currentPosX)
+            .attr("y", function (d, i) {
+                if (i == 0) {
+                    d.posY = currentPosY;
+                    return currentPosY;
+                }
+                else {
+                    currentPosY += globalLaneHeight;
+                    d.posY = currentPosY;
+                    return currentPosY;
+                }
+            })
+            .attr("width", currentWidth)
+            .attr("height", globalLaneHeight)
+            .attr("fill", "white")
+            .attr("stroke-width", "2px")
+            .attr("stroke", "black");
+
+        entering.append("text")
+            .text(function (d) { return d.name })
+            .attr("transform", function (d) { return `translate(${1130},${d.posY + 50}) rotate(90)` })
+    }
+    svg.append("rect")
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("fill", "grey")
+        .attr("stroke-width", "6px")
+        .attr("stroke", "black");
+    swimingLaneCreation(4, 3);
+    topLabels();
+    sideLabel();
+    lineCreation();
+    jobsCreation();
+    d3.selectAll("#job").raise();
+
+
+
+    svg.selectAll("#diagram")
+        .attr("transform", "translate(15,15)")
+
+
+
+</script>
+
+</html>
