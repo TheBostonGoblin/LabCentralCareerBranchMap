@@ -19,12 +19,19 @@
 
 </body>
 <script>
+
+
     const width = 1200;
     const height = 800;
     var svg = d3.select("body")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
+
+
+
+
+
     const data = {
         segments:
             [
@@ -124,7 +131,7 @@
                 posY: 700,
                 width: 0,
                 height: 0,
-                neighbor: ["Research Associate", "Venture Capital Associate", "Biomenufacturing Associate"]
+                neighbor: ["Research Associate", "Venture Capital Associate", "Biomenufacturing Associate"]//0 | 1 2 3
             },
             {
                 name: "Research Associate",
@@ -132,7 +139,8 @@
                 posY: 500,
                 width: 0,
                 height: 0,
-                neighbor: ["Venture Capital Associate"]
+                neighbor: []
+                //neighbor: ["Venture Capital Associate"]
             },
             {
                 name: "Venture Capital Associate",
@@ -140,7 +148,8 @@
                 posY: 500,
                 width: 0,
                 height: 0,
-                neighbor: ["Biomenufacturing Associate"]
+                neighbor: []
+                //neighbor: ["Biomenufacturing Associate"]
             },
             {
                 name: "Biomenufacturing Associate",
@@ -148,22 +157,32 @@
                 posY: 500,
                 width: 0,
                 height: 0,
-                neighbor: ["Research Intern"]
+                neighbor: []
+                //neighbor: ["Research Intern"]
             },
+            {
+                name: "Biomenufacturing CEO",
+                posX: 630,
+                posY: 200,
+                width: 0,
+                height: 0,
+                neighbor: []
+            }
         ],
         links: [
             {
-                source : 0,
-                target : 1
+                source: 0,
+                target: 1
             },
             {
-                source : 0,
-                target : 2
+                source: 0,
+                target: 2
             },
             {
-                source : 0,
-                target : 3
+                source: 0,
+                target: 3
             }
+
         ]
     }
 
@@ -187,7 +206,8 @@
             .attr("id", "nodeBox")
             .style("fill", "white")
             .style("stroke", "black")
-            .style("stroke-width", "1.5px");
+            .style("stroke-width", "1.5px")
+            ;
     }
     function jobsCreation() {
         let currentGElement = null;
@@ -196,14 +216,14 @@
             .append("g")
             .attr("x", function (d) { return d.posX })
             .attr("y", function (d) { return d.posY })
-            .attr("id","job")
-            .each(function(){console.log(this)})
+            .attr("id", "job")
+            .each(function () { console.log(this) })
             .append("text")
             .attr("x", function (d) { return d.posX })
             .attr("y", function (d) { return d.posY })
             .attr("id", "jobText")
             .text(function (d) { return d.name })
-            .each(function(d){
+            .each(function (d) {
                 console.log(this);
                 let currnetText = d3.select(this);
                 let objectToAppend = d3.select(this.parentNode);
@@ -211,41 +231,127 @@
                 objectToAppend.append("rect")
                     .attr("x", bbox.x)
                     .attr("y", bbox.y)
-                    .attr("width",function(d){d.width = bbox.width; return bbox.width})
-                    .attr("height", function(d){d.height = bbox.height; return bbox.height})
-                    .attr("id","jobBox")
-                    .style("fill","white")
-                    .style("stroke","black")
-                    .style("stroke-width","1.5px")
+                    .attr("width", function (d) { d.width = bbox.width; return bbox.width })
+                    .attr("height", function (d) { d.height = bbox.height; return bbox.height })
+                    .attr("id", "jobBox")
+                    .style("fill", "white")
+                    .style("stroke", "black")
+                    .style("stroke-width", "1.5px")
 
 
 
             })
             .raise();
-            d3.selectAll("#job")
-                .on("click",clicked);
+        d3.selectAll("#job")
+            .on("click", generateLinks);
 
 
 
-        
-        function clicked(){
-            console.log(this);
+
+        function generateLinks() {
+            //console.log(this.lastChild.innerHTML);
+            let source = null;
+            for (let x = 0; x < data.jobs.length; x++) {
+                if (data.jobs[x].name == this.lastChild.innerHTML) {
+                    //console.log(data.jobs[x].neighbor.length);
+                    source = x;
+                }
+
+            }
+            lineCreation(source);
+            d3.selectAll("#job").raise();
             //console.log("clicked!");
         }
 
 
     }
-    function lineCreation(source){
-        let connections = dataLinks
+    function lineCreation(source) {
+        console.log("clicked");
+        svg.selectAll("line").remove();
+        let sourceX = null;
+        let sourceY = null;
+        let targetX = null;
+        let targetY = null;
+
+        let sourceFound = false;
+        let dataSet = dataLinks
             .enter()
-            .append("line")
-            .attr("class","link")
-            .attr("x1",function(d){return (data.jobs[d.source].posX + (data.jobs[d.source].width/2))})
-            .attr("y1",function(d){return (data.jobs[d.source].posY - (data.jobs[d.source].height/2)-7)})
-            .attr("x2",function(d){return (data.jobs[d.target].posX + (data.jobs[d.target].width/2))})
-            .attr("y2",function(d){return (data.jobs[d.target].posY - (data.jobs[d.target].height/2))})
-            .attr("fill","none")
-            .attr("stroke","white")
+            .each(function (d) {
+                const objectToAppend = d3.select(this);
+                if (d.source == source) {
+                    sourceX = (data.jobs[d.source].posX + (data.jobs[d.source].width / 2));
+                    sourceY = (data.jobs[d.source].posY - (data.jobs[d.source].height / 2) - 1);
+                    targetX = (data.jobs[d.target].posX + (data.jobs[d.target].width / 2));
+                    targetY = (data.jobs[d.target].posY - (data.jobs[d.target].height / 2));
+                }
+
+                objectToAppend.append("line")
+                    // .enter()
+                    //     .attr({
+                    //         "x1": sourceX,
+                    //         "y1": sourceY,
+                    //         "x2": targetX,
+                    //         "y2": targetY
+                    //     });
+                    .attr("class", "link")
+                    .attr("x1", sourceX)
+                    .attr("y1", sourceY)
+                    .attr("x2", sourceX)
+                    .attr("y2", sourceY)
+                    .attr("stroke-width", "3px")
+                    .attr("stroke", "white")
+                    .attr("fill", "none")
+                    .transition()
+                    .duration(1500)
+                    .attr("x2", targetX)
+                    .attr("y2", targetY);
+
+            })
+
+
+        // .append("line")
+        // .attr("class", "link")
+        // let connections = dataLinks
+        //     .enter()
+        //     .attr({
+        //         "x1": sourceX,
+        //         "y1": sourceY,
+        //         "x2": targetX,
+        //         "y2": targetY
+        //     })
+        // .attr("x1", function (d) {
+        //     if (d.source == source) {
+        //         return (data.jobs[d.source].posX + (data.jobs[d.source].width / 2));
+        //     }
+
+        // })
+        // .attr("y1", function (d) {
+        //     if (d.source == source) {
+        //         return (data.jobs[d.source].posY - (data.jobs[d.source].height / 2) - 1);
+        //     }
+        // })
+        // .attr("x2", function (d) {//animation in place the line will start at is source and animate towards the target
+
+        //     if (d.source == source) {
+        //         return (data.jobs[d.source].posX + (data.jobs[d.source].width / 2));
+        //     }
+        //     // if (d.source == source) {
+        //     //     return (data.jobs[d.target].posX + (data.jobs[d.target].width / 2))
+        //     // }
+        // })
+        // .attr("y2", function (d) {
+
+        //     if (d.source == source) {
+        //         return (data.jobs[d.source].posY - (data.jobs[d.source].height / 2) - 1);
+        //     }
+        //     // if (d.source == source) {
+        //     //     return (data.jobs[d.target].posY - (data.jobs[d.target].height / 2))
+        //     // }
+        // })
+        // .transition()
+        // .duration(1500)
+        // .attr("x2",function(d){if (d.source == source) return (data.jobs[d.source].posX + (data.jobs[d.source].width / 2))})
+        // .attr("y2",function(d){if (d.source == source) return (data.jobs[d.target].posY - (data.jobs[d.target].height / 2))})
     }
     function swimingLaneCreation(vertLaneNum, horiLaneNum) {
         let currentPosX = 0;
@@ -385,15 +491,19 @@
     swimingLaneCreation(4, 3);
     topLabels();
     sideLabel();
-    
+
     jobsCreation();
-    lineCreation();
     d3.selectAll("#job").raise();
 
 
 
     svg.selectAll("#diagram")
         .attr("transform", "translate(15,15)")
+
+    function linkRemoval() {
+        svg.selectAll("line").remove();
+    }
+    d3.selectAll("#diagram").on("click", linkRemoval);
 
 
 
