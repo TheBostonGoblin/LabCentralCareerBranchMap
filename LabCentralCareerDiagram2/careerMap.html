@@ -239,7 +239,7 @@
     function generateLinks() {
         let source = null;
         for (let x = 0; x < data.jobs.length; x++) {
-            if (data.jobs[x].name == this.lastChild.innerHTML) {
+            if (data.jobs[x].name == this.children[1].innerHTML) {//get the second child element this will ALWAYS be the text element
                 source = x;
             }
 
@@ -289,7 +289,7 @@
             });
 
             
-            sourceTest();
+            selectedNodes();
 
     }
     function swimingLaneCreation(vertLaneNum, horiLaneNum) {
@@ -430,6 +430,8 @@
     sideLabel();
 
     jobsCreation();
+
+
     d3.selectAll("#job").raise();
 
 
@@ -443,19 +445,47 @@
         svg.selectAll("#jobBox").style("opacity","1.0");
     }
     d3.selectAll("#diagram").on("click", linkRemoval);
-    function sourceTest(){
+    function selectedNodes(){
         let test = dataLinks
         .enter()
         .each(function(d,i){
-            if(d.source == currentSource){
-                // console.log(currentSource)
-                // let test = svg.select(".Research Intern");
-                // console.log(test);
+            if(d.source == currentSource)
+            {
+
                 let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill","skyblue").style("opacity","1.0");
                 let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect").style("fill","skyblue").style("opacity","1.0");
             }
         });
     };
+    // var tooltip = d3.selectAll("#job")
+    //     .append("div")
+    //     .style("position","absolute")
+    //     .style("text-align","center")
+    //     .attr("width","60px")
+    //     .attr("height","28px")
+    //     .style("background","#a60094")
+    //     .style("border","solid")
+    //     .style("border-width","3px")
+    //     .style("border-radius", "8px")
+    //     .style("padding","10px")
+    //     .style("opacity",0.9)
+    //     .html("<p>Hello D3 JS</p>")
+    //     .raise();
+
+    var tooltip = d3.selectAll("#job")
+        .append("div")
+        .style("position","absolute")
+        .style("visibility", "hidden")
+        .text("D3 hello!")
+        .raise();
+
+
+        d3.selectAll("#job")
+            .on("mouseover",function(){ console.log(this.lastChild); return d3.select(this.lastChild).style("visibility","visible").raise();})
+            .on("mousemove", function(){return d3.select(this.lastChild).style("top", (event.pageY)+"px").style("left",(event.pageX)+"px");})
+            .on("mouseout",function(){return d3.select(this.lastChild).style("visibility","hidden");});
+
+
     
 
 
