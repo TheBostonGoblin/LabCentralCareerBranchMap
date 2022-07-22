@@ -11,6 +11,13 @@
             stroke: #000;
             stroke-width: 2px;
         }
+
+        body {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
     </style>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -23,6 +30,9 @@
 
     const width = 1200;
     const height = 800;
+    const body = d3.select("body");
+    var wrapper = body.append("div")
+        .attr("id","wrapper");
     var svg = d3.select("body")
         .append("svg")
         .attr("width", width)
@@ -247,13 +257,13 @@
         lineCreation(source);
         d3.selectAll("#job").raise();
 
-        
+
     };
     function lineCreation(source) {
         currentSource = source;
         console.log("clicked");
-        svg.selectAll("#jobBox").style("fill","white");
-        svg.selectAll("#jobBox").style("opacity","0.5");
+        svg.selectAll("#jobBox").style("fill", "white");
+        svg.selectAll("#jobBox").style("opacity", "0.5");
         svg.selectAll("line").remove();
         let sourceX = null;
         let sourceY = null;
@@ -288,8 +298,8 @@
 
             });
 
-            
-            selectedNodes();
+
+        selectedNodes();
 
     }
     function swimingLaneCreation(vertLaneNum, horiLaneNum) {
@@ -441,21 +451,20 @@
 
     function linkRemoval() {
         svg.selectAll("line").remove();
-        svg.selectAll("#jobBox").style("fill","white");
-        svg.selectAll("#jobBox").style("opacity","1.0");
+        svg.selectAll("#jobBox").style("fill", "white");
+        svg.selectAll("#jobBox").style("opacity", "1.0");
     }
     d3.selectAll("#diagram").on("click", linkRemoval);
-    function selectedNodes(){
+    function selectedNodes() {
         let test = dataLinks
-        .enter()
-        .each(function(d,i){
-            if(d.source == currentSource)
-            {
+            .enter()
+            .each(function (d, i) {
+                if (d.source == currentSource) {
 
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill","skyblue").style("opacity","1.0");
-                let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect").style("fill","skyblue").style("opacity","1.0");
-            }
-        });
+                    let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
+                    let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
+                }
+            });
     };
     // var tooltip = d3.selectAll("#job")
     //     .append("div")
@@ -472,21 +481,76 @@
     //     .html("<p>Hello D3 JS</p>")
     //     .raise();
 
-    var tooltip = d3.selectAll("#job")
+    var tooltip = d3.select("body")
         .append("div")
-        .style("position","absolute")
-        .style("visibility", "hidden")
-        .text("D3 hello!")
-        .raise();
+        .attr("class", "tooltip")
+        .style("position", "absolute")
+        .style("display", "flex")
+        //.style("visibility", "hidden")
+        .append("span")
+        .attr("class", "tooltiptext")
+        .attr("width", "100px")
+        .attr("bottom", "100%")
+        .style("background-color", "cornsilk")
+        .style("color","black")
+        .style("text-align","center")
+        //.attr("margin-left", "-60px")
+        //.style("padding", "5px")
+        .style("border","solid black 2px")
+        .style("border-radius", "6px")
+        .style("position", "absolute")
+        .text("Hello")
+        // .append("span")
+        // .attr("class", "tooltiptext")
+        // .attr("width", "120px")
+        // .attr("bottom", "100%")
+        // .attr("left", "50%")
+        // .attr("margin-left", "-60px")
+        // .style("visibility", "hidden")
+        // .style("background-color", "black")
+        // .style("color", "#fff")
+        // .style("text-align", "center")
+        // .style("padding", "5px 0")
+        // .style("border-radius", "6px")
+        // .style("position", "absolute");
 
 
-        d3.selectAll("#job")
-            .on("mouseover",function(){ console.log(this.lastChild); return d3.select(this.lastChild).style("visibility","visible").raise();})
-            .on("mousemove", function(){return d3.select(this.lastChild).style("top", (event.pageY)+"px").style("left",(event.pageX)+"px");})
-            .on("mouseout",function(){return d3.select(this.lastChild).style("visibility","hidden");});
+
+    d3.selectAll("#job")
+        .on("mouseover", function () 
+        {  
+            //console.log( (d3.select(this.children[0]).attr("y")) );
+            const bBoxPosX = parseInt(d3.select(this.children[0]).attr("x"));
+            const bBoxWidth = parseInt(d3.select(this.children[0]).attr("width"));
+            const bBoxPosY = parseInt(d3.select(this.children[0]).attr("y"));
+            const bBoxHeight = parseInt(d3.select(this.children[0]).attr("height"));
+
+            console.log("posX:"+bBoxPosX);
+            console.log("posy:"+bBoxPosY);
+            console.log("width:"+bBoxWidth);
+            console.log("height:"+bBoxHeight);
+            const top  = bBoxPosY -bBoxHeight;
+            const left = (bBoxPosX + bBoxWidth/2);//all items within the diagram have been transformed by 15 x and 15 y this is to compensate
+            console.log(left);
+
+            console.log(d3.select(".tooltiptext"));
+            d3.select(".tooltip")
+            .style("visibility", "visible")
+            .style("top", `${top}px`).style("left", `${left-12}px`); 
+
+            // let test = d3.select(this).attr("x");
+            // console.log(test);
+
+            //console.log(d3.select(this.children[0]).attr("width"));
+            
+        })
+        .on("mouseout", function () 
+        {  
+            d3.select(".tooltip").style("visibility", "hidden"); 
+        });
 
 
-    
+
 
 
 

@@ -1,2 +1,6 @@
 https://d3-graph-gallery.com/graph/interactivity_tooltip.html
 d3.select(this).select("text").innerHTML
+
+Adding tooltips to a svg sources
+https://stackoverflow.com/questions/10643426/how-to-add-a-tooltip-to-an-svg-graphic
+https://d3-graph-gallery.com/graph/interactivity_tooltip.html
