@@ -18,6 +18,21 @@
             -webkit-user-select: none;
             user-select: none;
         }
+
+        .tooltip .tooltiptext::after {
+        content: " ";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: black transparent transparent transparent;
+    }
+    #jobBox{
+        padding: 25px !important;
+
+    }
     </style>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -135,6 +150,7 @@
 
         ],
         jobs: [
+            //Test Position
             {
                 name: "Research Intern",
                 posX: 370,
@@ -142,6 +158,14 @@
                 width: 0,
                 height: 0,
                 neighbor: ["Research Associate", "Venture Capital Associate", "Biomenufacturing Associate"]//0 | 1 2 3
+                ,
+                salary: "$25/y",
+                eduReq: "High School Diploma",
+                eduDes: "Bachelors in Science",
+                reqExp: "Beat Super Mario",
+                desExp: "Beat Super Mario 2"
+
+
             },
             {
                 name: "Research Associate",
@@ -150,6 +174,12 @@
                 width: 0,
                 height: 0,
                 neighbor: []
+                ,
+                salary: "$25/y",
+                eduReq: "High School Diploma",
+                eduDes: "Bachelors in Science",
+                reqExp: "Beat Super Mario",
+                desExp: "Beat Super Mario 2"
                 //neighbor: ["Venture Capital Associate"]
             },
             {
@@ -159,6 +189,12 @@
                 width: 0,
                 height: 0,
                 neighbor: []
+                ,
+                salary: "$25/y",
+                eduReq: "High School Diploma",
+                eduDes: "Bachelors in Science",
+                reqExp: "Beat Super Mario",
+                desExp: "Beat Super Mario 2"
                 //neighbor: ["Biomenufacturing Associate"]
             },
             {
@@ -168,6 +204,12 @@
                 width: 0,
                 height: 0,
                 neighbor: []
+                ,
+                salary: "$25/y",
+                eduReq: "High School Diploma",
+                eduDes: "Bachelors in Science",
+                reqExp: "Beat Super Mario",
+                desExp: "Beat Super Mario 2"
                 //neighbor: ["Research Intern"]
             },
             {
@@ -177,7 +219,132 @@
                 width: 0,
                 height: 0,
                 neighbor: []
+                ,
+                salary: "$25/y",
+                eduReq: "High School Diploma",
+                eduDes: "Bachelors in Science",
+                reqExp: "Beat Super Mario",
+                desExp: "Beat Super Mario 2"
             }
+            // Venture Capital / Business Development Positions
+            //Entry
+            ,{
+                name: "Management Consultant(entry-level)",
+                posX: 40,
+                posY: 700,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "Bachelor's Degree",
+                eduDes: "Master's or PhD preferred",
+                reqExp: "None",
+                desExp: "Often hired right out of college"
+            }
+            //Mid
+            ,{
+                name: "Analyst",
+                posX: 50,
+                posY: 450,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "Bachelor's Degree",
+                eduDes: "MBA or PhD",
+                reqExp: "Early stage diligence or scouting experience",
+                desExp: "Experience in external innovation sourcing and evaluating"
+            }
+            ,{
+                name: "Management Consultant(mid-level)",
+                posX: 40,
+                posY: 450,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "Bachelor's Degree",
+                eduDes: "Master's or PhD or MD preferred",
+                reqExp: "Consulting/Biotech/Pharma or startup experience preferred",
+                desExp: "Experience in external innovation sourcing and evaluating"
+            }
+            ,{
+                name: "Research Director (Biotech or Pharma)",
+                posX: 30,
+                posY: 400,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "Bachelor's Degree",
+                eduDes: "Master's or PhD or MD preferred",
+                reqExp: "Leading research",
+                desExp: "Having scientific publications and track record of interesting research that translates to potential products"
+            }
+            ,{
+                name: "Business Development Scout",
+                posX: 60,
+                posY: 350,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "Bachelor's Degree",
+                eduDes: "Master'r or PhD preferred",
+                reqExp: "Understanding of biotech or pharma",
+                desExp: "Scouting experience preferred"
+            }
+            //Advanced
+            ,{
+                name: "Principal or Associate",
+                posX: 80,
+                posY: 250,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "MBA, PhD or MD usually required",
+                eduDes: "MBA, PhD or MD usually required",
+                reqExp: "Sourcing and supporting scientific diligence and several years of experience in VC",
+                desExp: "Board experience desired but not required"
+            }
+            ,{
+                name: "Venture Capitalist Partner",
+                posX: 70,
+                posY: 200,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "MBA, PhD or MD usually required",
+                eduDes: "MBA, PhD or MD usually required",
+                reqExp: "Successful portfolio of investments",
+                desExp: "Board experience required.  Connections for fundraising "
+            }
+            ,{
+                name: "Business Director Transaction Lead",
+                posX: 40,
+                posY: 150,
+                width: 0,
+                height: 0,
+                neighbor: []
+                ,
+                salary: "N/A",
+                eduReq: "Bachelor's Degree",
+                eduDes: "MBA, PhD or MD preferred",
+                reqExp: "BD experience",
+                desExp: "Understanding of biotech or pharma"
+            }
+
+
+
         ],
         links: [
             {
@@ -221,12 +388,15 @@
             .each(function (d) {
                 let currnetText = d3.select(this);
                 let objectToAppend = d3.select(this.parentNode);
+                let padding  = 20;
                 let bbox = objectToAppend.node().getBBox();
                 objectToAppend.append("rect")
-                    .attr("x", bbox.x)
-                    .attr("y", bbox.y)
-                    .attr("width", function (d) { d.width = bbox.width; return bbox.width })
-                    .attr("height", function (d) { d.height = bbox.height; return bbox.height })
+                    .attr("x", bbox.x-(padding/2))
+                    .attr("y", bbox.y-(padding/2))
+                    .attr("width", function (d) { d.width = bbox.width; return bbox.width+padding })
+                    .attr("height", function (d) { d.height = bbox.height; return bbox.height+padding })
+                    .attr("rx",6)
+                    .attr("ry",6)
                     .attr("id", "jobBox")
                     .style("fill", "white")
                     .style("stroke", "black")
@@ -263,7 +433,8 @@
         currentSource = source;
         console.log("clicked");
         svg.selectAll("#jobBox").style("fill", "white");
-        svg.selectAll("#jobBox").style("opacity", "0.5");
+        svg.selectAll("#jobBox").style("opacity", "0.3");
+        svg.selectAll("#jobText").style("opacity", "0.3");
         svg.selectAll("line").remove();
         let sourceX = null;
         let sourceY = null;
@@ -453,6 +624,7 @@
         svg.selectAll("line").remove();
         svg.selectAll("#jobBox").style("fill", "white");
         svg.selectAll("#jobBox").style("opacity", "1.0");
+        svg.selectAll("#jobText").style("opacity", "1.0");
     }
     d3.selectAll("#diagram").on("click", linkRemoval);
     function selectedNodes() {
@@ -460,9 +632,11 @@
             .enter()
             .each(function (d, i) {
                 if (d.source == currentSource) {
-
                     let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
-                    let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
+                    let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect").style("fill", "PaleVioletRed").style("opacity", "1.0");
+
+                    let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
+                    let targetText = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
                 }
             });
     };
@@ -481,72 +655,52 @@
     //     .html("<p>Hello D3 JS</p>")
     //     .raise();
 
-    var tooltip = d3.select("body")
+    const tooltip = d3.select("body")
         .append("div")
+        .style("position","absolute")
         .attr("class", "tooltip")
-        .style("position", "absolute")
-        .style("display", "flex")
-        //.style("visibility", "hidden")
-        .append("span")
-        .attr("class", "tooltiptext")
-        .attr("width", "100px")
-        .attr("bottom", "100%")
-        .style("background-color", "cornsilk")
-        .style("color","black")
-        .style("text-align","center")
-        //.attr("margin-left", "-60px")
-        //.style("padding", "5px")
-        .style("border","solid black 2px")
-        .style("border-radius", "6px")
-        .style("position", "absolute")
-        .text("Hello")
-        // .append("span")
-        // .attr("class", "tooltiptext")
-        // .attr("width", "120px")
-        // .attr("bottom", "100%")
-        // .attr("left", "50%")
-        // .attr("margin-left", "-60px")
-        // .style("visibility", "hidden")
-        // .style("background-color", "black")
-        // .style("color", "#fff")
-        // .style("text-align", "center")
-        // .style("padding", "5px 0")
-        // .style("border-radius", "6px")
-        // .style("position", "absolute");
+        .style("opacity", 0)
+        .style("background-color","cornsilk")
+        .style("border","solid 3px black")
+        .style("border-radius","5px")
+        .style("padding", "5px")
+        .style("max-width","250px")
+        .style("viibility","hidden")
+        // .append("p")
+        // .text("My name is Daniel i work at lab central and do front end web development")
+        .html("<h3>Hello</h3><hr><p>My name is Daniel i work at lab central and do front end web development</p>")
+        //.attr("class","tooltiptext")
+        .style("text-align","center");
 
 
-
-    d3.selectAll("#job")
-        .on("mouseover", function () 
+    let jobs = d3.selectAll("#job")
+        .on("mouseover", function (d) 
         {  
-            //console.log( (d3.select(this.children[0]).attr("y")) );
-            const bBoxPosX = parseInt(d3.select(this.children[0]).attr("x"));
-            const bBoxWidth = parseInt(d3.select(this.children[0]).attr("width"));
-            const bBoxPosY = parseInt(d3.select(this.children[0]).attr("y"));
-            const bBoxHeight = parseInt(d3.select(this.children[0]).attr("height"));
+            //console.log(data.jobs);
+            console.log(d.path[1]);
+            tooltip.html(`<h3>${d.name}</h3><hr><p>My name is Daniel i work at lab central and do front end web development</p>`)
+            tooltip.transition()
+            .duration(1000)
+            .style("opacity",1);
+            //.style("visibility","visible");
+        })
+        .on("mousemove",function(event){
+            //console.log(event.pageX);
+            let toolTipBox = document.querySelector(".tooltip");
 
-            console.log("posX:"+bBoxPosX);
-            console.log("posy:"+bBoxPosY);
-            console.log("width:"+bBoxWidth);
-            console.log("height:"+bBoxHeight);
-            const top  = bBoxPosY -bBoxHeight;
-            const left = (bBoxPosX + bBoxWidth/2);//all items within the diagram have been transformed by 15 x and 15 y this is to compensate
-            console.log(left);
+            let currentWidth = toolTipBox.offsetWidth;
+            let currentHeight = toolTipBox.offsetHeight;
+            tooltip.style("top",`${event.pageY-(currentHeight + currentHeight/8)}px`)
+            .style("left",`${event.pageX-(currentWidth/2)}px`);
 
-            console.log(d3.select(".tooltiptext"));
-            d3.select(".tooltip")
-            .style("visibility", "visible")
-            .style("top", `${top}px`).style("left", `${left-12}px`); 
 
-            // let test = d3.select(this).attr("x");
-            // console.log(test);
-
-            //console.log(d3.select(this.children[0]).attr("width"));
-            
         })
         .on("mouseout", function () 
         {  
-            d3.select(".tooltip").style("visibility", "hidden"); 
+            tooltip.transition()
+            .duration(1000)
+            .style("opacity",0);
+            //.style("visibility","hidden");
         });
 
 

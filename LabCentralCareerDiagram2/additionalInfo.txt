@@ -4,3 +4,19 @@ d3.select(this).select("text").innerHTML
 Adding tooltips to a svg sources
 https://stackoverflow.com/questions/10643426/how-to-add-a-tooltip-to-an-svg-graphic
 https://d3-graph-gallery.com/graph/interactivity_tooltip.html
+
+//console.log(event.pageX);
+            let toolTipBox = document.querySelector(".tooltip");
+
+            let currentWidth = toolTipBox.offsetWidth;
+            let currentHeight = toolTipBox.offsetHeight;
+
+            console.log("width:"+currentWidth);
+            console.log("height:"+currentHeight);
+            tooltip.style("opacity",1)
+            .style("top",`${event.pageY-(currentHeight + currentHeight/2)}px`)
+            .style("left",`${event.pageX-(currentWidth/2)}px`)
+            // return tooltip.style("opacity",1)
+            // .html("Test Test 123")
+            // .style("left",`${event.pageX}px`)
+            // .style("top",`${event.pageY}px`);
