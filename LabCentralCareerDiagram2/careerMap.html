@@ -20,19 +20,24 @@
         }
 
         .tooltip .tooltiptext::after {
-        content: " ";
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
-        border-color: black transparent transparent transparent;
-    }
-    #jobBox{
-        padding: 25px !important;
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
 
-    }
+        #jobBox {
+            padding: 25px !important;
+
+        }
+
+        .toolTipHTML {
+            border-bottom: 2px solid black;
+        }
     </style>
     <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
@@ -47,7 +52,7 @@
     const height = 800;
     const body = d3.select("body");
     var wrapper = body.append("div")
-        .attr("id","wrapper");
+        .attr("id", "wrapper");
     var svg = d3.select("body")
         .append("svg")
         .attr("width", width)
@@ -65,7 +70,7 @@
                     color: "#00a0a0"
                 },
                 {
-                    name: "Research & Design-A",
+                    name: "Research & Development-A",
                     color: "#a00000"
                 },
                 {
@@ -81,7 +86,7 @@
                     color: "#008080"
                 },
                 {
-                    name: "Research & Design-M",
+                    name: "Research & Development-M",
                     color: "#800000"
                 },
                 {
@@ -97,7 +102,7 @@
                     color: "#0d7373"
                 },
                 {
-                    name: "Research & Design-E",
+                    name: "Research & Development-E",
                     color: "#730d0d"
                 },
                 {
@@ -113,39 +118,53 @@
             {
                 name: "Venture Capital / Business Development",
                 posX: 0,
-                posY: 0
+                posY: 0,
+                width: 0,
+                height: 0
             },
             {
-                name: "Research & Design",
+                name: "Research & Development",
                 posX: 0,
-                posY: 0
+                posY: 0,
+                width: 0,
+                height: 0
             },
             {
                 name: "Biomanufacturing",
                 posX: 0,
-                posY: 0
+                posY: 0,
+                width: 0,
+                height: 0
             },
             {
                 name: "Lab Administration / Lab Operations",
                 posX: 0,
-                posY: 0
+                posY: 0,
+                width: 0,
+                height: 0
             }
         ],
         careerStage: [
             {
                 name: "Advanced",
                 posX: 0,
-                posY: 0
+                posY: 0,
+                width: 0,
+                height: 0
             },
             {
                 name: "Middle",
                 posX: 0,
-                posY: 0
+                posY: 0,
+                width: 0,
+                height: 0
             },
             {
                 name: "Entry",
                 posX: 0,
-                posY: 0
+                posY: 0,
+                width: 0,
+                height: 0
             }
 
         ],
@@ -185,7 +204,7 @@
             {
                 name: "Venture Capital Associate",
                 posX: 70,
-                posY: 500,
+                posY: 580,
                 width: 0,
                 height: 0,
                 neighbor: []
@@ -228,9 +247,9 @@
             }
             // Venture Capital / Business Development Positions
             //Entry
-            ,{
+            , {
                 name: "Management Consultant(entry-level)",
-                posX: 40,
+                posX: 35,
                 posY: 700,
                 width: 0,
                 height: 0,
@@ -243,10 +262,10 @@
                 desExp: "Often hired right out of college"
             }
             //Mid
-            ,{
+            , {
                 name: "Analyst",
-                posX: 50,
-                posY: 450,
+                posX: 120,
+                posY: 500,
                 width: 0,
                 height: 0,
                 neighbor: []
@@ -257,8 +276,8 @@
                 reqExp: "Early stage diligence or scouting experience",
                 desExp: "Experience in external innovation sourcing and evaluating"
             }
-            ,{
-                name: "Management Consultant(mid-level)",
+            , {
+                name: "Management Consultant (mid-level)",
                 posX: 40,
                 posY: 450,
                 width: 0,
@@ -271,7 +290,7 @@
                 reqExp: "Consulting/Biotech/Pharma or startup experience preferred",
                 desExp: "Experience in external innovation sourcing and evaluating"
             }
-            ,{
+            , {
                 name: "Research Director (Biotech or Pharma)",
                 posX: 30,
                 posY: 400,
@@ -285,7 +304,7 @@
                 reqExp: "Leading research",
                 desExp: "Having scientific publications and track record of interesting research that translates to potential products"
             }
-            ,{
+            , {
                 name: "Business Development Scout",
                 posX: 60,
                 posY: 350,
@@ -300,10 +319,10 @@
                 desExp: "Scouting experience preferred"
             }
             //Advanced
-            ,{
+            , {
                 name: "Principal or Associate",
-                posX: 80,
-                posY: 250,
+                posX: 200,
+                posY: 150,
                 width: 0,
                 height: 0,
                 neighbor: []
@@ -314,7 +333,7 @@
                 reqExp: "Sourcing and supporting scientific diligence and several years of experience in VC",
                 desExp: "Board experience desired but not required"
             }
-            ,{
+            , {
                 name: "Venture Capitalist Partner",
                 posX: 70,
                 posY: 200,
@@ -328,7 +347,7 @@
                 reqExp: "Successful portfolio of investments",
                 desExp: "Board experience required.  Connections for fundraising "
             }
-            ,{
+            , {
                 name: "Business Director Transaction Lead",
                 posX: 40,
                 posY: 150,
@@ -384,26 +403,25 @@
             .attr("x", function (d) { return d.posX })
             .attr("y", function (d) { return d.posY })
             .attr("id", "jobText")
+            .attr("class",function(d){return d.name})
             .text(function (d) { return d.name })
+            //.call(wrap, 30)
             .each(function (d) {
                 let currnetText = d3.select(this);
                 let objectToAppend = d3.select(this.parentNode);
-                let padding  = 20;
+                let padding = 20;
                 let bbox = objectToAppend.node().getBBox();
                 objectToAppend.append("rect")
-                    .attr("x", bbox.x-(padding/2))
-                    .attr("y", bbox.y-(padding/2))
-                    .attr("width", function (d) { d.width = bbox.width; return bbox.width+padding })
-                    .attr("height", function (d) { d.height = bbox.height; return bbox.height+padding })
-                    .attr("rx",6)
-                    .attr("ry",6)
+                    .attr("x", bbox.x - (padding / 2))
+                    .attr("y", bbox.y - (padding / 2))
+                    .attr("width", function (d) { d.width = bbox.width; return bbox.width + padding })
+                    .attr("height", function (d) { d.height = bbox.height; return bbox.height + padding })
+                    .attr("rx", 6)
+                    .attr("ry", 6)
                     .attr("id", "jobBox")
                     .style("fill", "white")
                     .style("stroke", "black")
                     .style("stroke-width", "1.5px")
-
-
-
             })
             .raise();
         d3.selectAll("#job")
@@ -419,7 +437,10 @@
     function generateLinks() {
         let source = null;
         for (let x = 0; x < data.jobs.length; x++) {
-            if (data.jobs[x].name == this.children[1].innerHTML) {//get the second child element this will ALWAYS be the text element
+            //let test = this.children[1].attr("class");
+            console.log(d3.select(this.children[1]).attr("class"));
+            let selectedClass = d3.select(this.children[1]).attr("class");
+            if (data.jobs[x].name == selectedClass) {//get the second child element this will ALWAYS be the text element
                 source = x;
             }
 
@@ -431,7 +452,6 @@
     };
     function lineCreation(source) {
         currentSource = source;
-        console.log("clicked");
         svg.selectAll("#jobBox").style("fill", "white");
         svg.selectAll("#jobBox").style("opacity", "0.3");
         svg.selectAll("#jobText").style("opacity", "0.3");
@@ -533,9 +553,8 @@
         let entering = dataTopLabel
             .enter()
             .append("g")
-            .attr("class", "careerLabel")
+            .attr("class", "careerLabelV")
             .attr("id", "diagram")
-            .attr("class", "careerLabel");
 
         entering.append("rect")
             .attr("x", function (d, i) {
@@ -550,37 +569,58 @@
                     return currentPosX;
                 }
             })
-            .attr("y", currentPosY)
-            .attr("width", currentWidth)
-            .attr("height", currentHeight)
+            .attr("y", function (d) { d.posY = currentPosY; return currentPosY; })
+            .attr("width", function (d) { d.width = currentWidth; return currentWidth })
+            .attr("height", function (d) { d.height = currentHeight; return currentHeight })
             .attr("fill", "white")
             .attr("stroke-width", "2px")
             .attr("stroke", "black")
+            .attr("id", "vRect");
 
+
+        let positionX = 0;
+        let positionY = 0;
         entering
             .append("text")
             .text(function (d) { return d.name })
-            .attr("x", function (d, i) { return d.posX })
-            .attr("y", 25)
+            .each(function (d) {
 
-        d3.selectAll(".careerLabel")
+                let currentText = d3.select(this);
+                let objectToAppend = d3.select(this.parentNode);
+
+                let bbox = currentText.node().getBBox();//bbox is created to get the demensions and position of each of the labels
+
+                let newPosX = d.posX + (d.width - bbox.width) / 2;//the difference in width /2 will give us the centered X
+                let newPosY = d.posY + (d.height - (bbox.height));//the differnce in height will give you 
+
+                console.log(d.height);
+
+                currentText
+                    .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+                    .attr("y", function (d) { return newPosY });//accounting for transformation
+
+                currentText.raise();
+            });
+
+
+        d3.selectAll(".careerLabel");
     }
     function sideLabel() {
-        const currentPosX = width - 80;
+        const currentPosX = width - 50 - (2 * 15);//the width of the side labels is 50 and adjustment for the transformation of 15
         let currentPosY = 50;
         const currentHeight = globalLaneHeight;
         const currentWidth = 50;
         let entering = dataSideLabel
             .enter()
             .append("g")
-            .attr("class", "careerLabel")
-            .attr("id", "diagram")
-            .attr("class", "careerLabel");
+            .attr("class", "careerLabelH")
+            .attr("id", "diagram");
 
         entering.append("rect")
-            .attr("x", currentPosX)
+            .attr("x", function (d) { d.posX = currentPosX; return currentPosX })
             .attr("y", function (d, i) {
                 if (i == 0) {
+
                     d.posY = currentPosY;
                     return currentPosY;
                 }
@@ -590,15 +630,37 @@
                     return currentPosY;
                 }
             })
-            .attr("width", currentWidth)
-            .attr("height", globalLaneHeight)
+            .attr("width", function (d) { d.width = currentWidth; return currentWidth })
+            .attr("height", function (d) { d.height = globalLaneHeight; return globalLaneHeight })
             .attr("fill", "white")
             .attr("stroke-width", "2px")
             .attr("stroke", "black");
 
         entering.append("text")
             .text(function (d) { return d.name })
-            .attr("transform", function (d) { return `translate(${1130},${d.posY + 50}) rotate(90)` })
+            .each(function (d) {
+                let currentText = d3.select(this);
+                let parentNode = d3.select(this.parentNode);
+                let bbox = currentText.node().getBBox();
+
+                //because the items are rotated 90 degrees height is affecting the x axis instead of the Y and vis versa so the differnce is the width - text(height)
+                let newPosX = d.posX + (d.width - bbox.height) / 2;
+                let newPosY = d.posY + (d.height - bbox.width) / 2;
+
+                /*
+                implimenting the transformation (unlike in other 
+                cases where objects have been moved globally)
+                we must transform locally so rotation occours
+                around the text origin
+                */
+                currentText
+                    .attr("transform", function (d) { return `translate(${newPosX},${newPosY}) rotate(90)` });
+
+
+
+                console.log(d.posX);
+            })
+        //.attr("transform", function (d) {return `translate(${currentPosX+50},${d.posY}) rotate(90)` })//in order r
     }
     svg.append("rect")
         .attr("width", "100%")
@@ -640,68 +702,113 @@
                 }
             });
     };
-    // var tooltip = d3.selectAll("#job")
-    //     .append("div")
-    //     .style("position","absolute")
-    //     .style("text-align","center")
-    //     .attr("width","60px")
-    //     .attr("height","28px")
-    //     .style("background","#a60094")
-    //     .style("border","solid")
-    //     .style("border-width","3px")
-    //     .style("border-radius", "8px")
-    //     .style("padding","10px")
-    //     .style("opacity",0.9)
-    //     .html("<p>Hello D3 JS</p>")
-    //     .raise();
 
     const tooltip = d3.select("body")
         .append("div")
-        .style("position","absolute")
+        .style("position", "absolute")
         .attr("class", "tooltip")
         .style("opacity", 0)
-        .style("background-color","cornsilk")
-        .style("border","solid 3px black")
-        .style("border-radius","5px")
+        .style("background-color", "cornsilk")
+        .style("border", "solid 3px black")
+        .style("border-radius", "5px")
         .style("padding", "5px")
-        .style("max-width","250px")
-        .style("viibility","hidden")
+        .style("max-width", "250px")
+        .style("viibility", "hidden")
         // .append("p")
         // .text("My name is Daniel i work at lab central and do front end web development")
         .html("<h3>Hello</h3><hr><p>My name is Daniel i work at lab central and do front end web development</p>")
         //.attr("class","tooltiptext")
-        .style("text-align","center");
+        .style("text-align", "center");
 
 
     let jobs = d3.selectAll("#job")
-        .on("mouseover", function (d) 
-        {  
-            //console.log(data.jobs);
-            console.log(d.path[1]);
-            tooltip.html(`<h3>${d.name}</h3><hr><p>My name is Daniel i work at lab central and do front end web development</p>`)
+        .on("mouseover", function (d) {
+            let overNodeData = d3.select(d.path[1]).datum();
+            tooltip.html(`
+            <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
+            <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
+            <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
+            <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
+            <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
+            <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
+            `)
+
             tooltip.transition()
-            .duration(1000)
-            .style("opacity",1);
-            //.style("visibility","visible");
+                .duration(700)
+                .style("opacity", 1);
         })
-        .on("mousemove",function(event){
-            //console.log(event.pageX);
+        .on("mousemove", function (event) {
             let toolTipBox = document.querySelector(".tooltip");
 
             let currentWidth = toolTipBox.offsetWidth;
             let currentHeight = toolTipBox.offsetHeight;
-            tooltip.style("top",`${event.pageY-(currentHeight + currentHeight/8)}px`)
-            .style("left",`${event.pageX-(currentWidth/2)}px`);
+            tooltip.style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)
+                .style("left", `${event.pageX - (currentWidth / 2)}px`);
 
 
         })
-        .on("mouseout", function () 
-        {  
+        .on("mouseout", function () {
             tooltip.transition()
-            .duration(1000)
-            .style("opacity",0);
-            //.style("visibility","hidden");
+                .duration(700)
+                .style("opacity", 0);
         });
+
+    /*Citing code (Mike, B (Feb 2022) D3 JS V3. https://bl.ocks.org/mbostock/7555321)
+    this is code is used to wrap text in d3 js based on spacinng
+    if their is a space within the text this will generate a new line*/
+
+    function wrap(text, width) {
+        let originalX = null;
+        let originalY = null;
+        let numberOfNewLines = null;
+        text.each(function () {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                x = text.attr("x"),
+                y = text.attr("y"),
+                dy = 0, //parseFloat(text.attr("dy")),
+                tspan = text.text(null)
+                    .append("tspan")
+                    .attr("x", x)
+                    .attr("y", y)
+                    .attr("dy", function(d){return dy + "em"});
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line = [word];
+                    tspan = text.append("tspan")
+                        .attr("x", x)
+                        .attr("y", y)
+                        .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                        .text(word);
+                }
+                
+            }
+            let parent = d3.select(this.parentNode);
+            let originY = parseInt(parent.attr("y"));
+            parent.attr("transform","translate(0,-26.6)")
+            //console.log(lineNumber)
+            //console.log(text.datum());
+            
+
+            //console.log(test.attr("y"));
+            
+
+            //console.log(d3.select(this.parentNode).attr("width"));
+        });
+
+
+        //console.log(d3.select(text));
+        d3.select();
+    }
+
 
 
 
