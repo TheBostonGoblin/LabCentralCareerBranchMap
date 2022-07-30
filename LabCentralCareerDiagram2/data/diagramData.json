@@ -1,0 +1,344 @@
+{
+    "segments":
+        [
+            {
+                "name": "Venture Capital / Business Development-A",
+                "color": "#ff450c"
+            },
+            {
+                "name": "Research & Development-A",
+                "color": "#4ad2ce"
+            },
+            {
+                "name": "Biomanufacturing-A",
+                "color": "#ffd31a"
+            },
+            {
+                "name": "Lab Administration / Lab Operations-A",
+                "color": "#7c1f94"
+            },
+            {
+                "name": "Venture Capital / Business Development-M",
+                "color": "#ee5325"
+            },
+            {
+                "name": "Research & Development-M",
+                "color": "#58c4c1"
+            },
+            {
+                "name": "Biomanufacturing-M",
+                "color": "#fcc733"
+            },
+            {
+                "name": "Lab Administration / Lab Operations-M",
+                "color": "#752b88"
+            },
+            {
+                "name": "Venture Capital / Business Development-E",
+                "color": "#da5e39"
+            },
+            {
+                "name": "Research & Development-E",
+                "color": "#63b9b7"
+            },
+            {
+                "name": "Biomanufacturing-E",
+                "color": "#e8bd47"
+            },
+            {
+                "name": "Lab Administration / Lab Operations-E",
+                "color": "#70347f"
+            }
+        ],
+    "careerPaths": [
+        {
+            "name": "Venture Capital / Business Development",
+            "posX": 0,
+            "posY": 0,
+            "width": 0,
+            "height": 0
+        },
+        {
+            "name": "Research & Development",
+            "posX": 0,
+            "posY": 0,
+            "width": 0,
+            "height": 0
+        },
+        {
+            "name": "Biomanufacturing",
+            "posX": 0,
+            "posY": 0,
+            "width": 0,
+            "height": 0
+        },
+        {
+            "name": "Lab Administration / Lab Operations",
+            "posX": 0,
+            "posY": 0,
+            "width": 0,
+            "height": 0
+        }
+    ],
+    "careerStage": [
+        {
+            "name": "Advanced",
+            "posX": 0,
+            "posY": 0,
+            "width": 0,
+            "height": 0
+        },
+        {
+            "name": "Middle",
+            "posX": 0,
+            "posY": 0,
+            "width": 0,
+            "height": 0
+        },
+        {
+            "name": "Entry",
+            "posX": 0,
+            "posY": 0,
+            "width": 0,
+            "height": 0
+        }
+
+    ],
+    "jobs": [
+        {
+            "name": "Research Intern",
+            "posX": 400,
+            "posY": 700,
+            "width": 0,
+            "height": 0,
+            "salary": "$25/y",
+            "eduReq": "High School Diploma",
+            "eduDes": "Bachelors in Science",
+            "reqExp": "Beat Super Mario",
+            "desExp": "Beat Super Mario 2"
+            ,
+            "id": 0,
+            "yAdjustment": 0,
+            "comment":"test"
+
+
+
+
+        },
+        {
+            "name": "Research Associate",
+            "posX": 400,
+            "posY": 500,
+            "width": 0,
+            "height": 0,
+            "salary": "$25/y",
+            "eduReq": "High School Diploma",
+            "eduDes": "Bachelors in Science",
+            "reqExp": "Beat Super Mario",
+            "desExp": "Beat Super Mario 2"
+            ,
+            "id": 1,
+            "yAdjustment": 0,
+            "comment":"test"
+        },
+        {
+            "name": "Venture Capital Associate",
+            "posX": 190,
+            "posY": 640,
+            "width": 0,
+            "height": 0,
+            "salary": "$25/y",
+            "eduReq": "High School Diploma",
+            "eduDes": "Bachelors in Science",
+            "reqExp": "Beat Super Mario",
+            "desExp": "Beat Super Mario 2"
+            ,
+            "id": 2,
+            "yAdjustment": 0,
+            "comment":"test"
+        },
+        {
+            "name": "Biomenufacturing Associate",
+            "posX": 650,
+            "posY": 500,
+            "width": 0,
+            "height": 0,
+            "salary": "$25/y",
+            "eduReq": "High School Diploma",
+            "eduDes": "Bachelors in Science",
+            "reqExp": "Beat Super Mario",
+            "desExp": "Beat Super Mario 2"
+            ,
+            "id": 3,
+            "yAdjustment": 0,
+            "comment":"test"
+        },
+        {
+            "name": "Biomenufacturing CEO",
+            "posX": 650,
+            "posY": 200,
+            "width": 0,
+            "height": 0,
+            "salary": "$25/y",
+            "eduReq": "High School Diploma",
+            "eduDes": "Bachelors in Science",
+            "reqExp": "Beat Super Mario",
+            "desExp": "Beat Super Mario 2"
+            ,
+            "id": 4,
+            "yAdjustment": 0,
+            "comment":"test"
+        }
+        , {
+            "name": "Management Consultant Entry-Level",
+            "posX": 55,
+            "posY": 640,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "Bachelor's Degree",
+            "eduDes": "Master's or PhD preferred",
+            "reqExp": "None",
+            "desExp": "Often hired right out of college"
+            ,
+            "id": 5,
+            "yAdjustment": 0,
+            "comment":"Entry: Venture Capital / Business Development Positions"
+        }
+        , {
+            "name": "Analyst",
+            "posX": 60,
+            "posY": 510,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "Bachelor's Degree",
+            "eduDes": "MBA or PhD",
+            "reqExp": "Early stage diligence or scouting experience",
+            "desExp": "Experience in external innovation sourcing and evaluating"
+            ,
+            "id": 6,
+            "yAdjustment": 0,
+            "comment":"Mid: Venture Capital / Business Development Positions"
+        }
+        , {
+            "name": "Management Consultant Mid-level",
+            "posX": 160,
+            "posY": 510,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "Bachelor's Degree",
+            "eduDes": "Master's or PhD or MD preferred",
+            "reqExp": "Consulting/Biotech/Pharma or startup experience preferred",
+            "desExp": "Experience in external innovation sourcing and evaluating"
+            ,
+            "id": 7,
+            "yAdjustment": 0,
+            "comment":"Mid: Venture Capital / Business Development Positions"
+        }
+        , {
+            "name": "Research Director",
+            "posX": 60,
+            "posY": 410,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "Bachelor's Degree",
+            "eduDes": "Master's or PhD or MD preferred",
+            "reqExp": "Leading research",
+            "desExp": "Having scientific publications and track record of interesting research that translates to potential products"
+            ,
+            "id": 8,
+            "yAdjustment": 0,
+            "comment":"Mid: Venture Capital / Business Development Positions"
+        }
+        , {
+            "name": "Business Development Scout",
+            "posX": 160,
+            "posY": 410,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "Bachelor's Degree",
+            "eduDes": "Master'r or PhD preferred",
+            "reqExp": "Understanding of biotech or pharma",
+            "desExp": "Scouting experience preferred"
+            ,
+            "id": 9,
+            "yAdjustment": 0,
+            "comment":"Mid: Venture Capital / Business Development Positions"
+        }
+        , {
+            "name": "Principal/ Associate",
+            "posX": 200,
+            "posY": 150,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "MBA, PhD or MD usually required",
+            "eduDes": "MBA, PhD or MD usually required",
+            "reqExp": "Sourcing and supporting scientific diligence and several years of experience in VC",
+            "desExp": "Board experience desired but not required",
+            "id": 10,
+            "yAdjustment": 0,
+            "comment":"Advanced: Venture Capital / Business Development Positions"
+        }
+        , {
+            "name": "Venture Capitalist Partner",
+            "posX": 120,
+            "posY": 260,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "MBA, PhD or MD usually required",
+            "eduDes": "MBA, PhD or MD usually required",
+            "reqExp": "Successful portfolio of investments",
+            "desExp": "Board experience required.  Connections for fundraising ",
+            "id": 11,
+            "yAdjustment": 0,
+            "comment":"Advanced: Venture Capital / Business Development Positions"
+        }
+        , {
+            "name": "Business Director Transaction Lead",
+            "posX": 40,
+            "posY": 150,
+            "width": 0,
+            "height": 0,
+            "salary": "N/A",
+            "eduReq": "Bachelor's Degree",
+            "eduDes": "MBA, PhD or MD preferred",
+            "reqExp": "BD experience",
+            "desExp": "Understanding of biotech or pharma",
+            "id": 12,
+            "yAdjustment": 0,
+            "comment":"Advanced: Venture Capital / Business Development Positions"
+        }
+
+
+
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1
+        },
+        {
+            "source": 0,
+            "target": 2
+        },
+        {
+            "source": 0,
+            "target": 3
+        },
+        {
+            "source": 5,
+            "target": 6
+        },
+        {
+            "source": 5,
+            "target": 7
+        }
+
+    ]
+}

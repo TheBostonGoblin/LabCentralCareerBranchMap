@@ -138,7 +138,6 @@ const data = {
             ,
             id: 1,
             yAdjustment: 0
-            //neighbor: ["Venture Capital Associate"]
         },
         {
             name: "Venture Capital Associate",
@@ -154,7 +153,6 @@ const data = {
             ,
             id: 2,
             yAdjustment: 0
-            //neighbor: ["Biomenufacturing Associate"]
         },
         {
             name: "Biomenufacturing Associate",
@@ -170,7 +168,6 @@ const data = {
             ,
             id: 3,
             yAdjustment: 0
-            //neighbor: ["Research Intern"]
         },
         {
             name: "Biomenufacturing CEO",
@@ -370,6 +367,7 @@ const tooltip = d3.select("body")
     .style("max-width", "250px")
     .style("viibility", "hidden")
     .style("text-align", "center")
+    .style("display","none")
     .html(`
         <h3 class="toolTipHTML" id="position">NULL</h3>
         <h5 class="toolTipHTML" id="salary">Salary: NULL</h5>
@@ -388,6 +386,23 @@ const dataJobs = svg.selectAll("job").data(data.jobs);
 const dataLinks = svg.selectAll("link").data(data.links);
 let globalLaneWidth;
 let globalLaneHeight;
+svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .attr("fill", "grey")
+    .attr("stroke-width", "6px")
+    .attr("stroke", "black");
+swimingLaneCreation(4, 3);
+topLabels();
+sideLabel();
+
+jobsCreation();
+
+
+
+svg.selectAll("#diagram")
+    .attr("transform", "translate(15,15)")
+
 
 
 
@@ -673,22 +688,6 @@ function sideLabel() {
                 .attr("transform", function (d) { return `translate(${newPosX},${newPosY}) rotate(90)` });
         })
 }
-svg.append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "grey")
-    .attr("stroke-width", "6px")
-    .attr("stroke", "black");
-swimingLaneCreation(4, 3);
-topLabels();
-sideLabel();
-
-jobsCreation();
-
-
-
-svg.selectAll("#diagram")
-    .attr("transform", "translate(15,15)")
 
 function linkRemoval() {
     svg.selectAll("line").remove();
@@ -698,9 +697,10 @@ function linkRemoval() {
 }
 d3.selectAll("#diagram").on("click", linkRemoval);
 function selectedNodes() {
-    let activeNodes = dataLinks
+    dataLinks
         .enter()
         .each(function (d, i) {
+            //if the source has been found this means the node has targets and these will be highlighted as well
             if (d.source == currentSource) {
                 let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
                 let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect").style("fill", "PaleVioletRed").style("opacity", "1.0");
@@ -708,22 +708,17 @@ function selectedNodes() {
                 let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
                 let targetText = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
             }
+            //in the event that the node has no target it. It will simply be the only highlighted node
+            else if(d.source != currentSource && data.jobs[currentSource].name != null){
+                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
+                let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
+            }
         });
 };
-
-
-
-
 
 //ensuring on hover functions as well as animaitons are executed
 let jobs = d3.selectAll("#job")
     .on("mouseover", function (d) {
-
-
-
-        //     .toolTipHTML {
-        //     border-bottom: 2px solid black;
-        // }
         //obtains the data associated with this specfic node and feeds this into the html elemnt
         //This will display the appropraite data associated with each of the nodes
         let overNodeData = d3.select(d.path[1]).datum();
@@ -735,6 +730,7 @@ let jobs = d3.selectAll("#job")
         <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
         <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
         `)
+        .style("display","block");
         d3.selectAll(".toolTipHTML").style("border-bottom", "2px solid black");
         //controls the opacity animation that will have the tooltip fade in and out
         tooltip.transition()
@@ -754,9 +750,11 @@ let jobs = d3.selectAll("#job")
 
         //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
         tooltip.transition()
+            .delay(425)
             .duration(1100)
             .style("opacity", 0)
-            .style("top", `${-height}px`);
+            .style("top", `${-height}px`)
+            .on("end",function(){tooltip.style("display","none")});
     });
 
 
@@ -764,9 +762,6 @@ let jobs = d3.selectAll("#job")
 this is code is used to wrap text in d3 js based on spacing
 if their is a space within the text this will generate a new line*/
 function wrap(text, width) {
-    let originalX = null;
-    let originalY = null;
-    let numberOfNewLines = null;
     text.each(function () {
         var text = d3.select(this),
             words = text.text().split(/\s+/).reverse(),
