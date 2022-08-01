@@ -52,7 +52,7 @@ const data = {
         ],
     careerPaths: [
         {
-            name: "Venture Capital / Business Development",
+            name: "Venture Capital/Business Development",
             posX: 0,
             posY: 0,
             width: 0,
@@ -73,7 +73,7 @@ const data = {
             height: 0
         },
         {
-            name: "Lab Administration / Lab Operations",
+            name: "Lab Administration/Lab Operations",
             posX: 0,
             posY: 0,
             width: 0,
@@ -105,88 +105,9 @@ const data = {
 
     ],
     jobs: [
-        //Test Position
-        {
-            name: "Research Intern",
-            posX: 400,
-            posY: 700,
-            width: 0,
-            height: 0,
-            salary: "$25/y",
-            eduReq: "High School Diploma",
-            eduDes: "Bachelors in Science",
-            reqExp: "Beat Super Mario",
-            desExp: "Beat Super Mario 2"
-            ,
-            id: 0,
-            yAdjustment: 0
-
-
-
-        },
-        {
-            name: "Research Associate",
-            posX: 400,
-            posY: 500,
-            width: 0,
-            height: 0,
-            salary: "$25/y",
-            eduReq: "High School Diploma",
-            eduDes: "Bachelors in Science",
-            reqExp: "Beat Super Mario",
-            desExp: "Beat Super Mario 2"
-            ,
-            id: 1,
-            yAdjustment: 0
-        },
-        {
-            name: "Venture Capital Associate",
-            posX: 190,
-            posY: 640,
-            width: 0,
-            height: 0,
-            salary: "$25/y",
-            eduReq: "High School Diploma",
-            eduDes: "Bachelors in Science",
-            reqExp: "Beat Super Mario",
-            desExp: "Beat Super Mario 2"
-            ,
-            id: 2,
-            yAdjustment: 0
-        },
-        {
-            name: "Biomenufacturing Associate",
-            posX: 650,
-            posY: 500,
-            width: 0,
-            height: 0,
-            salary: "$25/y",
-            eduReq: "High School Diploma",
-            eduDes: "Bachelors in Science",
-            reqExp: "Beat Super Mario",
-            desExp: "Beat Super Mario 2"
-            ,
-            id: 3,
-            yAdjustment: 0
-        },
-        {
-            name: "Biomenufacturing CEO",
-            posX: 650,
-            posY: 200,
-            width: 0,
-            height: 0,
-            salary: "$25/y",
-            eduReq: "High School Diploma",
-            eduDes: "Bachelors in Science",
-            reqExp: "Beat Super Mario",
-            desExp: "Beat Super Mario 2"
-            ,
-            id: 4,
-            yAdjustment: 0
-        }
         // Venture Capital / Business Development Positions
         //Entry
-        , {
+        {
             name: "Management Consultant Entry-Level",
             posX: 55,
             posY: 640,
@@ -198,7 +119,7 @@ const data = {
             reqExp: "None",
             desExp: "Often hired right out of college"
             ,
-            id: 5,
+            id: 0,
             yAdjustment: 0
         }
         //Mid
@@ -214,7 +135,7 @@ const data = {
             reqExp: "Early stage diligence or scouting experience",
             desExp: "Experience in external innovation sourcing and evaluating"
             ,
-            id: 6,
+            id: 1,
             yAdjustment: 0
         }
         , {
@@ -229,7 +150,7 @@ const data = {
             reqExp: "Consulting/Biotech/Pharma or startup experience preferred",
             desExp: "Experience in external innovation sourcing and evaluating"
             ,
-            id: 7,
+            id: 2,
             yAdjustment: 0
         }
         , {
@@ -244,7 +165,7 @@ const data = {
             reqExp: "Leading research",
             desExp: "Having scientific publications and track record of interesting research that translates to potential products"
             ,
-            id: 8,
+            id: 3,
             yAdjustment: 0
         }
         , {
@@ -259,7 +180,7 @@ const data = {
             reqExp: "Understanding of biotech or pharma",
             desExp: "Scouting experience preferred"
             ,
-            id: 9,
+            id: 4,
             yAdjustment: 0
         }
         //Advanced
@@ -274,7 +195,7 @@ const data = {
             eduDes: "MBA, PhD or MD usually required",
             reqExp: "Sourcing and supporting scientific diligence and several years of experience in VC",
             desExp: "Board experience desired but not required",
-            id: 10,
+            id: 5,
             yAdjustment: 0
         }
         , {
@@ -288,7 +209,7 @@ const data = {
             eduDes: "MBA, PhD or MD usually required",
             reqExp: "Successful portfolio of investments",
             desExp: "Board experience required.  Connections for fundraising ",
-            id: 11,
+            id: 6,
             yAdjustment: 0
         }
         , {
@@ -302,7 +223,7 @@ const data = {
             eduDes: "MBA, PhD or MD preferred",
             reqExp: "BD experience",
             desExp: "Understanding of biotech or pharma",
-            id: 12,
+            id: 7,
             yAdjustment: 0
         }
 
@@ -321,14 +242,6 @@ const data = {
         {
             source: 0,
             target: 3
-        },
-        {
-            source: 5,
-            target: 6
-        },
-        {
-            source: 5,
-            target: 7
         }
 
     ]
@@ -353,6 +266,8 @@ var svg = d3.select("body")
 
 
 let currentSource = null;
+//when a node is clicked the tooltip will disappear breifly to allow for better view of connections
+let nodeAnimationCompleted = true;
 
 //creating ToolTip Default
 const tooltip = d3.select("body")
@@ -367,17 +282,19 @@ const tooltip = d3.select("body")
     .style("max-width", "250px")
     .style("viibility", "hidden")
     .style("text-align", "center")
-    .style("display","none")
+    .style("display", "none")
     .html(`
-        <h3 class="toolTipHTML" id="position">NULL</h3>
+        <h4 class="toolTipHTML" id="pos">NULL</h4>
         <h5 class="toolTipHTML" id="salary">Salary: NULL</h5>
         <h5 class="toolTipHTML" id="reqEDU">Required Eduction: NULL</h5>
         <h5 class="toolTipHTML" id="desEDU">Desired Eduction: NULL</h5>
         <h5 class="toolTipHTML" id="reqEXP">Required Expirence: NULL</h5>
         <h5 class="toolTipHTML" id="desEXP">Desired Expirence: NULL</h5>
-        `)
+        `);
+
 let toolTipHTML = d3.selectAll(".toolTipHTML")
-    .style("border-bottom", "2px solid black");
+    .style("border-bottom", "2px solid black")
+    .style("color","#24211D");
 
 const dataSegments = svg.selectAll("segment").data(data.segments);
 const dataTopLabel = svg.selectAll("tLabel").data(data.careerPaths);
@@ -403,46 +320,89 @@ jobsCreation();
 svg.selectAll("#diagram")
     .attr("transform", "translate(15,15)")
 
-    //ensuring on hover functions as well as animaitons are executed
+//ensuring on hover functions as well as animaitons are executed
 let jobs = d3.selectAll("#job")
-.on("mouseover", function (d) {
-    //obtains the data associated with this specfic node and feeds this into the html elemnt
-    //This will display the appropraite data associated with each of the nodes
-    let overNodeData = d3.select(d.path[1]).datum();
-    tooltip.html(`
-    <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
-    <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
-    <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
-    <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
-    <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
-    <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
-    `)
-    .style("display","block");
-    d3.selectAll(".toolTipHTML").style("border-bottom", "2px solid black");
-    //controls the opacity animation that will have the tooltip fade in and out
-    tooltip.transition()
-        .duration(500)
-        .style("opacity", 0.95);
-})
-.on("mousemove", function (event) {
+    .on("mouseover", function (d) {
+        //obtains the data associated with this specfic node and feeds this into the html elemnt
+        //This will display the appropraite data associated with each of the nodes
+        if (nodeAnimationCompleted) {
+            let overNodeData = d3.select(d.path[1]).datum();
+            tooltip.html(`
+                <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
+                <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
+                <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
+                <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
+                <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
+                <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
+            `)
+                .style("display", "block");
+            d3.selectAll(".toolTipHTML").style("border-bottom", "2px solid black");
+            //controls the opacity animation that will have the tooltip fade in and out
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 1);
 
-    let toolTipBox = document.querySelector(".tooltip");
-    let currentWidth = toolTipBox.offsetWidth;
-    let currentHeight = toolTipBox.offsetHeight;
+        }
 
-    tooltip.style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)//ensures that the tooltip is slightly above the cursor
-        .style("left", `${event.pageX - (currentWidth / 2)}px`);//ensures that the tooltip is in the center of the cursor
-})
-.on("mouseout", function () {
+    })
+    .on("mousemove", function (event) {
+            let toolTipBox = document.querySelector(".tooltip");
+            let currentWidth = toolTipBox.offsetWidth;
+            let currentHeight = toolTipBox.offsetHeight;
 
-    //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
-    tooltip.transition()
-        .delay(150)
-        .duration(500)
-        .style("opacity", 0)
-        //.style("top", `${-height}px`)
-        .on("end",function(){tooltip.style("display","none")});
-});
+            //HoverAbove code: style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)
+            //HoverBelow code: style("top", `${event.pageY + (currentHeight / 8)}px`)
+
+            //top
+            tooltip.style("top", function(){
+                /*
+                    if the tooltip "top" attirbute is less than zero or above the svg than ensure
+                    that the tooltip is contained within the
+                */
+                if(event.pageY - (currentHeight + currentHeight / 8) >= 15){// why 15? accounting for the 15x15 translation
+                    return `${event.pageY - (currentHeight + currentHeight / 8)}px`;
+                }
+                else{
+                    return `${event.pageY + (currentHeight / 8)}px`;
+                }
+                
+            }).style("left", function(){
+                //if the tooltip is at the left most border of the svg thanm keep its position at 0
+                if(event.pageX - (currentWidth / 2) <= 15){
+                    return 15;
+                }
+                //if the tooltip is at the right most border of the svg than keep its position at the width(1200)
+                else if(event.pageX + (currentWidth / 2) >= (width-15)){
+                    return (width-15);
+                }
+                //in ever other case just keep the tooltip centered on the cursor
+                else{
+                    return `${event.pageX - (currentWidth / 2)}px`;
+                }
+                
+                
+            });//ensures that the tooltip is in the center of the cursor
+            //bottom
+            //left
+            //right
+            //bottomLeft
+            //bottomRight
+            console.log("left:"+(event.pageX + (currentWidth / 2)));
+
+            
+    })
+    .on("mouseout", function () {
+        if (nodeAnimationCompleted) {
+        //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
+        tooltip.transition()
+            .delay(150)
+            .duration(500)
+            .style("opacity", 0)
+            //.style("top", `${-height}px`)
+            .on("end", function () { tooltip.style("display", "none") });
+        }
+    });
+d3.selectAll("#diagram").on("click", linkRemoval);
 
 
 
@@ -732,49 +692,63 @@ function sideLabel() {
 
 function linkRemoval() {
     svg.selectAll("line").remove();
-    svg.selectAll("#jobBox").style("fill", "white");
-    svg.selectAll("#jobBox").style("opacity", "1.0");
-    svg.selectAll("#jobText").style("opacity", "1.0");
+    svg.selectAll("#jobBox")
+        .transition()
+        .duration(600)
+        .style("fill", "white")
+        .style("opacity", "1.0");
+
+    svg.selectAll("#jobText")
+        .transition()
+        .duration(600)
+        .style("opacity", "1.0");
 }
-d3.selectAll("#diagram").on("click", linkRemoval);
 function selectedNodes() {
+    tooltip.style("opacity", 0);
+    nodeAnimationCompleted = false;
     dataLinks
         .enter()
         .each(function (d, i) {
             //if the source has been found this means the node has targets and these will be highlighted as well
             if (d.source == currentSource) {
+                
                 let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect")
-                .transition()
-                .duration(600)
-                .style("fill", "skyblue").style("opacity", "1.0");
+                    .transition()
+                    .duration(600)
+                    .style("fill", "skyblue").style("opacity", "1.0");
 
                 let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect")
-                .transition()
-                .duration(600)
-                .style("fill", "PaleVioletRed").style("opacity", "1.0");
+                    .transition()
+                    .duration(600)
+                    .style("fill", "PaleVioletRed").style("opacity", "1.0");
 
                 let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text")
-                .transition()
-                .duration(600)
-                .style("opacity", "1.0");
+                    .transition()
+                    .duration(600)
+                    .style("opacity", "1.0");
 
                 let targetText = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("text")
-                .transition()
-                .duration(600)
-                .style("opacity", "1.0");
+                    .transition()
+                    .duration(600)
+                    .style("opacity", "1.0")
+                    //.on("end",setTimeout(function(){nodeAnimationCompleted = true;},100));
             }
             //in the event that the node has no target it. It will simply be the only highlighted node
-            else if(d.source != currentSource && data.jobs[currentSource].name != null){
+            else if (d.source != currentSource && data.jobs[currentSource].name != null) {
+                tooltip.style("display", "none");
                 let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect")
-                .transition()
-                .duration(600)
-                .style("fill", "skyblue").style("opacity", "1.0");
+                    .transition()
+                    .duration(600)
+                    .style("fill", "skyblue").style("opacity", "1.0");
 
                 let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text")
-                .transition()
-                .duration(600)
-                .style("opacity", "1.0");
+                    .transition()
+                    .duration(600)
+                    .style("opacity", "1.0")
+                    //.on("end",setTimeout(function(){nodeAnimationCompleted = true;},100));
             }
+            setTimeout(function(){nodeAnimationCompleted = true;},1200);
+            
         });
 };
 
