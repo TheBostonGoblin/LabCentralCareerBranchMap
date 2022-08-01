@@ -403,6 +403,47 @@ jobsCreation();
 svg.selectAll("#diagram")
     .attr("transform", "translate(15,15)")
 
+    //ensuring on hover functions as well as animaitons are executed
+let jobs = d3.selectAll("#job")
+.on("mouseover", function (d) {
+    //obtains the data associated with this specfic node and feeds this into the html elemnt
+    //This will display the appropraite data associated with each of the nodes
+    let overNodeData = d3.select(d.path[1]).datum();
+    tooltip.html(`
+    <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
+    <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
+    <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
+    <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
+    <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
+    <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
+    `)
+    .style("display","block");
+    d3.selectAll(".toolTipHTML").style("border-bottom", "2px solid black");
+    //controls the opacity animation that will have the tooltip fade in and out
+    tooltip.transition()
+        .duration(500)
+        .style("opacity", 0.95);
+})
+.on("mousemove", function (event) {
+
+    let toolTipBox = document.querySelector(".tooltip");
+    let currentWidth = toolTipBox.offsetWidth;
+    let currentHeight = toolTipBox.offsetHeight;
+
+    tooltip.style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)//ensures that the tooltip is slightly above the cursor
+        .style("left", `${event.pageX - (currentWidth / 2)}px`);//ensures that the tooltip is in the center of the cursor
+})
+.on("mouseout", function () {
+
+    //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
+    tooltip.transition()
+        .delay(150)
+        .duration(500)
+        .style("opacity", 0)
+        //.style("top", `${-height}px`)
+        .on("end",function(){tooltip.style("display","none")});
+});
+
 
 
 
@@ -702,61 +743,40 @@ function selectedNodes() {
         .each(function (d, i) {
             //if the source has been found this means the node has targets and these will be highlighted as well
             if (d.source == currentSource) {
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
-                let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect").style("fill", "PaleVioletRed").style("opacity", "1.0");
+                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect")
+                .transition()
+                .duration(600)
+                .style("fill", "skyblue").style("opacity", "1.0");
 
-                let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
-                let targetText = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
+                let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect")
+                .transition()
+                .duration(600)
+                .style("fill", "PaleVioletRed").style("opacity", "1.0");
+
+                let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text")
+                .transition()
+                .duration(600)
+                .style("opacity", "1.0");
+
+                let targetText = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("text")
+                .transition()
+                .duration(600)
+                .style("opacity", "1.0");
             }
             //in the event that the node has no target it. It will simply be the only highlighted node
             else if(d.source != currentSource && data.jobs[currentSource].name != null){
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect").style("fill", "skyblue").style("opacity", "1.0");
-                let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text").style("opacity", "1.0");
+                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect")
+                .transition()
+                .duration(600)
+                .style("fill", "skyblue").style("opacity", "1.0");
+
+                let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text")
+                .transition()
+                .duration(600)
+                .style("opacity", "1.0");
             }
         });
 };
-
-//ensuring on hover functions as well as animaitons are executed
-let jobs = d3.selectAll("#job")
-    .on("mouseover", function (d) {
-        //obtains the data associated with this specfic node and feeds this into the html elemnt
-        //This will display the appropraite data associated with each of the nodes
-        let overNodeData = d3.select(d.path[1]).datum();
-        tooltip.html(`
-        <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
-        <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
-        <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
-        <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
-        <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
-        <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
-        `)
-        .style("display","block");
-        d3.selectAll(".toolTipHTML").style("border-bottom", "2px solid black");
-        //controls the opacity animation that will have the tooltip fade in and out
-        tooltip.transition()
-            .duration(500)
-            .style("opacity", 1);
-    })
-    .on("mousemove", function (event) {
-
-        let toolTipBox = document.querySelector(".tooltip");
-        let currentWidth = toolTipBox.offsetWidth;
-        let currentHeight = toolTipBox.offsetHeight;
-
-        tooltip.style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)//ensures that the tooltip is slightly above the cursor
-            .style("left", `${event.pageX - (currentWidth / 2)}px`);//ensures that the tooltip is in the center of the cursor
-    })
-    .on("mouseout", function () {
-
-        //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
-        tooltip.transition()
-            .delay(425)
-            .duration(1100)
-            .style("opacity", 0)
-            .style("top", `${-height}px`)
-            .on("end",function(){tooltip.style("display","none")});
-    });
-
 
 /*Citing code (Mike, B (Feb 2022) D3 JS V3. https://bl.ocks.org/mbostock/7555321)
 this is code is used to wrap text in d3 js based on spacing
