@@ -1,4 +1,15 @@
+/*
+    NOTE:
+    This is the SquareSpace Code Injection version of the Javascript file
+    (Due to Font and other CSS factors imposed by squarespace it doesnt look the same in standalone form)
+*/
+
+{/* <script src="https://d3js.org/d3.v7.min.js"></script>
+<script type="module"> */}
+
+//All data for the diagram. This is in JSON format
 const data = {
+    //Data primarily controls the color of each of the segments.
     segments:
         [
             {
@@ -50,9 +61,18 @@ const data = {
                 color: "#70347f"
             },
         ],
+        /*
+            The career paths that each position will sit under 
+            This data is also used to save and load the size of the
+            careerpath or TOP labels. 
+            
+            The positon and with data is saved
+            inorder to properly center the text within each of the 
+            labels information is stored and then used later when text BBox is created
+        */
     careerPaths: [
         {
-            name: "Venture Capital/Business Development",
+            name: "VC/Business Development",
             posX: 0,
             posY: 0,
             width: 0,
@@ -73,13 +93,18 @@ const data = {
             height: 0
         },
         {
-            name: "Lab Administration/Lab Operations",
+            name: "Lab Administation/Lab Ops",
             posX: 0,
             posY: 0,
             width: 0,
             height: 0
         }
     ],
+    /* 
+        similar to careerPath this is used to generate the text that would be used in 
+        career stage labels . Position and Dimensions are saved to center the text when BBox
+        is created later
+    */
     careerStage: [
         {
             name: "Advanced",
@@ -104,13 +129,18 @@ const data = {
         }
 
     ],
+    /*
+        The core data for the diagram. Dictating the information 
+        and position of each of the job nodes as well as 
+        feeding information into the tooltip to display
+    */
     jobs: [
         // Venture Capital / Business Development Positions
         //Entry
         {
             name: "Management Consultant Entry-Level",
-            posX: 55,
-            posY: 640,
+            posX: 150,
+            posY: 700,
             width: 0,
             height: 0,
             salary: "$65,000 - $75,000",
@@ -186,8 +216,8 @@ const data = {
         //Advanced
         , {
             name: "Principal or Associate",
-            posX: 200,
-            posY: 150,
+            posX: 300,
+            posY: 525,
             width: 0,
             height: 0,
             salary: "$120,000 - $140,000",
@@ -200,7 +230,7 @@ const data = {
         }
         , {
             name: "Venture Capitalist Partner",
-            posX: 120,
+            posX: 195,
             posY: 260,
             width: 0,
             height: 0,
@@ -214,8 +244,8 @@ const data = {
         }
         , {
             name: "Business Director Transaction Lead",
-            posX: 40,
-            posY: 150,
+            posX: 90,
+            posY: 225,
             width: 0,
             height: 0,
             salary: "$120,000 - $140,000",
@@ -230,6 +260,11 @@ const data = {
 
 
     ],
+    /* 
+        dictates which node is connected to what
+        in this current example node 0 or the first 
+        job node is connected to the second, third, and fourth node
+    */
     links: [
         {
             source: 0,
@@ -247,28 +282,36 @@ const data = {
     ]
 }
 
-//setting up svg
-const width = 1200;
+/*
+    setting up svg, all the content of the diagram
+    is contained within the svg. the additional css
+    /style is inplace to prevent coursor change when
+    the cursor is over text 
+*/
+const width = 1800;
 const height = 800;
 const body = d3.select("body")
     .style("-moz-user-select", "none")
     .style("-khtml-user-select", "none")
     .style("-webkit-user-select", "none")
-    .style("user-select", "none")
+    .style("user-select", "none");
 
-// .style("display","flex")
-// .style("justify-item","center")
-// .style("align-items","center")
-// .style("text-align","center");
-
-
-var svg = d3.select("body")
-    .append("svg")
+    //this is to select the element that the svg will be conneted appended to
+var svg = d3.select(".content-wrapper .content div div")
+	.append("svg")
     .attr("id", "diagramSVG")
     .attr("width", width)
     .attr("height", height)
-    .style("display", "block")
-    .style("margin", "auto");
+	.style("display","block")
+	.style("margin","auto");
+
+    //css to center the svg on the page
+  d3.select(".content-wrapper .content div div")
+  	.style("display","flex")
+  	.style("justify-items","center")
+  	.style("align-items","center")
+  	.style("text-align","center");
+  
 
 
 let currentSource = null;
@@ -288,9 +331,12 @@ const tooltip = d3.select("body")
     .style("max-width", "250px")
     .style("viibility", "hidden")
     .style("text-align", "center")
+	.style("text-font","25px")
+	.style("font-weight","bold")
     .style("display", "none")
+	.style("z-index", 10)
     .html(`
-        <h4 class="toolTipHTML" id="pos">NULL</h4>
+        <h6 class="toolTipHTML" id="pos">NULL</h6>
         <h5 class="toolTipHTML" id="salary">Salary: NULL</h5>
         <h5 class="toolTipHTML" id="reqEDU">Required Eduction: NULL</h5>
         <h5 class="toolTipHTML" id="desEDU">Desired Eduction: NULL</h5>
@@ -329,10 +375,11 @@ let jobs = d3.selectAll("#job")
         //This will display the appropraite data associated with each of the nodes
 
         if (nodeAnimationCompleted) {
-            console.log();
+
+            console.log(d);
             let overNodeData = d3.select(d.path[1]).datum();
             tooltip.html(`
-                <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
+                <p class="toolTipHTML" id="position">${overNodeData.name}</p>
                 <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
                 <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
                 <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
@@ -341,14 +388,9 @@ let jobs = d3.selectAll("#job")
             `)
                 .style("display", "block");
 
-            d3.selectAll(".toolTipHTML")
-                .style("border-bottom", "2px solid black")
+            d3.selectAll(".toolTipHTML").style("border-bottom", "2px solid black")
                 .style("border-bottom", "2px solid black")
                 .style("color", "#24211D");
-
-            let toolTipBox = document.querySelector(".tooltip");
-            let currentWidth = toolTipBox.offsetWidth;
-            let currentHeight = toolTipBox.offsetHeight;
             //controls the opacity animation that will have the tooltip fade in and out
             tooltip.transition()
                 .duration(500)
@@ -357,20 +399,25 @@ let jobs = d3.selectAll("#job")
 
     })
     .on("mousemove", function (event) {
+        /*
+            tooltip width and height information taken to center
+            the tooltip to the cursor as well as ensure the tooltip
+            stays within the diagram
+        */
         let toolTipBox = document.querySelector(".tooltip");
         let currentWidth = toolTipBox.offsetWidth;
         let currentHeight = toolTipBox.offsetHeight;
+
+        /*Getting the bounding box  */
         let svgElem = document.querySelector("#diagramSVG");
         let svgBBox = svgElem.getBoundingClientRect();
 
         //HoverAbove code: style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)
         //HoverBelow code: style("top", `${event.pageY + (currentHeight / 8)}px`)
-
-        //top
         tooltip.style("top", function () {
 
-            if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top > 0) {// why 15? accounting for the 15x15 translation
-
+            if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top> 0) {
+                
                 return `${event.pageY - currentHeight - (currentHeight / 8)}px`;
             }
             else {
@@ -389,20 +436,16 @@ let jobs = d3.selectAll("#job")
             else {
                 return `${event.pageX - (currentWidth / 2)}px`;
             }
-
+            
 
         });
-        //ensures that the tooltip is in the center of the cursor
-        //bottom
-        //left
-        //right
-        //bottomLeft
-        //bottomRight
         console.log("diagramTop:" + svgBBox.top);
         console.log("diagramLeft:" + svgBBox.left);
         console.log("left:" + (event.pageX - (currentWidth / 2)));
-        console.log("top:" + ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top));
+        console.log("top:" + ((event.pageY - currentHeight - (currentHeight / 8))- svgBBox.top));
+
         console.log("differnce:" + (svgBBox.top - (event.pageY - currentHeight - (currentHeight / 8))));
+
 
     })
     .on("mouseout", function () {
@@ -434,6 +477,7 @@ function jobsCreation() {
         .attr("id", "jobText")
         .attr("class", function (d) { return d.name })
         .text(function (d) { return d.name })
+    	.style("font-size","small")
         .call(wrap, 30)
         .each(function (d, i) {
 
@@ -455,7 +499,7 @@ function jobsCreation() {
                 .attr("height", function (d) { return pastbbox.height + padding })
                 .remove();
 
-            let tspans = d3.selectAll(this.children).style("text-anchor", "middle");
+            d3.selectAll(this.children).style("text-anchor", "middle");
             let bbox = objectToAppend.node().getBBox();
             newX = bbox.x - (padding / 2);
 
@@ -629,12 +673,13 @@ function topLabels() {
         .each(function (d) {
 
             let currentText = d3.select(this);
+      		currentText.style("text-font","5%")
+      		.style("font-weight","bold");
             let objectToAppend = d3.select(this.parentNode);
-
             let bbox = currentText.node().getBBox();//bbox is created to get the demensions and position of each of the labels
 
             let newPosX = d.posX + (d.width - bbox.width) / 2;//the difference in width /2 will give us the centered X
-            let newPosY = d.posY + (d.height - (bbox.height));//the differnce in height will give you 
+            let newPosY = d.posY + (d.height - (bbox.height)/2);//the differnce in height will give you 
 
             currentText
                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
@@ -642,7 +687,6 @@ function topLabels() {
 
             currentText.raise();
         });
-
 
     d3.selectAll(".careerLabel");
 }
@@ -684,6 +728,8 @@ function sideLabel() {
             let currentText = d3.select(this);
             let parentNode = d3.select(this.parentNode);
             let bbox = currentText.node().getBBox();
+      
+      currentText.style("font-weight","bold");
 
             //because the items are rotated 90 degrees height is affecting the x axis instead of the Y and vis versa so the differnce is the width - text(height)
             let newPosX = d.posX + (d.width - bbox.height) / 2;
@@ -758,7 +804,7 @@ function selectedNodes() {
                     .style("opacity", "1.0")
                 //.on("end",setTimeout(function(){nodeAnimationCompleted = true;},100));
             }
-            setTimeout(function () { nodeAnimationCompleted = true; }, 1200);
+            setTimeout(function () { nodeAnimationCompleted = true; }, 1500);
 
         });
 };
@@ -773,7 +819,7 @@ function wrap(text, width) {
             word,
             line = [],
             lineNumber = 0,
-            lineHeight = 17.6,
+            lineHeight = 20.6,
             x = text.attr("x"),
             y = text.attr("y"),
             dy = 0,
@@ -812,3 +858,4 @@ function wrap(text, width) {
         d3.select(this.parentNode).datum().yAdjustment = adjustedY;
     });
 }
+{/* </script> */}
