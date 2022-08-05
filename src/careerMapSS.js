@@ -129,15 +129,6 @@ const data = {
         }
 
     ],
-    /*
-        The core data for the diagram. Dictating the information 
-        and position of each of the job nodes as well as 
-        feeding information into the tooltip to display
-
-        Note: "id" has no effect on any data its simply there to assist the
-        programmer in linking job nodes
-        
-    */
     jobs: [
         // Venture Capital / Business Development Positions
         //Entry
