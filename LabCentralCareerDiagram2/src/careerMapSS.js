@@ -133,6 +133,10 @@ const data = {
         The core data for the diagram. Dictating the information 
         and position of each of the job nodes as well as 
         feeding information into the tooltip to display
+
+        Note: "id" has no effect on any data its simply there to assist the
+        programmer in linking job nodes
+        
     */
     jobs: [
         // Venture Capital / Business Development Positions
@@ -318,7 +322,7 @@ let currentSource = null;
 //when a node is clicked the tooltip will disappear breifly to allow for better view of connections
 let nodeAnimationCompleted = true;
 
-//creating ToolTip Default
+//creating ToolTip
 const tooltip = d3.select("body")
     .append("div")
     .style("position", "absolute")
@@ -334,15 +338,7 @@ const tooltip = d3.select("body")
 	.style("text-font","25px")
 	.style("font-weight","bold")
     .style("display", "none")
-	.style("z-index", 10)
-    .html(`
-        <h6 class="toolTipHTML" id="pos">NULL</h6>
-        <h5 class="toolTipHTML" id="salary">Salary: NULL</h5>
-        <h5 class="toolTipHTML" id="reqEDU">Required Eduction: NULL</h5>
-        <h5 class="toolTipHTML" id="desEDU">Desired Eduction: NULL</h5>
-        <h5 class="toolTipHTML" id="reqEXP">Required Expirence: NULL</h5>
-        <h5 class="toolTipHTML" id="desEXP">Desired Expirence: NULL</h5>
-        `)
+	.style("z-index", 10);
 
 const dataSegments = svg.selectAll("segment").data(data.segments);
 const dataTopLabel = svg.selectAll("tLabel").data(data.careerPaths);
@@ -362,11 +358,13 @@ topLabels();
 sideLabel();
 
 jobsCreation();
-
-
-
+/*
+    moving the svg down and over by 15
+    adding a onclick function to reset the diagram
+ */
 svg.selectAll("#diagram")
     .attr("transform", "translate(15,15)")
+    .on("click", resetDiagram);
 
 //ensuring on hover functions as well as animaitons are executed
 let jobs = d3.selectAll("#job")
@@ -375,8 +373,9 @@ let jobs = d3.selectAll("#job")
         //This will display the appropraite data associated with each of the nodes
 
         if (nodeAnimationCompleted) {
-
-            console.log(d);
+            /*
+                through the job creation process 
+            */
             let overNodeData = d3.select(d.path[1]).datum();
             tooltip.html(`
                 <p class="toolTipHTML" id="position">${overNodeData.name}</p>
@@ -408,12 +407,15 @@ let jobs = d3.selectAll("#job")
         let currentWidth = toolTipBox.offsetWidth;
         let currentHeight = toolTipBox.offsetHeight;
 
-        /*Getting the bounding box  */
+        /*Getting the bounding box  for the svg element*/
         let svgElem = document.querySelector("#diagramSVG");
         let svgBBox = svgElem.getBoundingClientRect();
 
         //HoverAbove code: style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)
         //HoverBelow code: style("top", `${event.pageY + (currentHeight / 8)}px`)
+        /* 
+            The ori
+        */
         tooltip.style("top", function () {
 
             if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top> 0) {
@@ -455,11 +457,9 @@ let jobs = d3.selectAll("#job")
                 .delay(150)
                 .duration(500)
                 .style("opacity", 0)
-                //.style("top", `${-height}px`)
                 .on("end", function () { tooltip.style("display", "none") });
         }
     });
-d3.selectAll("#diagram").on("click", linkRemoval);
 
 
 function jobsCreation() {
@@ -516,10 +516,6 @@ function jobsCreation() {
                 .style("stroke", "black")
                 .style("stroke-width", "1.5px");
             objectToAppend.attr("transform", `translate(${difference},${-objectToAppend.datum().yAdjustment})`);
-
-
-
-
         })
         .raise();
     d3.selectAll("#job")
@@ -747,7 +743,7 @@ function sideLabel() {
         })
 }
 
-function linkRemoval() {
+function resetDiagram() {
     svg.selectAll("line").remove();
     svg.selectAll("#jobBox")
         .transition()

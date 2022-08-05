@@ -1,3 +1,4 @@
+
 const data = {
     segments:
         [
@@ -314,13 +315,16 @@ svg.append("rect")
 swimingLaneCreation(4, 3);
 topLabels();
 sideLabel();
-
 jobsCreation();
 
 
-
+d3.selectAll("#diagram").on("click", linkRemoval);
 svg.selectAll("#diagram")
-    .attr("transform", "translate(15,15)")
+    .attr("transform", "translate(15,15)");
+
+    let devModeActive = false;
+if(!devModeActive){
+
 
 //ensuring on hover functions as well as animaitons are executed
 let jobs = d3.selectAll("#job")
@@ -369,7 +373,7 @@ let jobs = d3.selectAll("#job")
         //top
         tooltip.style("top", function () {
 
-            if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top > 0) {// why 15? accounting for the 15x15 translation
+            if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top - window.scrollY > 0) {// why 15? accounting for the 15x15 translation
 
                 return `${event.pageY - currentHeight - (currentHeight / 8)}px`;
             }
@@ -416,8 +420,7 @@ let jobs = d3.selectAll("#job")
                 .on("end", function () { tooltip.style("display", "none") });
         }
     });
-d3.selectAll("#diagram").on("click", linkRemoval);
-
+}
 
 function jobsCreation() {
     let currentGElement = null;
@@ -782,7 +785,8 @@ function wrap(text, width) {
                 .attr("x", x)
                 .attr("y", y)
                 .attr("dy", function (d) { return dy + "px" });
-        while (word = words.pop()) {
+        while (word = words.pop()) 
+        {
             line.push(word);
             tspan.text(line.join(" "));
             if (tspan.node().getComputedTextLength() > width) {
@@ -801,14 +805,36 @@ function wrap(text, width) {
             }
 
         }
-
         /*
         the code used to wrap text within the each of the job nodes also displaces them
-        from their original position we store the readjustment of the Y position within the 
+        from their original position we store the re-adjustment of the Y position within the 
         node to use later in job creation to re-adjust the position to its proper location
         */
         let adjustedY = lineNumber * lineHeight + dy;
         let parent = d3.select(this.parentNode);
         d3.select(this.parentNode).datum().yAdjustment = adjustedY;
     });
+
+
+    //code from pathfind Diagram for possible "developer mode" where the user can change the position of job nodes
+
+    const jobNodes = d3.selectAll("#job");
+
+    jobNodes
+    function dragstarted(d) {
+
+        d3.select(this).raise().classed("active", true);
+
+        d3.select()
+    }
+
+    function dragged(d) {
+
+
+
+    }
+
+    function dragended(d) {
+        d3.select(this).classed("active", false);
+    }
 }
