@@ -110,7 +110,7 @@ const data = {
         //Entry
         {
             name: "Management Consultant Entry-Level",
-            posX: 495,
+            posX: 55,
             posY: 640,
             width: 0,
             height: 0,
@@ -126,7 +126,7 @@ const data = {
         //Mid
         , {
             name: "Analyst",
-            posX: 460,
+            posX: 60,
             posY: 510,
             width: 0,
             height: 0,
@@ -141,7 +141,7 @@ const data = {
         }
         , {
             name: "Management Consultant Mid-level",
-            posX: 560,
+            posX: 160,
             posY: 510,
             width: 0,
             height: 0,
@@ -156,7 +156,7 @@ const data = {
         }
         , {
             name: "Research Director",
-            posX: 460,
+            posX: 60,
             posY: 410,
             width: 0,
             height: 0,
@@ -171,7 +171,7 @@ const data = {
         }
         , {
             name: "Business Development Scout",
-            posX: 560,
+            posX: 160,
             posY: 410,
             width: 0,
             height: 0,
@@ -187,7 +187,7 @@ const data = {
         //Advanced
         , {
             name: "Principal or Associate",
-            posX: 600,
+            posX: 200,
             posY: 150,
             width: 0,
             height: 0,
@@ -201,7 +201,7 @@ const data = {
         }
         , {
             name: "Venture Capitalist Partner",
-            posX: 520,
+            posX: 120,
             posY: 260,
             width: 0,
             height: 0,
@@ -215,7 +215,7 @@ const data = {
         }
         , {
             name: "Business Director Transaction Lead",
-            posX: 440,
+            posX: 40,
             posY: 150,
             width: 0,
             height: 0,
@@ -248,72 +248,46 @@ const data = {
     ],
     toolTip: [
         {
-            //Label information stored for center and Main text information stored for centering
             name: "Position",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
-
+            width: null,
+            height: null,
+            posX : null,
+            posY : null
         },
         {
             name: "Salary",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            width: null,
+            height: null,
+            posX : null,
+            posY : null
         },
         {
             name: "Required Education",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            width: null,
+            height: null,
+            posX : null,
+            posY : null
         },
         {
             name: "Desired Education",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            width: null,
+            height: null,
+            posX : null,
+            posY : null
         },
         {
             name: "Required Expirence",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            width: null,
+            height: null,
+            posX : null,
+            posY : null
         },
         {
             name: "Desired Expirence",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            width: null,
+            height: null,
+            posX : null,
+            posY : null
         }
 
     ]
@@ -338,7 +312,7 @@ const body = d3.select("body")
 var svg = d3.select("body")
     .append("svg")
     .attr("id", "diagramSVG")
-    .attr("width", width + flyOutSpace)
+    .attr("width", width)
     .attr("height", height)
     .style("display", "block")
     .style("margin", "auto");
@@ -397,82 +371,72 @@ sideLabel();
 jobsCreation();
 
 
-const flyOut = dataToolTip.enter()
-    .append("g")
-    .attr("id", "flyOut");
+// const flyOut = dataToolTip.enter()
+//     .append("g")
+//     .attr("id", "flyOut");
 
 
-const flyOutHeight = (height) - (paddingSpace * 2);
+// const flyOutHeight = (height) - (paddingSpace * 2);
 
-const flyoutDivision = 6;
+// const flyoutDivision = 6;
 
-const startingLocation = 45;
-const flyOutSectionHeight = (flyOutHeight / flyoutDivision);
-flyOut
-    .append("rect")
-    .attr("x", function (d) { d.posXM = (paddingSpace - 7); return `${(paddingSpace - 7)}px` })
-    .attr("y", function (d, i) { d.posYM = ((15) + (flyOutSectionHeight * i)); return `${(15) + (flyOutSectionHeight * i)}px` })
-    .attr("width", function (d) { d.widthM = flyOutSpace; return `${flyOutSpace}px` })
-    .attr("height", function (d) { d.heightM = flyOutSectionHeight; return `${flyOutSectionHeight}px` })
-    .style("fill", "#6958df")
+// const startingLocation = 45;
+// const flyOutSectionHeight = (flyOutHeight / flyoutDivision);
+// flyOut
+//     .append("rect")
+//     .attr("x", `${(paddingSpace)}px`)
+//     .attr("y", function (d,i) {return `${(15) + (flyOutSectionHeight * i)}px`})
+//     .attr("width", `${flyOutSpace}px`)
+//     .attr("height", `${flyOutSectionHeight}px`)
+//     .style("fill", "#6958df")
 
-flyOut
-    .append("rect")
-    .attr("x", function (d, i) { d.posXL = paddingSpace - 7; return `${(paddingSpace - 7)}px` })
-    .attr("y", function (d, i) { d.posYL = (15) + (flyOutSectionHeight * i); return `${(15) + (flyOutSectionHeight * i)}px` })
-    .attr("width", function (d) { d.widthL = flyOutSpace; return `${flyOutSpace}px` })
-    .attr("height", function (d) { d.heightL = 50; return `${50}px` })
-    .style("fill", "lightgrey")
-
-
+// flyOut
+//     .append("rect")
+//     .attr("x", function (d,i) {d.posX = paddingSpace;return `${(paddingSpace)}px`})
+//     .attr("y", function (d,i) {d.posY = (15) + (flyOutSectionHeight * i);return `${(15) + (flyOutSectionHeight * i)}px`})
+//     .attr("width", function(d){d.width = flyOutSpace; return `${flyOutSpace}px`})
+//     .attr("height", function(d){d.height = 50; return `${50}px`})
+//     .style("fill", "lightgrey")
 
 
+    
 
-flyOut.append("text")
-    .text(function (d) { return d.name })
-    .each(
-        function (d) {
-            let currentText = d3.select(this);
-            let textBBox = currentText.node().getBBox();
-            console.log(textBBox);
 
-            let newPosX = d.posXL + (d.widthL - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-            let newPosY = d.posYL + (d.heightL - (textBBox.height));//the differnce in height will give you 
+// flyOut.append("text")
+//     .text(function(d){return d.name})
+//     .each(
+//         function(d){
+//             let currentText = d3.select(this);
+//             let textBBox = currentText.node().getBBox();
+//             console.log(textBBox);
 
-            currentText
-                .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                .attr("y", function (d) { return newPosY });//accounting for transformation
+//             let newPosX = d.posX + (d.width - textBBox.width) / 2;//the difference in width /2 will give us the centered X
+//             let newPosY = d.posY + (d.height - (textBBox.height));//the differnce in height will give you 
 
-            currentText.raise();
-        }
+//             currentText
+//                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+//                 .attr("y", function (d) { return newPosY });//accounting for transformation
 
-    )
-    flyOut.append("text")
-                .text(function (d) { return d.name })
-                .each(
-                    function (d,i) {
-                        console.log(i);
-                        let currentText = d3.select(this);
-                        let textBBox = currentText.node().getBBox();
-                        console.log(textBBox);
-
-                        let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-                        let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
-
-                        currentText
-                            .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                            .attr("y", function (d) { return newPosY })//accounting for transformation
-                            .attr("class",function(d){return d.name.split(" ").join("")})
-
-                        currentText.raise();
-                    }
-
-                );
+//             currentText.raise();
+//         }
+        
+//     )
+    // .attr("x", function(d){return `${(paddingSpace)}px`})
+    // .attr("y", function (d,i) {return `${(15) + (flyOutSectionHeight * i)}px`})
 
 
 
-// .attr("x", function(d){return `${(paddingSpace)}px`})
-// .attr("y", function (d,i) {return `${(15) + (flyOutSectionHeight * i)}px`})
+
+
+// flyOut
+//     .append("rect")
+//     .attr("x", `${(paddingSpace)}px`)
+//     .attr("y", "15px")
+//     .attr("width", `${flyOutSpace}px`)
+//     .attr("height", "50px")
+//     .style("fill", "white")
+//     .style("stroke-width", "2px")
+//     .style("stroke", "black");
 
 
 
@@ -480,7 +444,7 @@ flyOut.append("text")
 
 d3.selectAll("#diagram").on("click", linkRemoval);
 svg.selectAll("#diagram")
-    .attr("transform", `translate(${flyOutSpace + paddingSpace},${paddingSpace})`);
+    .attr("transform", `translate(${paddingSpace},${paddingSpace})`);
 
 let devModeActive = false;
 if (!devModeActive) {
@@ -507,6 +471,7 @@ if (!devModeActive) {
 
                 d3.selectAll(".toolTipHTML")
                     .style("border-bottom", "2px solid black")
+                    .style("border-bottom", "2px solid black")
                     .style("color", "#24211D");
 
                 let toolTipBox = document.querySelector(".tooltip");
@@ -516,14 +481,7 @@ if (!devModeActive) {
                 tooltip.transition()
                     .duration(500)
                     .style("opacity", 1);
-                    d3.select(".Position").text(overNodeData.name);
-                    d3.select(".Salary").text(overNodeData.salary);
-                    d3.select(".RequiredEducation").text(overNodeData.eduReq);
-                    d3.select(".DesiredEducation").text(overNodeData.eduDes);
-                    d3.select(".RequiredExpirence").text(overNodeData.reqExp);
-                    d3.select(".DesiredExpirence").text(overNodeData.desExp);
             }
-            
 
         })
         .on("mousemove", function (event) {
@@ -752,7 +710,6 @@ function swimingLaneCreation(vertLaneNum, horiLaneNum) {
         })
         .attr("id", "diagram");
 };
-
 function topLabels() {
     let currentPosX = 0;
     const currentPosY = 0;
