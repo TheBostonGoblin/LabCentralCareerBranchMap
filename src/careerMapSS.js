@@ -129,15 +129,6 @@ const data = {
         }
 
     ],
-    /*
-        The core data for the diagram. Dictating the information 
-        and position of each of the job nodes as well as 
-        feeding information into the tooltip to display
-
-        Note: "id" has no effect on any data its simply there to assist the
-        programmer in linking job nodes
-        
-    */
     jobs: [
         // Venture Capital / Business Development Positions
         //Entry
@@ -265,7 +256,7 @@ const data = {
 
     ],
     /* 
-        dictates which node is connected to what
+        node connections
         in this current example node 0 or the first 
         job node is connected to the second, third, and fourth node
     */
@@ -287,10 +278,9 @@ const data = {
 }
 
 /*
-    setting up svg, all the content of the diagram
-    is contained within the svg. the additional css
-    /style is inplace to prevent coursor change when
-    the cursor is over text 
+    diagram svg 
+    the additional css prevents cursor 
+    change when the cursor is over text 
 */
 const width = 1800;
 const height = 800;
@@ -300,7 +290,7 @@ const body = d3.select("body")
     .style("-webkit-user-select", "none")
     .style("user-select", "none");
 
-    //this is to select the element that the svg will be conneted appended to
+//selects the element the svg will be appended to
 var svg = d3.select(".content-wrapper .content div div")
 	.append("svg")
     .attr("id", "diagramSVG")
@@ -319,10 +309,10 @@ var svg = d3.select(".content-wrapper .content div div")
 
 
 let currentSource = null;
-//when a node is clicked the tooltip will disappear breifly to allow for better view of connections
+//when a node is clicked, hides the tooltip
 let nodeAnimationCompleted = true;
 
-//creating ToolTip
+//ToolTip
 const tooltip = d3.select("body")
     .append("div")
     .style("position", "absolute")
@@ -399,9 +389,8 @@ let jobs = d3.selectAll("#job")
     })
     .on("mousemove", function (event) {
         /*
-            tooltip width and height information taken to center
-            the tooltip to the cursor as well as ensure the tooltip
-            stays within the diagram
+            center tooltip to the cursor and ensure 
+            the tooltip stays within the diagram
         */
         let toolTipBox = document.querySelector(".tooltip");
         let currentWidth = toolTipBox.offsetWidth;
