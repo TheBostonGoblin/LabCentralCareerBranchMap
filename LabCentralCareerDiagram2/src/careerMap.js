@@ -548,10 +548,6 @@ function swimingLaneCreation(vertLaneNum, horiLaneNum) {
     const laneHeight = (height - 80) / horiLaneNum;
     globalLaneWidth = laneWidth;
     globalLaneHeight = laneHeight;
-    const numOfLanes = vertLaneNum * horiLaneNum;
-    let modeCounter = horiLaneNum;
-    const firstRowHeight = laneHeight + 50;
-    const firstColumnWidth = laneWidth + 50;
     let entering = dataSegments
         .enter()
         .append("rect")
@@ -586,8 +582,6 @@ function swimingLaneCreation(vertLaneNum, horiLaneNum) {
         .attr("fill", function (d) {
             return d.color;
         })
-        .attr("stroke-width", "2px")
-        .attr("stroke", "black")
         .attr("id", "diagram");
 };
 function topLabels() {
@@ -619,13 +613,9 @@ function topLabels() {
         .attr("width", function (d) { d.width = currentWidth; return currentWidth })
         .attr("height", function (d) { d.height = currentHeight; return currentHeight })
         .attr("fill", "white")
-        .attr("stroke-width", "2px")
-        .attr("stroke", "black")
         .attr("id", "vRect");
 
 
-    let positionX = 0;
-    let positionY = 0;
     entering
         .append("text")
         .text(function (d) { return d.name })
@@ -677,9 +667,7 @@ function sideLabel() {
         })
         .attr("width", function (d) { d.width = currentWidth; return currentWidth })
         .attr("height", function (d) { d.height = globalLaneHeight; return globalLaneHeight })
-        .attr("fill", "white")
-        .attr("stroke-width", "2px")
-        .attr("stroke", "black");
+        .attr("fill", "white");
 
     entering.append("text")
         .text(function (d) { return d.name })
@@ -744,8 +732,7 @@ function selectedNodes() {
                 let targetText = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
-                    .style("opacity", "1.0")
-                //.on("end",setTimeout(function(){nodeAnimationCompleted = true;},100));
+                    .style("opacity", "1.0");
             }
             //in the event that the node has no target it. It will simply be the only highlighted node
             else if (d.source != currentSource && data.jobs[currentSource].name != null) {
