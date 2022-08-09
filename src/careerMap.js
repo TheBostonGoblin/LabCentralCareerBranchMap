@@ -1,4 +1,3 @@
-
 const data = {
     segments:
         [
@@ -320,28 +319,48 @@ const data = {
 }
 
 //setting up svg
-const width = 1200;
-const height = 800;
-const flyOutSpace = 400;
+let resizing = 0;
+const flyOutSpace = 400 - (resizing / 2);
+const svgWidth = 1200;
+const width = svgWidth - resizing;
+const height = 800 + resizing;
 const body = d3.select("body")
     .style("-moz-user-select", "none")
     .style("-khtml-user-select", "none")
     .style("-webkit-user-select", "none")
     .style("user-select", "none");
 
-// .style("display","flex")
-// .style("justify-item","center")
-// .style("align-items","center")
-// .style("text-align","center");
+const svgContainer = d3.select("div#chartId")
+    .append("div")
+    .classed("svg-container", true)
+    .style("display", "block")
+    .style("max-width", "1500px")
+    .style("position", "relative")
+    .style("width", "100%")
+    .style("padding-bottom", "100%")
+    .style("vertical-align", "top")
+    .style("overflow", "hidden")
+    .style("margin", "auto");
 
-
-var svg = d3.select("body")
+const svg = svgContainer
     .append("svg")
     .attr("id", "diagramSVG")
-    .attr("width", width + flyOutSpace)
-    .attr("height", height)
-    .style("display", "block")
-    .style("margin", "auto");
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", `0 0 ${width + flyOutSpace} ${height}`)
+    .style("display", "inline-block")
+    .style("position", "relative")
+    .style("top", "10px")
+    .style("left", "0");
+
+// .style("display", "block")
+// .style("margin", "auto");
+
+svg.append("rect")
+    .attr("width", `${width + flyOutSpace}`)
+    .attr("height", `${height}`)
+    .attr("fill", "grey")
+    .attr("stroke-width", "5px")
+    .attr("stroke", "black");
 
 
 let currentSource = null;
@@ -380,12 +399,6 @@ const dataLinks = svg.selectAll("link").data(data.links);
 const dataToolTip = svg.selectAll("tooltipData").data(data.toolTip);
 let globalLaneWidth;
 let globalLaneHeight;
-svg.append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .attr("fill", "grey")
-    .attr("stroke-width", "6px")
-    .attr("stroke", "black");
 
 const paddingSpace = 15;
 
@@ -424,12 +437,9 @@ flyOut
     .attr("height", function (d) { d.heightL = 50; return `${50}px` })
     .style("fill", "lightgrey")
 
-
-
-
-
 flyOut.append("text")
     .text(function (d) { return d.name })
+    .attr("id", "flyOutTextL")
     .each(
         function (d) {
             let currentText = d3.select(this);
@@ -447,32 +457,28 @@ flyOut.append("text")
         }
 
     )
-    flyOut.append("text")
-                .text(function (d) { return d.name })
-                .each(
-                    function (d,i) {
-                        console.log(i);
-                        let currentText = d3.select(this);
-                        let textBBox = currentText.node().getBBox();
-                        console.log(textBBox);
+flyOut.append("text")
+    .text(function (d) { return "N/A" })
+    .attr("id", "flyOutTextM")
+    .each(
+        function (d, i) {
+            console.log(i);
+            let currentText = d3.select(this);
+            let textBBox = currentText.node().getBBox();
+            console.log(textBBox);
 
-                        let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-                        let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
+            let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
+            let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
 
-                        currentText
-                            .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                            .attr("y", function (d) { return newPosY })//accounting for transformation
-                            .attr("class",function(d){return d.name.split(" ").join("")})
+            currentText
+                .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+                .attr("y", function (d) { return newPosY })//accounting for transformation
+                .attr("class", function (d) { return d.name.split(" ").join("") })
 
-                        currentText.raise();
-                    }
+            currentText.raise();
+        }
 
-                );
-
-
-
-// .attr("x", function(d){return `${(paddingSpace)}px`})
-// .attr("y", function (d,i) {return `${(15) + (flyOutSectionHeight * i)}px`})
+    );
 
 
 
@@ -481,7 +487,7 @@ flyOut.append("text")
 d3.selectAll("#diagram").on("click", linkRemoval);
 svg.selectAll("#diagram")
     .attr("transform", `translate(${flyOutSpace + paddingSpace},${paddingSpace})`);
-
+//possible set up for deactivating onhover funtionality for a developer mode
 let devModeActive = false;
 if (!devModeActive) {
 
@@ -493,7 +499,6 @@ if (!devModeActive) {
             //This will display the appropraite data associated with each of the nodes
 
             if (nodeAnimationCompleted) {
-                console.log();
                 let overNodeData = d3.select(d.path[1]).datum();
                 tooltip.html(`
                 <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
@@ -516,17 +521,43 @@ if (!devModeActive) {
                 tooltip.transition()
                     .duration(500)
                     .style("opacity", 1);
-                    d3.select(".Position").text(overNodeData.name);
-                    d3.select(".Salary").text(overNodeData.salary);
-                    d3.select(".RequiredEducation").text(overNodeData.eduReq);
-                    d3.select(".DesiredEducation").text(overNodeData.eduDes);
-                    d3.select(".RequiredExpirence").text(overNodeData.reqExp);
-                    d3.select(".DesiredExpirence").text(overNodeData.desExp);
+
+
             }
-            
+            let overNodeData = d3.select(d.path[1]).datum();
+            d3.select(".Position").text(overNodeData.name);
+            d3.select(".Salary").text(overNodeData.salary);
+            d3.select(".RequiredEducation").text(overNodeData.eduReq);
+            d3.select(".DesiredEducation").text(overNodeData.eduDes);
+            d3.select(".RequiredExpirence").text(overNodeData.reqExp);
+            d3.select(".DesiredExpirence").text(overNodeData.desExp);
+            d3.selectAll("#flyOutTextM")
+                .call(wrap, 300)
+                .each(
+                    function (d, i) {
+                        console.log(i);
+                        let currentText = d3.select(this);
+                        let textBBox = currentText.node().getBBox();
+                        console.log(textBBox);
+
+                        let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
+                        let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
+
+                        currentText
+                            .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+                            .attr("y", function (d) { return newPosY })//accounting for transformation
+                            .attr("class", function (d) { return d.name.split(" ").join("") })
+
+                        currentText.raise();
+                    }
+
+                );
+
 
         })
         .on("mousemove", function (event) {
+
+            
             let toolTipBox = document.querySelector(".tooltip");
             let currentWidth = toolTipBox.offsetWidth;
             let currentHeight = toolTipBox.offsetHeight;
@@ -574,6 +605,8 @@ if (!devModeActive) {
             console.log("top:" + ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top));
             console.log("differnce:" + (svgBBox.top - (event.pageY - currentHeight - (currentHeight / 8))));
 
+
+
         })
         .on("mouseout", function () {
             if (nodeAnimationCompleted) {
@@ -585,7 +618,51 @@ if (!devModeActive) {
                     //.style("top", `${-height}px`)
                     .on("end", function () { tooltip.style("display", "none") });
             }
+        })
+        .on("touchstart", function () {
+            let overNodeData = d3.select(d.path[1]).datum();
+            d3.select(".Position").text(overNodeData.name);
+            d3.select(".Salary").text(overNodeData.salary);
+            d3.select(".RequiredEducation").text(overNodeData.eduReq);
+            d3.select(".DesiredEducation").text(overNodeData.eduDes);
+            d3.select(".RequiredExpirence").text(overNodeData.reqExp);
+            d3.select(".DesiredExpirence").text(overNodeData.desExp);
+            d3.selectAll("#flyOutTextM")
+                .call(wrap, 300)
+                .each(
+                    function (d, i) {
+                        console.log(i);
+                        let currentText = d3.select(this);
+                        let textBBox = currentText.node().getBBox();
+                        console.log(textBBox);
+
+                        let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
+                        let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
+
+                        currentText
+                            .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+                            .attr("y", function (d) { return newPosY })//accounting for transformation
+                            .attr("class", function (d) { return d.name.split(" ").join("") })
+
+                        currentText.raise();
+                    }
+
+                );
+        })
+        .on("click", function (d) {
+            generateLinks(this);
+
+            
         });
+    // .on("click",function(d){
+    //     let overNodeData = d3.select(d.path[1]).datum();
+    //     d3.select(".Position").text(overNodeData.name);
+    //     d3.select(".Salary").text(overNodeData.salary);
+    //     d3.select(".RequiredEducation").text(overNodeData.eduReq);
+    //     d3.select(".DesiredEducation").text(overNodeData.eduDes);
+    //     d3.select(".RequiredExpirence").text(overNodeData.reqExp);
+    //     d3.select(".DesiredExpirence").text(overNodeData.desExp);
+    // })
 }
 
 function jobsCreation() {
@@ -647,25 +724,19 @@ function jobsCreation() {
 
         })
         .raise();
-    d3.selectAll("#job")
-        .on("click", generateLinks);
 
 }
-function generateLinks() {
+function generateLinks(selectedNode) {
+    console.log(selectedNode.data);
+    tooltip.style("display", "none");
     let source = null;
     for (let x = 0; x < data.jobs.length; x++) {
-        let selectedClass = d3.select(this.children[1]).attr("class");
-        if (data.jobs[x].name == selectedClass) {//get the second child element this will ALWAYS be the text element
+        //let selectedClass = d3.select(this.children[1]).attr("class");
+        if (data.jobs[x].name == selectedNode.__data__.name) {//get the second child element this will ALWAYS be the text element
             source = x;
         }
 
     }
-    lineCreation(source);
-    d3.selectAll("#job").raise();
-
-
-};
-function lineCreation(source) {
     currentSource = source;
     svg.selectAll("#jobBox").style("fill", "white");
     svg.selectAll("#jobBox").style("opacity", "0.3");
@@ -676,8 +747,7 @@ function lineCreation(source) {
     let targetX = null;
     let targetY = null;
 
-    let sourceFound = false;
-    let entering = dataLinks
+    dataLinks
         .enter()
         .each(function (d) {
             const objectToAppend = d3.select(this);
@@ -705,6 +775,14 @@ function lineCreation(source) {
 
 
     selectedNodes();
+    d3.selectAll("#job").raise();
+
+
+};
+function lineCreation(source) {
+
+
+
 
 }
 function swimingLaneCreation(vertLaneNum, horiLaneNum) {
@@ -865,6 +943,7 @@ function sideLabel() {
 }
 
 function linkRemoval() {
+    tooltip.attr("display", "none")
     svg.selectAll("line").remove();
     svg.selectAll("#jobBox")
         .transition()
@@ -935,7 +1014,7 @@ function wrap(text, width) {
             word,
             line = [],
             lineNumber = 0,
-            lineHeight = 17.6,
+            lineHeight = 17.6,//px
             x = text.attr("x"),
             y = text.attr("y"),
             dy = 0,
@@ -943,7 +1022,7 @@ function wrap(text, width) {
                 .append("tspan")
                 .attr("x", x)
                 .attr("y", y)
-                .attr("dy", function (d) { return dy + "px" });
+                .attr("dy", function () { return dy + "px" });
         while (word = words.pop()) {
             line.push(word);
             tspan.text(line.join(" "));
@@ -954,7 +1033,6 @@ function wrap(text, width) {
                 tspan = text.append("tspan")
                     .attr("x", function (d) {
                         let newNumber = parseInt(x);
-                        let addition = newNumber + 30;
                         return parseInt(newNumber)
                     })
                     .attr("y", y)
