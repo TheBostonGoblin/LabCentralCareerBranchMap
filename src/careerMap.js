@@ -337,7 +337,7 @@ const svgContainer = d3.select("div#chartId")
     .style("max-width", "1500px")
     .style("position", "relative")
     .style("width", "100%")
-    .style("padding-bottom", "100%")
+    .style("padding-bottom", "1%")
     .style("vertical-align", "top")
     .style("overflow", "hidden")
     .style("margin", "auto");
@@ -410,72 +410,154 @@ sideLabel();
 jobsCreation();
 
 
-const flyOut = dataToolTip.enter()
+const flyOutCard = svg
     .append("g")
-    .attr("id", "flyOut");
+    .attr("id", "flyOut")
+    .attr("class", "daigram");
 
+const cardWidth = (flyOutSpace - 15);
+const cardHeight = 600;
+const cardX = paddingSpace;
+const cardY = (height / 2) - (cardHeight / 2);
 
-const flyOutHeight = (height) - (paddingSpace * 2);
-
-const flyoutDivision = 6;
-
-const startingLocation = 45;
-const flyOutSectionHeight = (flyOutHeight / flyoutDivision);
-flyOut
+flyOutCard
     .append("rect")
-    .attr("x", function (d) { d.posXM = (paddingSpace - 7); return `${(paddingSpace - 7)}px` })
-    .attr("y", function (d, i) { d.posYM = ((15) + (flyOutSectionHeight * i)); return `${(15) + (flyOutSectionHeight * i)}px` })
-    .attr("width", function (d) { d.widthM = flyOutSpace; return `${flyOutSpace}px` })
-    .attr("height", function (d) { d.heightM = flyOutSectionHeight; return `${flyOutSectionHeight}px` })
-    .style("fill", "#6958df")
+    .attr("x", `${cardX}px`)
+    .attr("y", `${cardY}px`)
+    .attr("width", `${cardWidth}px`)
+    .attr("height", `${cardHeight}px`)
+    .style("fill", "#c3dbb6")
+    .style("rx", 10)
+    .style("ry", 10)
+// .style("stroke-width","3px")
+// .style("stroke","black");
 
-flyOut
+const cardHeaderX = cardX;
+const cardHeaderY = cardY;
+const cardHeaderWidth = cardWidth;
+const cardHeaderHeight = cardHeight / 10;
+flyOutCard
     .append("rect")
-    .attr("x", function (d, i) { d.posXL = paddingSpace - 7; return `${(paddingSpace - 7)}px` })
-    .attr("y", function (d, i) { d.posYL = (15) + (flyOutSectionHeight * i); return `${(15) + (flyOutSectionHeight * i)}px` })
-    .attr("width", function (d) { d.widthL = flyOutSpace; return `${flyOutSpace}px` })
-    .attr("height", function (d) { d.heightL = 50; return `${50}px` })
-    .style("fill", "lightgrey")
+    .attr("id", "cardHeader")
+    .attr("x", `${cardHeaderX}px`)
+    .attr("y", `${cardHeaderY}px`)
+    .attr("width", `${cardHeaderWidth}px`)
+    .attr("height", `${cardHeaderHeight}px`)
+    .style("fill", "#ffff")
+    .style("rx", 10)
+    .style("ry", 10)
+flyOutCard
+    .append("rect")
+    .attr("x", `${cardHeaderX}px`)
+    .attr("y", `${cardHeaderY + (cardHeaderHeight - 5)}px`)
+    .attr("width", `${cardHeaderWidth}px`)
+    .style("fill", "#ffff")
+    .attr("height", `${5}px`);
 
-flyOut.append("text")
-    .text(function (d) { return d.name })
-    .attr("id", "flyOutTextL")
-    .each(
-        function (d) {
-            let currentText = d3.select(this);
-            let textBBox = currentText.node().getBBox();
+const CardContentX = paddingSpace + 15;
+const CardContentY = cardHeaderY + cardHeaderHeight + paddingSpace;
+const CardContentWidth = flyOutSpace - (30 + paddingSpace);
+const CardContentHeight = cardHeight - (paddingSpace * 2) - cardHeaderHeight;
+flyOutCard
+    .append("rect")
+    .attr("id", "card Content")
+    .attr("x", `${CardContentX}px`)
+    .attr("y", `${CardContentY}px`)
+    .attr("width", `${CardContentWidth}`)
+    .attr("height", `${CardContentHeight}px`)
+    .style("fill", "#F8F8F8")
+    .style("rx", 10)
+    .style("ry", 10);
 
-            let newPosX = d.posXL + (d.widthL - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-            let newPosY = d.posYL + (d.heightL - (textBBox.height));//the differnce in height will give you 
+let headerText = flyOutCard
+    .append("text")
+    .text("N/A")
+    .attr("font-weight","bold")
+    .attr("class", "Position");
+// .attr("x",`${cardHeaderX}px`)
+// .attr("y",`${cardHeaderY}px`)
 
-            currentText
-                .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                .attr("y", function (d) { return newPosY });//accounting for transformation
+let bboxHeader = headerText.node().getBBox();
 
-            currentText.raise();
-        }
 
-    )
-flyOut.append("text")
-    .text(function (d) { return "N/A" })
-    .attr("id", "flyOutTextM")
-    .each(
-        function (d, i) {
-            let currentText = d3.select(this);
-            let textBBox = currentText.node().getBBox();
+console.log(bboxHeader);
+headerText.attr("x", function () {
+    return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
+})
+    .attr("y", function () {
+        return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)-5);
+    })
 
-            let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-            let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
 
-            currentText
-                .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                .attr("y", function (d) { return newPosY })//accounting for transformation
-                .attr("class", function (d) { return d.name.split(" ").join("") })
 
-            currentText.raise();
-        }
 
-    );
+
+// const flyOut = dataToolTip.enter()
+//     .append("g")
+//     .attr("id", "flyOut");
+
+
+// const flyOutHeight = (height) - (paddingSpace * 2);
+
+// const flyoutDivision = 6;
+
+// const startingLocation = 45;
+// const flyOutSectionHeight = (flyOutHeight / flyoutDivision);
+// flyOut
+//     .append("rect")
+//     .attr("x", function (d) { d.posXM = (paddingSpace - 7); return `${(paddingSpace - 7)}px` })
+//     .attr("y", function (d, i) { d.posYM = ((15) + (flyOutSectionHeight * i)); return `${(15) + (flyOutSectionHeight * i)}px` })
+//     .attr("width", function (d) { d.widthM = flyOutSpace; return `${flyOutSpace}px` })
+//     .attr("height", function (d) { d.heightM = flyOutSectionHeight; return `${flyOutSectionHeight}px` })
+//     .style("fill", "#6958df")
+
+// flyOut
+//     .append("rect")
+//     .attr("x", function (d, i) { d.posXL = paddingSpace - 7; return `${(paddingSpace - 7)}px` })
+//     .attr("y", function (d, i) { d.posYL = (15) + (flyOutSectionHeight * i); return `${(15) + (flyOutSectionHeight * i)}px` })
+//     .attr("width", function (d) { d.widthL = flyOutSpace; return `${flyOutSpace}px` })
+//     .attr("height", function (d) { d.heightL = 50; return `${50}px` })
+//     .style("fill", "lightgrey")
+
+// flyOut.append("text")
+//     .text(function (d) { return d.name })
+//     .attr("id", "flyOutTextL")
+//     .each(
+//         function (d) {
+//             let currentText = d3.select(this);
+//             let textBBox = currentText.node().getBBox();
+
+//             let newPosX = d.posXL + (d.widthL - textBBox.width) / 2;//the difference in width /2 will give us the centered X
+//             let newPosY = d.posYL + (d.heightL - (textBBox.height));//the differnce in height will give you 
+
+//             currentText
+//                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+//                 .attr("y", function (d) { return newPosY });//accounting for transformation
+
+//             currentText.raise();
+//         }
+
+//     )
+// flyOut.append("text")
+//     .text(function (d) { return "N/A" })
+//     .attr("id", "flyOutTextM")
+//     .each(
+//         function (d, i) {
+//             let currentText = d3.select(this);
+//             let textBBox = currentText.node().getBBox();
+
+//             let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
+//             let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
+
+//             currentText
+//                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+//                 .attr("y", function (d) { return newPosY })//accounting for transformation
+//                 .attr("class", function (d) { return d.name.split(" ").join("") })
+
+//             currentText.raise();
+//         }
+
+//     );
 
 
 
@@ -494,7 +576,7 @@ if (!devModeActive) {
     let jobs = d3.selectAll("#job")
         .on("mouseover", function (d) {
             TestTriggers++;
-            console.log("Triggers:"+TestTriggers);
+            console.log("Triggers:" + TestTriggers);
             //obtains the data associated with this specfic node and feeds this into the html elemnt
             //This will display the appropraite data associated with each of the nodes
 
@@ -508,7 +590,7 @@ if (!devModeActive) {
                 <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
                 <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
             `)
-            .style("display", "block");
+                    .style("display", "block");
 
                 d3.selectAll(".toolTipHTML")
                     .style("border-bottom", "2px solid black")
@@ -608,64 +690,69 @@ if (!devModeActive) {
 
                         currentText
                             .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                            .attr("y", function (d) { return newPosY-5 })//accounting for transformation
+                            .attr("y", function (d) { return newPosY - 5 })//accounting for transformation
                             .attr("class", function (d) { return d.name.split(" ").join("") })
 
                         currentText.raise();
                     }
 
                 );
-                
-                //im unsure why at the moment but centering within the rect does not occur unless the text is cented twice or called twice
-                d3.selectAll("#flyOutTextM")
+
+            //im unsure why at the moment but centering within the rect does not occur unless the text is cented twice or called twice
+            d3.selectAll("#flyOutTextM")
                 .call(wrap, 300);
 
             generateLinks(this);
         })
         .on("click", function (d) {
+            // let overNodeData = d3.select(d.path[1]).datum();
+            // d3.select(".Position").text(overNodeData.name);
+            // d3.select(".Salary").text(overNodeData.salary);
+            // d3.select(".RequiredEducation").text(overNodeData.eduReq);
+            // d3.select(".DesiredEducation").text(overNodeData.eduDes);
+            // d3.select(".RequiredExpirence").text(overNodeData.reqExp);
+            // d3.select(".DesiredExpirence").text(overNodeData.desExp);
+            // d3.selectAll("#flyOutTextM")
+            //     .call(wrap, 300)
+            //     .each(
+            //         function (d) {
+            //             let currentText = d3.select(this);
+            //             let textBBox = currentText.node().getBBox();
+
+            //             let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
+            //             let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
+
+            //             currentText
+            //                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+            //                 .attr("y", function (d) { return newPosY - 5 })//accounting for transformation
+            //                 .attr("class", function (d) { return d.name.split(" ").join("") })
+
+            //             currentText.raise();
+            //         }
+
+            //     );
+            console.log(d);
             let overNodeData = d3.select(d.path[1]).datum();
-            d3.select(".Position").text(overNodeData.name);
-            d3.select(".Salary").text(overNodeData.salary);
-            d3.select(".RequiredEducation").text(overNodeData.eduReq);
-            d3.select(".DesiredEducation").text(overNodeData.eduDes);
-            d3.select(".RequiredExpirence").text(overNodeData.reqExp);
-            d3.select(".DesiredExpirence").text(overNodeData.desExp);
+                let headerText = d3.select(".Position")
+                headerText.text(overNodeData.name);
+            let bboxHeader = headerText.node().getBBox();
+
+
+            console.log(bboxHeader);
+            headerText.attr("x", function () {
+                return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
+            })
+                .attr("y", function () {
+                    return cardHeaderY + ((cardHeaderHeight - bboxHeader.height))-5;
+                });
+
+            //im unsure why at the moment but centering within the rect does not occur unless the text is cented twice or called twice
             d3.selectAll("#flyOutTextM")
-                .call(wrap, 300)
-                .each(
-                    function (d) {
-                        let currentText = d3.select(this);
-                        let textBBox = currentText.node().getBBox();
-
-                        let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-                        let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
-
-                        currentText
-                            .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                            .attr("y", function (d) { return newPosY-5 })//accounting for transformation
-                            .attr("class", function (d) { return d.name.split(" ").join("") })
-
-                        currentText.raise();
-                    }
-
-                );
-                
-                //im unsure why at the moment but centering within the rect does not occur unless the text is cented twice or called twice
-                d3.selectAll("#flyOutTextM")
                 .call(wrap, 300);
 
-            
+
             generateLinks(this);
         });
-    // .on("click",function(d){
-    //     let overNodeData = d3.select(d.path[1]).datum();
-    //     d3.select(".Position").text(overNodeData.name);
-    //     d3.select(".Salary").text(overNodeData.salary);
-    //     d3.select(".RequiredEducation").text(overNodeData.eduReq);
-    //     d3.select(".DesiredEducation").text(overNodeData.eduDes);
-    //     d3.select(".RequiredExpirence").text(overNodeData.reqExp);
-    //     d3.select(".DesiredExpirence").text(overNodeData.desExp);
-    // })
 }
 
 function jobsCreation() {
@@ -865,6 +952,8 @@ function topLabels() {
     entering
         .append("text")
         .text(function (d) { return d.name })
+        .style("font", "17px times")
+
         .each(function (d) {
 
             let currentText = d3.select(this);
@@ -1022,8 +1111,7 @@ function wrap(text, width) {
                 .attr("y", y)
                 .attr("dy", function () { return dy + "px" });
         while (word = words.pop()) {
-            if(word == "for")
-            {
+            if (word == "for") {
                 console.log("bop");
             }
             line.push(word);
@@ -1032,7 +1120,7 @@ function wrap(text, width) {
                 line.pop();
                 tspan.text("  ");
                 tspan.text(line.join(" "));
-                line = [" "+word];
+                line = [" " + word];
                 tspan = text.append("tspan")
                     .attr("x", function (d) {
                         let newNumber = parseInt(x);
