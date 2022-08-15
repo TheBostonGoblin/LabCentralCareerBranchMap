@@ -105,7 +105,7 @@ const data = {
 
     ],
     jobs: [
-        // Venture Capital / Business Development Positions
+        // Venture Capital / Business Development 
         //Entry
         {
             name: "Management Consultant Entry-Level",
@@ -122,7 +122,8 @@ const data = {
             id: 0,
             yAdjustment: 0
         }
-        //Mid
+        // Venture Capital / Business Development 
+        // Mid
         , {
             name: "Analyst",
             posX: 460,
@@ -183,7 +184,8 @@ const data = {
             id: 4,
             yAdjustment: 0
         }
-        //Advanced
+        // Venture Capital / Business Development 
+        // Advanced
         , {
             name: "Principal or Associate",
             posX: 600,
@@ -226,6 +228,284 @@ const data = {
             id: 7,
             yAdjustment: 0
         }
+        //Career Info Research & Development
+        //Entry
+        , {
+            name: "Glasswash/Lab Technician",
+            posX: 780,
+            posY: 750,
+            width: 0,
+            height: 0,
+            salary: "$35,000 - $50,000",
+            eduReq: "Certificate",
+            eduDes: "Associates/Bachelors in Science",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 8,
+            yAdjustment: 0
+        }
+        , {
+            name: "Research Assistant/Associate",
+            posX: 760,
+            posY: 680,
+            width: 0,
+            height: 0,
+            salary: "$45,000 - $65,000",
+            eduReq: "Associates Degree +2 years or Bachelors in Science",
+            eduDes: "Bachelors or Masters",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 9,
+            yAdjustment: 0
+        }
+        , {
+            name: "Associate Scientist",
+            posX: 885,
+            posY: 610,
+            width: 0,
+            height: 0,
+            salary: "$60,000 - $75,000",
+            eduReq: "Bachelors",
+            eduDes: "Masters or PhD",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 10,
+            yAdjustment: 0
+        }
+        , {
+            name: "Data Analyst",
+            posX: 755,
+            posY: 610,
+            width: 0,
+            height: 0,
+            salary: "$55,000 - $75,000",
+            eduReq: "Bachelors",
+            eduDes: "Masters",
+            reqExp: "Experience in object-oriebted programming (Python/R) and data visualization",
+            desExp: "Previous analytics/metrics related internship",
+            id: 11,
+            yAdjustment: 0
+        }
+        //Career Info Research & Development
+        //Mid
+        , {
+            name: "Lead/Senior/Managing Scientist",
+            posX: 755,
+            posY: 480,
+            width: 0,
+            height: 0,
+            salary: "$110,000 - $130,000",
+            eduReq: "Bachelors",
+            eduDes: "Masters or PhD",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 12,
+            yAdjustment: 0
+        }
+        , {
+            name: "Computational Biologist / Bioinformastician",
+            posX: 775,
+            posY: 410,
+            width: 0,
+            height: 0,
+            salary: "$120,000 - $155,000",
+            eduReq: "Masters",
+            eduDes: "Masters or PhD",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 13,
+            yAdjustment: 0
+        }
+        //Career Info Research & Development
+        //Advanced
+        , {
+            name: "Principal Scientist",
+            posX: 770,
+            posY: 280,
+            width: 0,
+            height: 0,
+            salary: "$150,000 - $170,000",
+            eduReq: "PhD",
+            eduDes: "PhD",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 14,
+            yAdjustment: 0
+        }
+        , {
+            name: "Director/VP of Research",
+            posX:835,
+            posY: 210,
+            width: 0,
+            height: 0,
+            salary: "$170,000 - $200,000+",
+            eduReq: "PhD",
+            eduDes: "PhD, PhD/MD",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 15,
+            yAdjustment: 0
+        }
+        , {
+            name: "CSO/CTO",
+            posX: 805,
+            posY: 120,
+            width: 0,
+            height: 0,
+            salary: "$170,000 - $200,000+",
+            eduReq: "PhD",
+            eduDes: "PhD, PhD/MD",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 16,
+            yAdjustment: 0
+        }
+        //Career Biomanufacturing
+        //entry
+        , {
+            name: "Biomanufacturing Technician",
+            posX: 1105,
+            posY: 720,
+            width: 0,
+            height: 0,
+            salary: "$40,000 - $55,000",
+            eduReq: "Certificate",
+            eduDes: "Bachelor's",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 17,
+            yAdjustment: 0
+        }
+        , {
+            name: "Quality Assurance (QA) Assistant",
+            posX: 990,
+            posY: 720,
+            width: 0,
+            height: 0,
+            salary: "$40,000 - $55,000",
+            eduReq: "Certificate",
+            eduDes: "Bachelor's",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 18,
+            yAdjustment: 0
+        }
+        , {
+            name: "Quality Control (QC) Assistant",
+            posX: 1175,
+            posY: 650,
+            width: 0,
+            height: 0,
+            salary: "$40,000 - $55,000",
+            eduReq: "Certificate",
+            eduDes: "Bachelor's",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 19,
+            yAdjustment: 0
+        }
+        , {
+            name: "Process/Production Technician",
+            posX: 1005,
+            posY: 620,
+            width: 0,
+            height: 0,
+            salary: "$40,000 - $60,000",
+            eduReq: "Certificate",
+            eduDes: "Bachelor's",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 20,
+            yAdjustment: 0
+        }
+        //Career Biomanufacturing
+        //Mid
+        , {
+            name: "Production Supervisor",
+            posX: 1105,
+            posY: 520,
+            width: 0,
+            height: 0,
+            salary: "$70,000 - $100,000",
+            eduReq: "Bachelor's ",
+            eduDes: "Bachelor's and Master's",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 22,
+            yAdjustment: 0
+        }
+        , {
+            name: "Quality Assurance (QA) Manager",
+            posX: 1005,
+            posY: 450,
+            width: 0,
+            height: 0,
+            salary: "$95,000 - $120,000",
+            eduReq: "Bachelor's + 5 Years Experience",
+            eduDes: "Master's",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 23,
+            yAdjustment: 0
+        }
+        , {
+            name: "Quality Control (QC) Manager",
+            posX: 1115,
+            posY: 420,
+            width: 0,
+            height: 0,
+            salary: "$95,000 - $120,000",
+            eduReq: "Bachelor's + 5 Years Experience",
+            eduDes: "Master's",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 24,
+            yAdjustment: 0
+        }
+        //Career Biomanufacturing
+        //Advanced
+        , {
+            name: "Process Development Engineer",
+            posX: 1105,
+            posY: 280,
+            width: 0,
+            height: 0,
+            salary: "$100,000 - $130,000",
+            eduReq: "Bachelor's and Master's ",
+            eduDes: "Bachelor's and Master's, 10 years experience",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 25,
+            yAdjustment: 0
+        }
+        , {
+            name: "Quality Assurance/ Quality Control (QA/QC) Director",
+            posX: 995,
+            posY: 220,
+            width: 0,
+            height: 0,
+            salary: "$120,000 - $150,000 +",
+            eduReq: "Bachelor's and Master's ",
+            eduDes: "Bachelor's and Master's, 10 years experience",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 26,
+            yAdjustment: 0
+        }
+        , {
+            name: "Process Development Director ",
+            posX: 1105,
+            posY: 170,
+            width: 0,
+            height: 0,
+            salary: "$120,000 - $150,000 +",
+            eduReq: "Bachelor's and Master's ",
+            eduDes: "Bachelor's and Master's, 10 years experience",
+            reqExp: "N/A",
+            desExp: "N/A",
+            id: 25,
+            yAdjustment: 0
+        }
 
 
 
@@ -242,23 +522,68 @@ const data = {
         {
             source: 0,
             target: 3
+        },
+        //Research & Development Career Map
+        //GlassWash Connections
+        {
+            source: 8,
+            target: 9
+        },
+        {
+            source: 8,
+            target: 10
+        },
+        //Research Assi/Assoc
+        {
+            source: 9,
+            target: 10
+        },
+        //Associate Scientist
+        {
+            source: 10,
+            target: 12
         }
+        ,
+        //Data Analyst
+        {
+            source: 11,
+            target: 13
+        }
+        ,
+        //Lead/Senior/Managing Scientist
+        {
+            source: 12,
+            target: 14
+        }
+        ,
+        {
+            source: 12,
+            target: 15
+        }
+        ,
+        {
+            source: 12,
+            target: 16
+        }
+        ,//Computational biologist/bioinformastician
+        {
+            source: 13,
+            target: 16
+        }
+        ,//Principal Scientist
+        {
+            source: 14,
+            target: 16
+        }
+        ,//Director/VP of Reseach
+        {
+            source: 15,
+            target: 16
+        }
+
 
     ],
     toolTip: [
-        {
-            //Label information stored for center and Main text information stored for centering
-            name: "Position",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
-
-        },
         {
             name: "Salary",
             widthL: null,
@@ -328,7 +653,12 @@ const body = d3.select("body")
     .style("-moz-user-select", "none")
     .style("-khtml-user-select", "none")
     .style("-webkit-user-select", "none")
-    .style("user-select", "none");
+    .style("user-select", "none")
+    .style("font-family"," Arial, Helvetica, sans-serif");
+
+    const wrapper = d3.select("body")
+        .append("div")
+        .attr("id","chartId");
 
 const svgContainer = d3.select("div#chartId")
     .append("div")
@@ -369,7 +699,7 @@ let currentSource = null;
 let nodeAnimationCompleted = true;
 
 //creating ToolTip Default
-const tooltip = d3.select("body")
+const tooltip = d3.select("#chartId")
     .append("div")
     .style("position", "absolute")
     .attr("class", "tooltip")
@@ -402,162 +732,120 @@ let globalLaneHeight;
 
 const paddingSpace = 15;
 
+//Flyout Card Global Information
+const cardWidth = (flyOutSpace - 15);
+const cardHeight = 600;
+const cardX = paddingSpace;
+const cardY = (height / 2) - (cardHeight / 2);
+
+const cardHeaderX = cardX;
+const cardHeaderY = cardY;
+const cardHeaderWidth = cardWidth;
+const cardHeaderHeight = cardHeight / 10;
+
 
 
 swimingLaneCreation(4, 3);
 topLabels();
 sideLabel();
 jobsCreation();
+flyOutCreation();
+
+function flyOutCreation() {
+    const flyOutCard = svg
+        .append("g")
+        .attr("id", "flyOut")
+        .attr("class", "daigram");
 
 
-const flyOutCard = svg
-    .append("g")
-    .attr("id", "flyOut")
-    .attr("class", "daigram");
+    flyOutCard
+        .append("rect")
+        .attr("x", `${cardX}px`)
+        .attr("y", `${cardY}px`)
+        .attr("width", `${cardWidth}px`)
+        .attr("height", `${cardHeight}px`)
+        .style("fill", "#c3dbb6")
+        .style("rx", 10)
+        .style("ry", 10);
 
-const cardWidth = (flyOutSpace - 15);
-const cardHeight = 600;
-const cardX = paddingSpace;
-const cardY = (height / 2) - (cardHeight / 2);
+    flyOutCard
+        .append("rect")
+        .attr("id", "cardHeader")
+        .attr("x", `${cardHeaderX}px`)
+        .attr("y", `${cardHeaderY}px`)
+        .attr("width", `${cardHeaderWidth}px`)
+        .attr("height", `${cardHeaderHeight}px`)
+        .style("fill", "#ffff")
+        .style("rx", 10)
+        .style("ry", 10)
+    flyOutCard
+        .append("rect")
+        .attr("x", `${cardHeaderX}px`)
+        .attr("y", `${cardHeaderY + (cardHeaderHeight - 5)}px`)
+        .attr("width", `${cardHeaderWidth}px`)
+        .style("fill", "#ffff")
+        .attr("height", `${5}px`);
 
-flyOutCard
-    .append("rect")
-    .attr("x", `${cardX}px`)
-    .attr("y", `${cardY}px`)
-    .attr("width", `${cardWidth}px`)
-    .attr("height", `${cardHeight}px`)
-    .style("fill", "#c3dbb6")
-    .style("rx", 10)
-    .style("ry", 10)
-// .style("stroke-width","3px")
-// .style("stroke","black");
+    const CardContentX = paddingSpace + 15;
+    const CardContentY = cardHeaderY + cardHeaderHeight + paddingSpace;
+    const CardContentWidth = flyOutSpace - (30 + paddingSpace);
+    const CardContentHeight = cardHeight - (paddingSpace * 2) - cardHeaderHeight;
+    flyOutCard
+        .append("rect")
+        .attr("id", "card Content")
+        .attr("x", `${CardContentX}px`)
+        .attr("y", `${CardContentY}px`)
+        .attr("width", `${CardContentWidth}`)
+        .attr("height", `${CardContentHeight}px`)
+        .style("fill", "#F8F8F8")
+        .style("rx", 10)
+        .style("ry", 10);
 
-const cardHeaderX = cardX;
-const cardHeaderY = cardY;
-const cardHeaderWidth = cardWidth;
-const cardHeaderHeight = cardHeight / 10;
-flyOutCard
-    .append("rect")
-    .attr("id", "cardHeader")
-    .attr("x", `${cardHeaderX}px`)
-    .attr("y", `${cardHeaderY}px`)
-    .attr("width", `${cardHeaderWidth}px`)
-    .attr("height", `${cardHeaderHeight}px`)
-    .style("fill", "#ffff")
-    .style("rx", 10)
-    .style("ry", 10)
-flyOutCard
-    .append("rect")
-    .attr("x", `${cardHeaderX}px`)
-    .attr("y", `${cardHeaderY + (cardHeaderHeight - 5)}px`)
-    .attr("width", `${cardHeaderWidth}px`)
-    .style("fill", "#ffff")
-    .attr("height", `${5}px`);
+    console.log(CardContentHeight)
 
-const CardContentX = paddingSpace + 15;
-const CardContentY = cardHeaderY + cardHeaderHeight + paddingSpace;
-const CardContentWidth = flyOutSpace - (30 + paddingSpace);
-const CardContentHeight = cardHeight - (paddingSpace * 2) - cardHeaderHeight;
-flyOutCard
-    .append("rect")
-    .attr("id", "card Content")
-    .attr("x", `${CardContentX}px`)
-    .attr("y", `${CardContentY}px`)
-    .attr("width", `${CardContentWidth}`)
-    .attr("height", `${CardContentHeight}px`)
-    .style("fill", "#F8F8F8")
-    .style("rx", 10)
-    .style("ry", 10);
+    let headerText = flyOutCard
+        .append("text")
+        .text("N/A")
+        .attr("font-weight", "bold")
+        .attr("class", "Position")
+        .attr("id", "headerText");
 
-let headerText = flyOutCard
-    .append("text")
-    .text("N/A")
-    .attr("font-weight","bold")
-    .attr("class", "Position");
-// .attr("x",`${cardHeaderX}px`)
-// .attr("y",`${cardHeaderY}px`)
-
-let bboxHeader = headerText.node().getBBox();
+    let bboxHeader = headerText.node().getBBox();
 
 
-console.log(bboxHeader);
-headerText.attr("x", function () {
-    return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
-})
-    .attr("y", function () {
-        return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)-5);
+    headerText.attr("x", function () {
+        return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
     })
+        .attr("y", function () {
+            return cardHeaderY + ((cardHeaderHeight - bboxHeader.height) - 5);
+        })
+    let startPosition = 0;
+    let newLabelY = CardContentWidth / 5;
 
 
+    dataToolTip.enter()
+        .append("text")
+        .attr("font-weight", "bold")
+        .text(function (d, i) { return `${d.name}:` })
+        .attr("x", CardContentX + paddingSpace)
+        .attr("y", function (d, i) {
+            return CardContentY + paddingSpace * 2 + ((CardContentWidth / 4) * i)
 
+        });
 
+    dataToolTip.enter()
+        .append("text")
+        .attr("font-weight", "normal")
+        .attr("class", function (d) { return d.name.split(" ").join("") })
+        .attr("id", "flyOutText")
+        .attr("x", CardContentX + paddingSpace)
+        .attr("y", function (d, i) {
+            let offSet = 25;
+            return offSet + CardContentY + paddingSpace * 2 + ((CardContentWidth / 4) * i)
 
-// const flyOut = dataToolTip.enter()
-//     .append("g")
-//     .attr("id", "flyOut");
+        });
 
-
-// const flyOutHeight = (height) - (paddingSpace * 2);
-
-// const flyoutDivision = 6;
-
-// const startingLocation = 45;
-// const flyOutSectionHeight = (flyOutHeight / flyoutDivision);
-// flyOut
-//     .append("rect")
-//     .attr("x", function (d) { d.posXM = (paddingSpace - 7); return `${(paddingSpace - 7)}px` })
-//     .attr("y", function (d, i) { d.posYM = ((15) + (flyOutSectionHeight * i)); return `${(15) + (flyOutSectionHeight * i)}px` })
-//     .attr("width", function (d) { d.widthM = flyOutSpace; return `${flyOutSpace}px` })
-//     .attr("height", function (d) { d.heightM = flyOutSectionHeight; return `${flyOutSectionHeight}px` })
-//     .style("fill", "#6958df")
-
-// flyOut
-//     .append("rect")
-//     .attr("x", function (d, i) { d.posXL = paddingSpace - 7; return `${(paddingSpace - 7)}px` })
-//     .attr("y", function (d, i) { d.posYL = (15) + (flyOutSectionHeight * i); return `${(15) + (flyOutSectionHeight * i)}px` })
-//     .attr("width", function (d) { d.widthL = flyOutSpace; return `${flyOutSpace}px` })
-//     .attr("height", function (d) { d.heightL = 50; return `${50}px` })
-//     .style("fill", "lightgrey")
-
-// flyOut.append("text")
-//     .text(function (d) { return d.name })
-//     .attr("id", "flyOutTextL")
-//     .each(
-//         function (d) {
-//             let currentText = d3.select(this);
-//             let textBBox = currentText.node().getBBox();
-
-//             let newPosX = d.posXL + (d.widthL - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-//             let newPosY = d.posYL + (d.heightL - (textBBox.height));//the differnce in height will give you 
-
-//             currentText
-//                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-//                 .attr("y", function (d) { return newPosY });//accounting for transformation
-
-//             currentText.raise();
-//         }
-
-//     )
-// flyOut.append("text")
-//     .text(function (d) { return "N/A" })
-//     .attr("id", "flyOutTextM")
-//     .each(
-//         function (d, i) {
-//             let currentText = d3.select(this);
-//             let textBBox = currentText.node().getBBox();
-
-//             let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-//             let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
-
-//             currentText
-//                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-//                 .attr("y", function (d) { return newPosY })//accounting for transformation
-//                 .attr("class", function (d) { return d.name.split(" ").join("") })
-
-//             currentText.raise();
-//         }
-
-//     );
+}
 
 
 
@@ -566,23 +854,47 @@ headerText.attr("x", function () {
 d3.selectAll("#diagram").on("click", linkRemoval);
 svg.selectAll("#diagram")
     .attr("transform", `translate(${flyOutSpace + paddingSpace},${paddingSpace})`);
-//possible set up for deactivating onhover funtionality for a developer mode
-let devModeActive = false;
-let TestTriggers = 0;
-if (!devModeActive) {
+body.style("font-family"," Arial, Helvetica, sans-serif");
 
+//ensuring on hover functions as well as animaitons are executed
+let jobs = d3.selectAll("#job")
+    .on("mouseover", function (d) {
+        let viewPortWidth = window.innerWidth
+        console.log(viewPortWidth);
+        if(viewPortWidth >= 1500){
+            tooltip.style("font-size","17px");
+            tooltip.style("max-width", "250px");
+        }
+        else if(viewPortWidth < 1500 && viewPortWidth >= 1200){
+            tooltip.style("font-size","15px");
+            tooltip.style("max-width", "220px");
+        }
+        else if(viewPortWidth < 1200 && viewPortWidth >= 900){
+            tooltip.style("font-size","12px");
+            tooltip.style("max-width", "200px");
+        }
+        else if(viewPortWidth < 900 && viewPortWidth >= 600){
+            tooltip.style("font-size","10px");
+            tooltip.style("max-width", "120px");
+        }
+        else if(viewPortWidth < 600){
+            tooltip.style("font-size","9px");
+            tooltip.style("max-width", "100px");
+        }
+        // else if(viewPortWidth < 800){
+        //     tooltip.style("max-width", "50px");
+        // }
+        // else if(viewPortWidth < 1500){
+        //     tooltip.style("font-size","10px")
+        // }
+        
+        //console.log(window.innerWidth);
+        //obtains the data associated with this specfic node and feeds this into the html elemnt
+        //This will display the appropraite data associated with each of the nodes
 
-    //ensuring on hover functions as well as animaitons are executed
-    let jobs = d3.selectAll("#job")
-        .on("mouseover", function (d) {
-            TestTriggers++;
-            console.log("Triggers:" + TestTriggers);
-            //obtains the data associated with this specfic node and feeds this into the html elemnt
-            //This will display the appropraite data associated with each of the nodes
-
-            if (nodeAnimationCompleted) {
-                let overNodeData = d3.select(d.path[1]).datum();
-                tooltip.html(`
+        if (nodeAnimationCompleted) {
+            let overNodeData = d3.select(d.path[1]).datum();
+            tooltip.html(`
                 <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
                 <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
                 <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
@@ -590,170 +902,117 @@ if (!devModeActive) {
                 <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
                 <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
             `)
-                    .style("display", "block");
+                .style("display", "block");
 
-                d3.selectAll(".toolTipHTML")
-                    .style("border-bottom", "2px solid black")
-                    .style("color", "#24211D");
-
-                let toolTipBox = document.querySelector(".tooltip");
-                let currentWidth = toolTipBox.offsetWidth;
-                let currentHeight = toolTipBox.offsetHeight;
-                //controls the opacity animation that will have the tooltip fade in and out
-                tooltip.transition()
-                    .duration(500)
-                    .style("opacity", 1);
-
-
-            }
-
-        })
-        .on("mousemove", function (event) {
-
+            d3.selectAll(".toolTipHTML")
+                .style("border-bottom", "2px solid black")
+                .style("color", "#24211D");
 
             let toolTipBox = document.querySelector(".tooltip");
             let currentWidth = toolTipBox.offsetWidth;
             let currentHeight = toolTipBox.offsetHeight;
-            let svgElem = document.querySelector("#diagramSVG");
-            let svgBBox = svgElem.getBoundingClientRect();
-
-            //HoverAbove code: style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)
-            //HoverBelow code: style("top", `${event.pageY + (currentHeight / 8)}px`)
-
-            //top
-            tooltip.style("top", function () {
-
-                if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top - window.scrollY > 0) {
-
-                    return `${event.pageY - currentHeight - (currentHeight / 8)}px`;
-                }
-                else {
-                    return `${event.pageY + (currentHeight / 8)}px`;
-                }
-
-            }).style("left", function () {
-
-                if ((event.pageX - (currentWidth / 2)) <= svgBBox.left) {
-                    return `${svgBBox.left}px`;
-                    // this will keep the tooltip within the html page(ive tried to keep it within the svg element but its behavior was inconsistant)
-                }
-                else if ((event.pageX + (currentWidth / 2)) >= svgBBox.right) {
-                    return `${svgBBox.right}px`;
-                }
-                else {
-                    return `${event.pageX - (currentWidth / 2)}px`;
-                }
-            });
-            //ensures that the tooltip is in the center of the cursor
-            //bottom
-            //left
-            //right
-            //bottomLeft
-            //bottomRight
-            // console.log("diagramTop:" + svgBBox.top);
-            // console.log("diagramLeft:" + svgBBox.left);
-            // console.log("left:" + (event.pageX - (currentWidth / 2)));
-            // console.log("top:" + ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top));
-            // console.log("differnce:" + (svgBBox.top - (event.pageY - currentHeight - (currentHeight / 8))));
+            //controls the opacity animation that will have the tooltip fade in and out
+            tooltip.transition()
+                .duration(500)
+                .style("opacity", 1);
 
 
+        }
 
-        })
-        .on("mouseout", function () {
-            if (nodeAnimationCompleted) {
-                //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
-                tooltip.transition()
-                    .delay(150)
-                    .duration(500)
-                    .style("opacity", 0)
-                    //.style("top", `${-height}px`)
-                    .on("end", function () { tooltip.style("display", "none") });
+    })
+    .on("mousemove", function (event) {
+
+
+        let toolTipBox = document.querySelector(".tooltip");
+        let currentWidth = toolTipBox.offsetWidth;
+        let currentHeight = toolTipBox.offsetHeight;
+        let svgElem = document.querySelector("#diagramSVG");
+        let svgBBox = svgElem.getBoundingClientRect();
+
+        //HoverAbove code: style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)
+        //HoverBelow code: style("top", `${event.pageY + (currentHeight / 8)}px`)
+
+        //top
+        tooltip.style("top", function () {
+
+            if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top - window.scrollY > 0) {
+
+                return `${event.pageY - currentHeight - (currentHeight / 8)}px`;
             }
-        })
-        .on("touchstart", function (d) {
-            let overNodeData = d3.select(d.path[1]).datum();
-            d3.select(".Position").text(overNodeData.name);
-            d3.select(".Salary").text(overNodeData.salary);
-            d3.select(".RequiredEducation").text(overNodeData.eduReq);
-            d3.select(".DesiredEducation").text(overNodeData.eduDes);
-            d3.select(".RequiredExpirence").text(overNodeData.reqExp);
-            d3.select(".DesiredExpirence").text(overNodeData.desExp);
-            d3.selectAll("#flyOutTextM")
-                .call(wrap, 300)
-                .each(
-                    function (d) {
-                        let currentText = d3.select(this);
-                        let textBBox = currentText.node().getBBox();
+            else {
+                return `${event.pageY + (currentHeight / 8)}px`;
+            }
 
-                        let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-                        let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
+        }).style("left", function () {
 
-                        currentText
-                            .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                            .attr("y", function (d) { return newPosY - 5 })//accounting for transformation
-                            .attr("class", function (d) { return d.name.split(" ").join("") })
-
-                        currentText.raise();
-                    }
-
-                );
-
-            //im unsure why at the moment but centering within the rect does not occur unless the text is cented twice or called twice
-            d3.selectAll("#flyOutTextM")
-                .call(wrap, 300);
-
-            generateLinks(this);
-        })
-        .on("click", function (d) {
-            // let overNodeData = d3.select(d.path[1]).datum();
-            // d3.select(".Position").text(overNodeData.name);
-            // d3.select(".Salary").text(overNodeData.salary);
-            // d3.select(".RequiredEducation").text(overNodeData.eduReq);
-            // d3.select(".DesiredEducation").text(overNodeData.eduDes);
-            // d3.select(".RequiredExpirence").text(overNodeData.reqExp);
-            // d3.select(".DesiredExpirence").text(overNodeData.desExp);
-            // d3.selectAll("#flyOutTextM")
-            //     .call(wrap, 300)
-            //     .each(
-            //         function (d) {
-            //             let currentText = d3.select(this);
-            //             let textBBox = currentText.node().getBBox();
-
-            //             let newPosX = d.posXM + (d.widthM - textBBox.width) / 2;//the difference in width /2 will give us the centered X
-            //             let newPosY = d.posYM + (d.heightM - (textBBox.height));//the differnce in height will give you 
-
-            //             currentText
-            //                 .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-            //                 .attr("y", function (d) { return newPosY - 5 })//accounting for transformation
-            //                 .attr("class", function (d) { return d.name.split(" ").join("") })
-
-            //             currentText.raise();
-            //         }
-
-            //     );
-            console.log(d);
-            let overNodeData = d3.select(d.path[1]).datum();
-                let headerText = d3.select(".Position")
-                headerText.text(overNodeData.name);
-            let bboxHeader = headerText.node().getBBox();
-
-
-            console.log(bboxHeader);
-            headerText.attr("x", function () {
-                return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
-            })
-                .attr("y", function () {
-                    return cardHeaderY + ((cardHeaderHeight - bboxHeader.height))-5;
-                });
-
-            //im unsure why at the moment but centering within the rect does not occur unless the text is cented twice or called twice
-            d3.selectAll("#flyOutTextM")
-                .call(wrap, 300);
-
-
-            generateLinks(this);
+            if ((event.pageX - (currentWidth / 2)) <= svgBBox.left) {
+                return `${svgBBox.left}px`;
+                // this will keep the tooltip within the html page(ive tried to keep it within the svg element but its behavior was inconsistant)
+            }
+            else if ((event.pageX + (currentWidth / 2)) >= svgBBox.right) {
+                return `${svgBBox.right}px`;
+            }
+            else {
+                return `${event.pageX - (currentWidth / 2)}px`;
+            }
         });
-}
+    })
+    .on("mouseout", function () {
+        if (nodeAnimationCompleted) {
+            //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
+            tooltip.transition()
+                .delay(150)
+                .duration(500)
+                .style("opacity", 0)
+                //.style("top", `${-height}px`)
+                .on("end", function () { tooltip.style("display", "none") });
+        }
+    })
+    .on("touchstart", function (d) {
+        let overNodeData = d3.select(d.path[1]).datum();
+        let headerText = d3.select(".Position")
+        headerText.text(overNodeData.name);
+        let bboxHeader = headerText.node().getBBox();
+        console.log(bboxHeader);
+        headerText.attr("x", function () {
+            return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
+        })
+            .attr("y", function () {
+                return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - 5;
+            });
+
+
+        d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
+        d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
+        d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
+        d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
+        d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
+
+        generateLinks(this);
+    })
+    .on("click", function (d) {
+        let overNodeData = d3.select(d.path[1]).datum();
+        let headerText = d3.select(".Position")
+        headerText.text(overNodeData.name);
+        let bboxHeader = headerText.node().getBBox();
+        console.log(bboxHeader);
+        headerText.attr("x", function () {
+            return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
+        })
+            .attr("y", function () {
+                return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - 5;
+            });
+
+
+        d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
+        d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
+        d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
+        d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
+        d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
+
+        generateLinks(this);
+    });
+
 
 function jobsCreation() {
     let currentGElement = null;
@@ -763,7 +1022,12 @@ function jobsCreation() {
         .attr("x", function (d) { return d.posX })
         .attr("y", function (d) { return d.posY })
         .attr("id", "job")
-        .attr("class", function (d) { return d.name.split(" ").join("") })
+        .attr("class", function (d) { 
+            
+            let newName = d.name.replaceAll('/','');
+            newName = newName.split(" ").join("");
+
+            return newName })
         .append("text")
         .attr("x", function (d) { return d.posX })
         .attr("y", function (d) { return d.posY })
@@ -824,6 +1088,7 @@ function generateLinks(selectedNode) {
         //let selectedClass = d3.select(this.children[1]).attr("class");
         if (data.jobs[x].name == selectedNode.__data__.name) {//get the second child element this will ALWAYS be the text element
             source = x;
+            break;
         }
 
     }
@@ -952,8 +1217,8 @@ function topLabels() {
     entering
         .append("text")
         .text(function (d) { return d.name })
-        .style("font", "17px times")
-
+        .style("font-size", "14.5px")
+        .style("font-weight", "bold")
         .each(function (d) {
 
             let currentText = d3.select(this);
@@ -1007,6 +1272,7 @@ function sideLabel() {
 
     entering.append("text")
         .text(function (d) { return d.name })
+        .style("font-weight", "bold")
         .each(function (d) {
             let currentText = d3.select(this);
             let parentNode = d3.select(this.parentNode);
@@ -1052,22 +1318,24 @@ function selectedNodes() {
             //if the source has been found this means the node has targets and these will be highlighted as well
             if (d.source == currentSource) {
 
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect")
+                let sourceNode = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
-                    .style("fill", "skyblue").style("opacity", "1.0");
+                    .style("fill", "white").style("opacity", "1.0");
+                //.style("fill", "skyblue").style("opacity", "1.0");
 
-                let targetNodes = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("rect")
+                let targetNodes = d3.select(`.${data.jobs[d.target].name.replaceAll('/','').split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
-                    .style("fill", "PaleVioletRed").style("opacity", "1.0");
+                    .style("fill", "white").style("opacity", "1.0");
+                //.style("fill", "PaleVioletRed").style("opacity", "1.0");
 
-                let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text")
+                let sourceText = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
                     .style("opacity", "1.0");
 
-                let targetText = d3.select(`.${data.jobs[d.target].name.split(" ").join("")}`).select("text")
+                let targetText = d3.select(`.${data.jobs[d.target].name.replaceAll('/','').split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
                     .style("opacity", "1.0");
@@ -1075,12 +1343,12 @@ function selectedNodes() {
             //in the event that the node has no target it. It will simply be the only highlighted node
             else if (d.source != currentSource && data.jobs[currentSource].name != null) {
                 tooltip.style("display", "none");
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("rect")
+                let sourceNode = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
-                    .style("fill", "skyblue").style("opacity", "1.0");
+                    .style("fill", "white").style("opacity", "1.0");
 
-                let sourceText = d3.select(`.${data.jobs[currentSource].name.split(" ").join("")}`).select("text")
+                let sourceText = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
                     .style("opacity", "1.0")
@@ -1137,7 +1405,12 @@ function wrap(text, width) {
         from their original position we store the re-adjustment of the Y position within the 
         node to use later in job creation to re-adjust the position to its proper location
         */
-        let adjustedY = lineNumber * lineHeight + dy;
-        d3.select(this.parentNode).datum().yAdjustment = adjustedY;
+        let undefinedTest = d3.select(this.parentNode).datum();
+        if (undefinedTest != undefined) {
+            let adjustedY = lineNumber * lineHeight + dy;
+            d3.select(this.parentNode).datum().yAdjustment = adjustedY;
+        }
+
+
     });
 }
