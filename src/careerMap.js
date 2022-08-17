@@ -189,7 +189,7 @@ const data = {
         , {
             name: "Principal or Associate",
             posX: 600,
-            posY: 150,
+            posY: 250,
             width: 0,
             height: 0,
             salary: "$120,000 - $140,000",
@@ -203,7 +203,7 @@ const data = {
         , {
             name: "Venture Capitalist Partner",
             posX: 520,
-            posY: 260,
+            posY: 160,
             width: 0,
             height: 0,
             salary: "$150,000 - $170,000",
@@ -217,7 +217,7 @@ const data = {
         , {
             name: "Business Director Transaction Lead",
             posX: 440,
-            posY: 150,
+            posY: 270,
             width: 0,
             height: 0,
             salary: "$120,000 - $140,000",
@@ -274,7 +274,7 @@ const data = {
         }
         , {
             name: "Data Analyst",
-            posX: 755,
+            posX: 715,
             posY: 610,
             width: 0,
             height: 0,
@@ -431,7 +431,7 @@ const data = {
             eduDes: "Bachelor's and Master's",
             reqExp: "N/A",
             desExp: "N/A",
-            id: 22,
+            id: 21,
             yAdjustment: 0
         }
         , {
@@ -445,7 +445,7 @@ const data = {
             eduDes: "Master's",
             reqExp: "N/A",
             desExp: "N/A",
-            id: 23,
+            id: 22,
             yAdjustment: 0
         }
         , {
@@ -459,14 +459,14 @@ const data = {
             eduDes: "Master's",
             reqExp: "N/A",
             desExp: "N/A",
-            id: 24,
+            id: 23,
             yAdjustment: 0
         }
         //Career Biomanufacturing
         //Advanced
         , {
             name: "Process Development Engineer",
-            posX: 1105,
+            posX: 1135,
             posY: 280,
             width: 0,
             height: 0,
@@ -475,7 +475,7 @@ const data = {
             eduDes: "Bachelor's and Master's, 10 years experience",
             reqExp: "N/A",
             desExp: "N/A",
-            id: 25,
+            id: 24,
             yAdjustment: 0
         }
         , {
@@ -489,12 +489,12 @@ const data = {
             eduDes: "Bachelor's and Master's, 10 years experience",
             reqExp: "N/A",
             desExp: "N/A",
-            id: 26,
+            id: 25,
             yAdjustment: 0
         }
         , {
             name: "Process Development Director ",
-            posX: 1105,
+            posX: 1135,
             posY: 170,
             width: 0,
             height: 0,
@@ -503,7 +503,7 @@ const data = {
             eduDes: "Bachelor's and Master's, 10 years experience",
             reqExp: "N/A",
             desExp: "N/A",
-            id: 25,
+            id: 26,
             yAdjustment: 0
         }
 
@@ -511,19 +511,35 @@ const data = {
 
     ],
     links: [
-        {
-            source: 0,
-            target: 1
-        },
+        //VC / Business Development Entry
+        //Management Consultant Entry-Level
         {
             source: 0,
             target: 2
         },
+        //VC / Business Development Mid
+        //Analyst
         {
-            source: 0,
-            target: 3
+            source: 1,
+            target: 4
         },
-        //Research & Development Career Map
+        //Management Consultant Mid-Level(No connections)(2)
+        //Research Director
+        {
+            source: 3,
+            target: 15
+        },
+        //Business Development Scout(No connections)(4)
+
+        //Principal or Associate
+        {
+            source: 5,
+            target: 6
+        },
+        //(No connections) Venture Capitalist Partner(6)
+        //(No connections) Business Director Transaction Lead(7)
+
+        //Research & Development Career Map Entry
         //GlassWash Connections
         {
             source: 8,
@@ -549,7 +565,11 @@ const data = {
             source: 11,
             target: 13
         }
-        ,
+        ,{
+            source: 11,
+            target: 1
+        }
+        ,//Research & Development Career Map Mid
         //Lead/Senior/Managing Scientist
         {
             source: 12,
@@ -565,79 +585,152 @@ const data = {
             source: 12,
             target: 16
         }
+        ,
+        {
+            source: 12,
+            target: 3
+        }
         ,//Computational biologist/bioinformastician
         {
             source: 13,
             target: 16
         }
+        //Research & Development Career Map Advanced
         ,//Principal Scientist
         {
             source: 14,
             target: 16
+        }
+        ,{
+            source: 14,
+            target: 3
         }
         ,//Director/VP of Reseach
         {
             source: 15,
             target: 16
         }
-
-
+        ,{
+            source: 15,
+            target: 3
+        }
+        // NOTE: CSO/CTO (NO CONNECTIONS)
+        //Biomanufacturing Career Map Entry
+        //Biomanufacturing Technician
+        ,{
+            source: 17,
+            target: 18
+        }
+        ,{
+            source: 17,
+            target: 19
+        }
+        ,{
+            source: 17,
+            target: 9
+        }
+        //Quality Assurance (QA) Assistant
+        ,{
+            source: 18,
+            target: 22
+        }
+        ,{
+            source: 18,
+            target: 23
+        }
+        ,{
+            source: 18,
+            target: 9
+        }
+        //Quality Control (QC) Assistant
+        ,{
+            source: 19,
+            target: 22
+        }
+        ,{
+            source: 19,
+            target: 23
+        }
+        ,{
+            source: 19,
+            target: 9
+        }
+        //Process/Production Technician
+        ,{
+            source: 20,
+            target: 18
+        }
+        ,{
+            source: 20,
+            target: 19
+        }
+        ,{
+            source: 20,
+            target: 21
+        }
+        ,{
+            source: 20,
+            target: 9
+        }
+        //Biomanufacturing Career Map Mid
+        //Production Supervisor
+        ,{
+            source: 21,
+            target: 22
+        }
+        ,{
+            source: 21,
+            target: 23
+        }
+        ,{
+            source: 21,
+            target: 24
+        }
+        //Quality Assurance (QA) Manager
+        ,{
+            source: 22,
+            target: 24
+        }
+        ,{
+            source: 22,
+            target: 25
+        }
+        //Quality Control (QC) Manager
+        ,{
+            source: 23,
+            target: 24
+        }
+        ,{
+            source: 23,
+            target: 25
+        }
+        //Process Development Engineer
+        ,{
+            source: 24,
+            target: 25
+        }
+        ,{
+            source: 24,
+            target: 26
+        }
+        //Quality Assurance/ Quality Control (QA/QC) Director (NO CONNECTIONS)
+        //Process Development Engineer (NO CONNECTIONS)
     ],
     toolTip: [
         {
-            name: "Salary",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            name: "Salary"
         },
         {
-            name: "Required Education",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            name: "Required Education"
         },
         {
-            name: "Desired Education",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            name: "Desired Education"
         },
         {
-            name: "Required Expirence",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            name: "Required Expirence"
         },
         {
-            name: "Desired Expirence",
-            widthL: null,
-            heightL: null,
-            posXL: null,
-            posYL: null,
-            widthM: null,
-            heightM: null,
-            posXM: null,
-            posYM: null
+            name: "Desired Expirence"
         }
 
     ]
@@ -750,6 +843,13 @@ topLabels();
 sideLabel();
 jobsCreation();
 flyOutCreation();
+// svg.append("rect")
+//     .attr("x",0)
+//     .attr("y",0)
+//     .attr("width",100)
+//     .attr("height",100)
+//     .style("fill","red")
+//     .attr("transform","translate(200,200) scale(4)");
 
 function flyOutCreation() {
     const flyOutCard = svg
@@ -996,12 +1096,16 @@ let jobs = d3.selectAll("#job")
         headerText.text(overNodeData.name);
         let bboxHeader = headerText.node().getBBox();
         console.log(bboxHeader);
+
+        console.log(headerText);
         headerText.attr("x", function () {
             return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
         })
             .attr("y", function () {
                 return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - 5;
             });
+
+            
 
 
         d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
@@ -1024,7 +1128,10 @@ function jobsCreation() {
         .attr("id", "job")
         .attr("class", function (d) { 
             
-            let newName = d.name.replaceAll('/','');
+            let newName = d.name
+            .replaceAll('(','')
+            .replaceAll(')','')
+            .replaceAll('/','');
             newName = newName.split(" ").join("");
 
             return newName })
@@ -1306,10 +1413,12 @@ function linkRemoval() {
     svg.selectAll("#jobText")
         .transition()
         .duration(600)
-        .style("opacity", "1.0");
+        .style("opacity", "1.0")
+        .style("font-weight", "normal");
 }
 function selectedNodes() {
     //d3.selectAll("#job").style("opacity","0.3");
+    svg.selectAll("#jobText").style("font-weight", "normal");
     tooltip.style("opacity", 0);
     nodeAnimationCompleted = false;
     dataLinks
@@ -1318,40 +1427,66 @@ function selectedNodes() {
             //if the source has been found this means the node has targets and these will be highlighted as well
             if (d.source == currentSource) {
 
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("rect")
+                let sourceNode = d3.select(`.${data.jobs[currentSource].name
+                    .replaceAll('/','')
+                    .replaceAll('(','')
+                    .replaceAll(')','')
+                    .split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
-                    .style("fill", "white").style("opacity", "1.0");
+                    .style("fill", "#D3D3D3").style("opacity", "1.0");
                 //.style("fill", "skyblue").style("opacity", "1.0");
 
-                let targetNodes = d3.select(`.${data.jobs[d.target].name.replaceAll('/','').split(" ").join("")}`).select("rect")
+                let targetNodes = d3.select(`.${data.jobs[d.target].name
+                    .replaceAll('/','')
+                    .replaceAll('(','')
+                    .replaceAll(')','')
+                    .split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
                     .style("fill", "white").style("opacity", "1.0");
                 //.style("fill", "PaleVioletRed").style("opacity", "1.0");
 
-                let sourceText = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("text")
+                let sourceText = d3.select(`.${data.jobs[currentSource].name
+                    .replaceAll('/','')
+                    .replaceAll('(','')
+                    .replaceAll(')','')
+                    .split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
-                    .style("opacity", "1.0");
+                    .style("opacity", "1.0")
+                    .style("font-weight", "bold");
 
-                let targetText = d3.select(`.${data.jobs[d.target].name.replaceAll('/','').split(" ").join("")}`).select("text")
+                let targetText = d3.select(`.${data.jobs[d.target].name
+                    .replaceAll('/','')
+                    .replaceAll('(','')
+                    .replaceAll(')','')
+                    .split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
                     .style("opacity", "1.0");
             }
-            //in the event that the node has no target it. It will simply be the only highlighted node
+            //in the event that the node has no target. It will simply be the only highlighted node
             else if (d.source != currentSource && data.jobs[currentSource].name != null) {
                 tooltip.style("display", "none");
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("rect")
+                let sourceNode = d3.select(`.${data.jobs[currentSource].name
+                    .replaceAll('(','')
+                    .replaceAll(')','')
+                    .replaceAll('/','')
+                    .split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
-                    .style("fill", "white").style("opacity", "1.0");
+                    .style("fill", "#D3D3D3").style("opacity", "1.0");
 
-                let sourceText = d3.select(`.${data.jobs[currentSource].name.replaceAll('/','').split(" ").join("")}`).select("text")
+                let sourceText = d3.select(`.${data.jobs[currentSource].name
+                    .replaceAll('(','')
+                    .replaceAll(')','')
+                    .replaceAll('/','')
+                    .split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
                     .style("opacity", "1.0")
+                    .style("font-weight", "bold");
                 //.on("end",setTimeout(function(){nodeAnimationCompleted = true;},100));
             }
             setTimeout(function () { nodeAnimationCompleted = true; }, 1200);
