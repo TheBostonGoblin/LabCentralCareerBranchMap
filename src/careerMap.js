@@ -334,7 +334,7 @@ const data = {
         }
         , {
             name: "Director/VP of Research",
-            posX:835,
+            posX: 835,
             posY: 210,
             width: 0,
             height: 0,
@@ -506,8 +506,135 @@ const data = {
             id: 26,
             yAdjustment: 0
         }
-
-
+        //Lab Admin/Ops Career Map Entry
+        , {
+            name: "Lab Operations Assistant",
+            posX: 1335,
+            posY: 750,
+            width: 0,
+            height: 0,
+            salary: "$50,000 - $60,000",
+            eduReq: "Certificate",
+            eduDes: "Bachelor's Degree",
+            reqExp: "N/A",
+            desExp: "Previous lab operations exposure with environmental health and safety training",
+            id: 27,
+            yAdjustment: 0
+        }
+        , {
+            name: "Lab Operations Associate",
+            posX: 1335,
+            posY: 640,
+            width: 0,
+            height: 0,
+            salary: "$55,000 - $65,000",
+            eduReq: "Associate's Degree",
+            eduDes: "Bachelor's Degree",
+            reqExp: "N/A",
+            desExp: "Previous lab operations exposure with environmental health and safety training",
+            id: 28,
+            yAdjustment: 0
+        }
+        //Lab Admin/Ops Career Map Mid
+        , {
+            name: "Senior Lab Operations Associate",
+            posX: 1425,
+            posY: 490,
+            width: 0,
+            height: 0,
+            salary: "$55,000 - $65,000",
+            eduReq: "Associate's Degree",
+            eduDes: "Bachelor's Degree",
+            reqExp: "3+ years lab operations experience",
+            desExp: "5+ years lab operations experience",
+            id: 29,
+            yAdjustment: 0
+        }
+        , {
+            name: "Assistant Lab Manager",
+            posX: 1305,
+            posY: 470,
+            width: 0,
+            height: 0,
+            salary: "$70,000 - $80,000",
+            eduReq: "Bachelor's Degree",
+            eduDes: "Bachelor's Degree",
+            reqExp: "Previous lab administration exposure with environmental health and safety training",
+            desExp: "Previous lab administration experience with environmental health and safety training",
+            id: 30,
+            yAdjustment: 0
+        }
+        , {
+            name: "Lab Manager",
+            posX: 1355,
+            posY: 370,
+            width: 0,
+            height: 0,
+            salary: "$80,000 - $90,000",
+            eduReq: "Bachelor's Degree",
+            eduDes: "Master's Degree",
+            reqExp: "3-5 years lab management experience",
+            desExp: "5+ years lab management experience",
+            id: 31,
+            yAdjustment: 0
+        }
+        //Lab Admin/Ops Career Map Advanced
+        , {
+            name: "Director of Science Operations",
+            posX: 1295,
+            posY: 170,
+            width: 0,
+            height: 0,
+            salary: "$100,000 - $120,000 +",
+            eduReq: "Master's Degree",
+            eduDes: "PhD",
+            reqExp: "Strong scientific background with lab management experience",
+            desExp: "?",
+            id: 32,
+            yAdjustment: 0
+        }
+        , {
+            name: "Senior Lab Manager",
+            posX: 1425,
+            posY: 230,
+            width: 0,
+            height: 0,
+            salary: "$95,000 - $105,000",
+            eduReq: "Bachelor's Degree ",
+            eduDes: "Master's Degree",
+            reqExp: "5+ years lab management experience",
+            desExp: "?",
+            id: 33,
+            yAdjustment: 0
+        }
+        , {
+            name: "Process Development Manager",
+            posX: 1275,
+            posY: 270,
+            width: 0,
+            height: 0,
+            salary: "$110,000 - $125,000",
+            eduReq: "Bachelor's Degree ",
+            eduDes: "Master's Degree",
+            reqExp: "5+ years lab management experience",
+            desExp: "?",
+            id: 34,
+            yAdjustment: 0
+        }
+        , {
+            name: "Lab Operations Director",
+            posX: 1435,
+            posY: 130,
+            width: 0,
+            height: 0,
+            salary: "$135,000 - $150,000 +",
+            eduReq: "Bachelor's Degree ",
+            eduDes: "Master's Degree",
+            reqExp: "5+ years lab management experience",
+            desExp: "Previous management/administrative experience",
+            id: 35,
+            yAdjustment: 0
+        }
 
     ],
     links: [
@@ -565,7 +692,7 @@ const data = {
             source: 11,
             target: 13
         }
-        ,{
+        , {
             source: 11,
             target: 1
         }
@@ -601,7 +728,7 @@ const data = {
             source: 14,
             target: 16
         }
-        ,{
+        , {
             source: 14,
             target: 3
         }
@@ -610,113 +737,185 @@ const data = {
             source: 15,
             target: 16
         }
-        ,{
+        , {
             source: 15,
             target: 3
         }
-        // NOTE: CSO/CTO (NO CONNECTIONS)
+        // NOTE: (16) CSO/CTO (NO CONNECTIONS)
         //Biomanufacturing Career Map Entry
         //Biomanufacturing Technician
-        ,{
+        , {
             source: 17,
             target: 18
         }
-        ,{
+        , {
             source: 17,
             target: 19
         }
-        ,{
+        , {
             source: 17,
             target: 9
         }
         //Quality Assurance (QA) Assistant
-        ,{
+        , {
             source: 18,
             target: 22
         }
-        ,{
+        , {
             source: 18,
             target: 23
         }
-        ,{
+        , {
             source: 18,
             target: 9
         }
         //Quality Control (QC) Assistant
-        ,{
+        , {
             source: 19,
             target: 22
         }
-        ,{
+        , {
             source: 19,
             target: 23
         }
-        ,{
+        , {
             source: 19,
             target: 9
         }
         //Process/Production Technician
-        ,{
+        , {
             source: 20,
             target: 18
         }
-        ,{
+        , {
             source: 20,
             target: 19
         }
-        ,{
+        , {
             source: 20,
             target: 21
         }
-        ,{
+        , {
             source: 20,
             target: 9
         }
         //Biomanufacturing Career Map Mid
         //Production Supervisor
-        ,{
+        , {
             source: 21,
             target: 22
         }
-        ,{
+        , {
             source: 21,
             target: 23
         }
-        ,{
+        , {
             source: 21,
             target: 24
         }
         //Quality Assurance (QA) Manager
-        ,{
+        , {
             source: 22,
             target: 24
         }
-        ,{
+        , {
             source: 22,
             target: 25
         }
         //Quality Control (QC) Manager
-        ,{
+        , {
             source: 23,
             target: 24
         }
-        ,{
+        , {
             source: 23,
             target: 25
         }
         //Process Development Engineer
-        ,{
+        , {
             source: 24,
             target: 25
         }
-        ,{
+        , {
             source: 24,
             target: 26
         }
-        //Quality Assurance/ Quality Control (QA/QC) Director (NO CONNECTIONS)
-        //Process Development Engineer (NO CONNECTIONS)
+        //Quality Assurance/ Quality Control (QA/QC) Director (NO CONNECTIONS) (25)
+        //Process Development Engineer (NO CONNECTIONS) (26)
+        , {
+            source: 26,
+            target: 34
+        }
+
+        //Lab Admin/Ops Career Map Entry
+        //Lab Operations Assistant
+        , {
+            source: 27,
+            target: 28
+        }
+        , {
+            source: 27,
+            target: 29
+        }
+        //Lab Operations Associate
+        , {
+            source: 28,
+            target: 29
+        }
+        , {
+            source: 28,
+            target: 30
+        }
+        //Senior Lab Operations Associate
+        , {
+            source: 29,
+            target: 30
+        }
+        , {
+            source: 29,
+            target: 31
+        }
+        //Assistant Lab Manager
+        , {
+            source: 30,
+            target: 31
+        }
+        //Lab Manager
+        , {
+            source: 31,
+            target: 33
+        }
+        //Director of Science Operations
+        , {
+            source: 32,
+            target: 16
+        }
+        //Senior Lab Manager
+        , {
+            source: 33,
+            target: 32
+        }
+        , {
+            source: 33,
+            target: 34
+        }
+        , {
+            source: 33,
+            target: 35
+        }
+        //Process Development Manager
+        , {
+            source: 34,
+            target: 26
+        }
+        , {
+            source: 34,
+            target: 35
+        }
+        //Lab Operations Director (35)
+
     ],
-    toolTip: [
+    flyOut: [
         {
             name: "Salary"
         },
@@ -736,23 +935,26 @@ const data = {
     ]
 }
 
-//setting up svg
-let resizing = 0;
-const flyOutSpace = 400 - (resizing / 2);
+//setting up svg (Scaleable Vector Graphic: Ensures that when the diagram is re-sized that it resoluation stays constant)
+const flyOutSpace = 400;
 const svgWidth = 1200;
-const width = svgWidth - resizing;
-const height = 800 + resizing;
+const width = svgWidth;
+const height = 800;
 const body = d3.select("body")
     .style("-moz-user-select", "none")
     .style("-khtml-user-select", "none")
     .style("-webkit-user-select", "none")
     .style("user-select", "none")
-    .style("font-family"," Arial, Helvetica, sans-serif");
+    .style("font-family", " Arial, Helvetica, sans-serif");
 
-    const wrapper = d3.select("body")
-        .append("div")
-        .attr("id","chartId");
+/*The wrapper is used to contain the svg-container ensuring 
+and ensure everything within is accociated with the diagram
+This is primaily to ensure that auto margin and automatic scaling works properly*/
+const wrapper = d3.select("body")
+    .append("div")
+    .attr("id", "chartId");
 
+//the svg contain will contain the svg all style's are to ensure proper scaling of the diagram in differing viewports
 const svgContainer = d3.select("div#chartId")
     .append("div")
     .classed("svg-container", true)
@@ -765,6 +967,9 @@ const svgContainer = d3.select("div#chartId")
     .style("overflow", "hidden")
     .style("margin", "auto");
 
+//additional style to ensure centering of diagram within the webpage
+/*Note: these wrappers and containers are to protect the diagram from outside CSS 
+and make the CSS that needs to be implimented is implimented*/
 const svg = svgContainer
     .append("svg")
     .attr("id", "diagramSVG")
@@ -775,23 +980,21 @@ const svg = svgContainer
     .style("top", "10px")
     .style("left", "0");
 
-// .style("display", "block")
-// .style("margin", "auto");
-
+/*creating the grey background for the diagram*/
 svg.append("rect")
     .attr("width", `${width + flyOutSpace}`)
     .attr("height", `${height}`)
-    .attr("fill", "grey")
+    .attr("fill", "#D3D3D3")
     .attr("stroke-width", "5px")
     .attr("stroke", "black");
 
-
+//Global variable tracking a nodes source due to how diagrams are selected and linked this must be global
 let currentSource = null;
 
 //when a node is clicked the tooltip will disappear breifly to allow for better view of connections
 let nodeAnimationCompleted = true;
 
-//creating ToolTip Default
+
 const tooltip = d3.select("#chartId")
     .append("div")
     .style("position", "absolute")
@@ -813,45 +1016,57 @@ const tooltip = d3.select("#chartId")
         <h5 class="toolTipHTML" id="reqEXP">Required Expirence: NULL</h5>
         <h5 class="toolTipHTML" id="desEXP">Desired Expirence: NULL</h5>
         `);
-
+//Creation of data variable used later for binding data to HTML Elements
 const dataSegments = svg.selectAll("segment").data(data.segments);
 const dataTopLabel = svg.selectAll("tLabel").data(data.careerPaths);
 const dataSideLabel = svg.selectAll("sLabel").data(data.careerStage);
 const dataJobs = svg.selectAll("job").data(data.jobs);
 const dataLinks = svg.selectAll("link").data(data.links);
-const dataToolTip = svg.selectAll("tooltipData").data(data.toolTip);
+const flyOutData = svg.selectAll("tooltipData").data(data.flyOut);
 let globalLaneWidth;
 let globalLaneHeight;
 
+//Manual Padding used thorughout diagram creation
 const paddingSpace = 15;
 
-//Flyout Card Global Information
+//Flyout Card Global Constants
 const cardWidth = (flyOutSpace - 15);
 const cardHeight = 600;
 const cardX = paddingSpace;
 const cardY = (height / 2) - (cardHeight / 2);
-
+//Flyout Card Header Constants
 const cardHeaderX = cardX;
 const cardHeaderY = cardY;
 const cardHeaderWidth = cardWidth;
 const cardHeaderHeight = cardHeight / 10;
 
-
-
+//Calling all functionsfor creation of the diagram
 swimingLaneCreation(4, 3);
 topLabels();
 sideLabel();
 jobsCreation();
 flyOutCreation();
-// svg.append("rect")
-//     .attr("x",0)
-//     .attr("y",0)
-//     .attr("width",100)
-//     .attr("height",100)
-//     .style("fill","red")
-//     .attr("transform","translate(200,200) scale(4)");
 
+//ensures that all text is Helvetica
+body.style("font-family", " Arial, Helvetica, sans-serif");
+
+//ensures the diagrma is moved to the side for the fly out and accounts for padding
+svg.selectAll("#diagram")
+    .attr("transform", `translate(${flyOutSpace + paddingSpace},${paddingSpace})`);
+
+
+//a function used to create the flyout
 function flyOutCreation() {
+    svg.append("rect")
+        .attr("x", cardX)
+        .attr("y", cardY)
+        .attr("width", cardWidth)
+        .attr("height", cardHeight)
+        .style("rx", 10)
+        .style("ry", 10)
+        .style("stroke-width", "5px")
+        .style("stroke", "black")
+
     const flyOutCard = svg
         .append("g")
         .attr("id", "flyOut")
@@ -919,11 +1134,9 @@ function flyOutCreation() {
         .attr("y", function () {
             return cardHeaderY + ((cardHeaderHeight - bboxHeader.height) - 5);
         })
-    let startPosition = 0;
-    let newLabelY = CardContentWidth / 5;
 
-
-    dataToolTip.enter()
+    //Creating the labels for each of the flyout's content text(Creates the bolded "Salary:" text you see)
+    flyOutData.enter()
         .append("text")
         .attr("font-weight", "bold")
         .text(function (d, i) { return `${d.name}:` })
@@ -932,8 +1145,8 @@ function flyOutCreation() {
             return CardContentY + paddingSpace * 2 + ((CardContentWidth / 4) * i)
 
         });
-
-    dataToolTip.enter()
+    //Fills the text for each of the flyout information
+    flyOutData.enter()
         .append("text")
         .attr("font-weight", "normal")
         .attr("class", function (d) { return d.name.split(" ").join("") })
@@ -950,49 +1163,38 @@ function flyOutCreation() {
 
 
 
-
+//when you click on the diagram the destroys all links and returns the diagram to its default state
 d3.selectAll("#diagram").on("click", linkRemoval);
-svg.selectAll("#diagram")
-    .attr("transform", `translate(${flyOutSpace + paddingSpace},${paddingSpace})`);
-body.style("font-family"," Arial, Helvetica, sans-serif");
 
-//ensuring on hover functions as well as animaitons are executed
+//All job nodes will have mouse over, on click, on touch, and mouse out functionality
 let jobs = d3.selectAll("#job")
     .on("mouseover", function (d) {
+        //Ensures the tooltip scales with the diagram. Although extremely small dimensions are not accounted for
         let viewPortWidth = window.innerWidth
-        console.log(viewPortWidth);
-        if(viewPortWidth >= 1500){
-            tooltip.style("font-size","17px");
+        if (viewPortWidth >= 1500) {
+            tooltip.style("font-size", "17px");
             tooltip.style("max-width", "250px");
         }
-        else if(viewPortWidth < 1500 && viewPortWidth >= 1200){
-            tooltip.style("font-size","15px");
+        else if (viewPortWidth < 1500 && viewPortWidth >= 1200) {
+            tooltip.style("font-size", "15px");
             tooltip.style("max-width", "220px");
         }
-        else if(viewPortWidth < 1200 && viewPortWidth >= 900){
-            tooltip.style("font-size","12px");
+        else if (viewPortWidth < 1200 && viewPortWidth >= 900) {
+            tooltip.style("font-size", "12px");
             tooltip.style("max-width", "200px");
         }
-        else if(viewPortWidth < 900 && viewPortWidth >= 600){
-            tooltip.style("font-size","10px");
+        else if (viewPortWidth < 900 && viewPortWidth >= 600) {
+            tooltip.style("font-size", "10px");
             tooltip.style("max-width", "120px");
         }
-        else if(viewPortWidth < 600){
-            tooltip.style("font-size","9px");
+        else if (viewPortWidth < 600) {
+            tooltip.style("font-size", "9px");
             tooltip.style("max-width", "100px");
         }
-        // else if(viewPortWidth < 800){
-        //     tooltip.style("max-width", "50px");
-        // }
-        // else if(viewPortWidth < 1500){
-        //     tooltip.style("font-size","10px")
-        // }
-        
-        //console.log(window.innerWidth);
-        //obtains the data associated with this specfic node and feeds this into the html elemnt
-        //This will display the appropraite data associated with each of the nodes
 
+        //ensures that the fade in animation is completed
         if (nodeAnimationCompleted) {
+            //Datum is used to obtain data from a HTML element
             let overNodeData = d3.select(d.path[1]).datum();
             tooltip.html(`
                 <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
@@ -1007,10 +1209,6 @@ let jobs = d3.selectAll("#job")
             d3.selectAll(".toolTipHTML")
                 .style("border-bottom", "2px solid black")
                 .style("color", "#24211D");
-
-            let toolTipBox = document.querySelector(".tooltip");
-            let currentWidth = toolTipBox.offsetWidth;
-            let currentHeight = toolTipBox.offsetHeight;
             //controls the opacity animation that will have the tooltip fade in and out
             tooltip.transition()
                 .duration(500)
@@ -1022,16 +1220,13 @@ let jobs = d3.selectAll("#job")
     })
     .on("mousemove", function (event) {
 
-
+        /*this code primarily ensures that the tooltip with always be above the job nodes and
+        that the tooltip will be always contained within the diagram*/
         let toolTipBox = document.querySelector(".tooltip");
         let currentWidth = toolTipBox.offsetWidth;
         let currentHeight = toolTipBox.offsetHeight;
         let svgElem = document.querySelector("#diagramSVG");
         let svgBBox = svgElem.getBoundingClientRect();
-
-        //HoverAbove code: style("top", `${event.pageY - (currentHeight + currentHeight / 8)}px`)
-        //HoverBelow code: style("top", `${event.pageY + (currentHeight / 8)}px`)
-
         //top
         tooltip.style("top", function () {
 
@@ -1050,7 +1245,7 @@ let jobs = d3.selectAll("#job")
                 // this will keep the tooltip within the html page(ive tried to keep it within the svg element but its behavior was inconsistant)
             }
             else if ((event.pageX + (currentWidth / 2)) >= svgBBox.right) {
-                return `${svgBBox.right}px`;
+                return `${svgBBox.right-currentWidth}px`;
             }
             else {
                 return `${event.pageX - (currentWidth / 2)}px`;
@@ -1059,21 +1254,22 @@ let jobs = d3.selectAll("#job")
     })
     .on("mouseout", function () {
         if (nodeAnimationCompleted) {
-            //the tooltip can interfere with onhover functionality so the tooltip is move up and away from the diagram
+            //the tooltip will no longer be displayed once mouse is out, this is to ensure that the tooltip doesnt effect on hover functionality
             tooltip.transition()
                 .delay(150)
                 .duration(500)
                 .style("opacity", 0)
-                //.style("top", `${-height}px`)
                 .on("end", function () { tooltip.style("display", "none") });
         }
     })
+    //On touch and on click preform the same task
     .on("touchstart", function (d) {
+        //gets data from the job nodes
         let overNodeData = d3.select(d.path[1]).datum();
+        //ensures that flyout header data is displayed
         let headerText = d3.select(".Position")
         headerText.text(overNodeData.name);
         let bboxHeader = headerText.node().getBBox();
-        console.log(bboxHeader);
         headerText.attr("x", function () {
             return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
         })
@@ -1081,13 +1277,14 @@ let jobs = d3.selectAll("#job")
                 return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - 5;
             });
 
-
+        //ensures that flyout content text is displayed once touched
         d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
         d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
         d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
         d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
         d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
 
+        //calls generate links function
         generateLinks(this);
     })
     .on("click", function (d) {
@@ -1105,9 +1302,6 @@ let jobs = d3.selectAll("#job")
                 return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - 5;
             });
 
-            
-
-
         d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
         d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
         d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
@@ -1117,7 +1311,7 @@ let jobs = d3.selectAll("#job")
         generateLinks(this);
     });
 
-
+//creates all the jobs based on dataJobs
 function jobsCreation() {
     let currentGElement = null;
     let enteringText = dataJobs
@@ -1126,15 +1320,16 @@ function jobsCreation() {
         .attr("x", function (d) { return d.posX })
         .attr("y", function (d) { return d.posY })
         .attr("id", "job")
-        .attr("class", function (d) { 
-            
+        .attr("class", function (d) {
+            //in order for classification to work special characters are removed 
             let newName = d.name
-            .replaceAll('(','')
-            .replaceAll(')','')
-            .replaceAll('/','');
+                .replaceAll('(', '')
+                .replaceAll(')', '')
+                .replaceAll('/', '');
             newName = newName.split(" ").join("");
 
-            return newName })
+            return newName
+        })
         .append("text")
         .attr("x", function (d) { return d.posX })
         .attr("y", function (d) { return d.posY })
@@ -1144,10 +1339,16 @@ function jobsCreation() {
         .call(wrap, 30)
         .each(function (d, i) {
 
-            let currnetText = d3.select(this);
+            /*
+                When creating the job nodes if they are not centered and wrapped there is no displacement
+                but when wrapped and centered, the node is displaced seemingly randomly horizonally and vertically
+                there for I create 2 instances of the nodes one where this is no wrapping and another where their is.
+                I then get the difference in the x direction and fix the horizonal displacement. Vertical displacement is
+                fixed during wrapping.
+            */
+           //creation of first node box(No wrapping)
             let objectToAppend = d3.select(this.parentNode);
             let padding = 20;
-            let jobText = d3.selectAll("#jobText")
             let pastX = null;
             let newX = null;
             let pastbbox = objectToAppend.node().getBBox();
@@ -1158,11 +1359,12 @@ function jobsCreation() {
                     return pastbbox.x - (padding / 2);
                 })
                 .attr("y", function () { return pastbbox.y - (padding / 2) })
-                .attr("width", function (d) { return pastbbox.width + padding })
-                .attr("height", function (d) { return pastbbox.height + padding })
+                .attr("width", function () { return pastbbox.width + padding })
+                .attr("height", function () { return pastbbox.height + padding })
                 .remove();
 
-            let tspans = d3.selectAll(this.children).style("text-anchor", "middle");
+                //creation of second node box with wrapping and centering
+            d3.selectAll(this.children).style("text-anchor", "middle");
             let bbox = objectToAppend.node().getBBox();
             newX = bbox.x - (padding / 2);
 
@@ -1178,27 +1380,31 @@ function jobsCreation() {
                 .style("fill", "white")
                 .style("stroke-width", "1.5px")
                 .style("stroke", "black");
+                //translating the node by the difference found in the Y and X (Y handed during wrapping function)
             objectToAppend.attr("transform", `translate(${difference},${-objectToAppend.datum().yAdjustment})`);
 
 
 
 
         })
+        //The text is then risen so it will be above the newly created job boxes
         .raise();
 
 }
 function generateLinks(selectedNode) {
-    console.log(selectedNode.data);
+
+    //when links are generated tooltip is nolonger displayed to allow for viewing of the diagram
     tooltip.style("display", "none");
     let source = null;
+    //looking for the selected job node and finding which place does it have in the job array
     for (let x = 0; x < data.jobs.length; x++) {
-        //let selectedClass = d3.select(this.children[1]).attr("class");
         if (data.jobs[x].name == selectedNode.__data__.name) {//get the second child element this will ALWAYS be the text element
             source = x;
             break;
         }
 
     }
+    //setting up for generating links by lowing opacity of every jobnode
     currentSource = source;
     svg.selectAll("#jobBox").style("fill", "white");
     svg.selectAll("#jobBox").style("opacity", "0.3");
@@ -1209,6 +1415,7 @@ function generateLinks(selectedNode) {
     let targetX = null;
     let targetY = null;
 
+    //links are generated using the data from the selected source
     dataLinks
         .enter()
         .each(function (d) {
@@ -1235,21 +1442,29 @@ function generateLinks(selectedNode) {
 
         });
 
-
+    //node creation is than called and all job nodes are raised so links are under the nodes
     selectedNodes();
     d3.selectAll("#job").raise();
 
 
 };
-function swimingLaneCreation(vertLaneNum, horiLaneNum) {
+function swimingLaneCreation(columnNum, rowNum) {
+
+    //ensures that each color codes sectino of the diagram has its proper width height and position
+    //the starting section position will always be 0,50
     let currentPosX = 0;
     let currentPosY = 50;
-    const laneWidth = (width - 80) / vertLaneNum;
-    const laneHeight = (height - 80) / horiLaneNum;
+    //the width and height of each section is the max width of the diagram divided by the number of each row and column
+    // the -80 is acounting for the horizonal padding 15*2 and vertical padding 15*2 in additino to the fact that the 
+    //height / width of the labels were 50 so 50+30 = 80;
+    const laneWidth = (width - 80) / columnNum;
+    const laneHeight = (height - 80) / rowNum;
+
+    //Lane Dimensions are stored for when used to create labels for the diagram
     globalLaneWidth = laneWidth;
     globalLaneHeight = laneHeight;
 
-
+    //creating each of the sections if the number of columns = the current section displace the Y by section height and reset X to Zero
     let entering = dataSegments
         .enter()
         .append("rect")
@@ -1257,7 +1472,7 @@ function swimingLaneCreation(vertLaneNum, horiLaneNum) {
             if (i == 0) {
                 return currentPosX;
             }
-            else if (i % vertLaneNum == 0) {
+            else if (i % columnNum == 0) {
                 currentPosX = 0;
                 return currentPosX;
             }
@@ -1270,7 +1485,7 @@ function swimingLaneCreation(vertLaneNum, horiLaneNum) {
             if (i == 0) {
                 return currentPosY;
             }
-            else if (i % vertLaneNum == 0) {
+            else if (i % columnNum == 0) {
                 currentPosY += laneHeight;
 
                 return currentPosY;
@@ -1281,13 +1496,31 @@ function swimingLaneCreation(vertLaneNum, horiLaneNum) {
         })
         .attr("width", `${laneWidth}`)
         .attr("height", `${laneHeight}`)
-        .attr("fill", function (d) {
+        .attr("fill", function (d) {//color is stored and used in the data
             return d.color;
         })
         .attr("id", "diagram");
+
+    //lines for the outline of the diagram
+    svg.append("line")
+        .attr("x1", 0 + flyOutSpace + 15)
+        .attr("y1", 50 + 15)
+        .attr("x2", 0 + flyOutSpace + 15)
+        .attr("y2", 50 + 15 + (height - 80))
+        .style("stroke", "black")
+        .style("stroke-width", "2px")
+
+    svg.append("line")
+        .attr("x1", 0 + flyOutSpace + 15)
+        .attr("y1", 50 + 15 + (height - 80))
+        .attr("x2", 0 + flyOutSpace + 15 + (width - 80))
+        .attr("y2", 50 + 15 + (height - 80))
+        .style("stroke", "black")
+        .style("stroke-width", "2px")
 };
 
 function topLabels() {
+    /* */
     let currentPosX = 0;
     const currentPosY = 0;
     let currentWidth = globalLaneWidth;
@@ -1297,7 +1530,7 @@ function topLabels() {
         .enter()
         .append("g")
         .attr("class", "careerLabelV")
-        .attr("id", "diagram")
+        .attr("id", "diagram");
 
     entering.append("rect")
         .attr("x", function (d, i) {
@@ -1347,16 +1580,18 @@ function topLabels() {
 
 function sideLabel() {
 
-    const currentPosX = width - 50 - (2 * 15);//the width of the side labels is 50 and adjustment for the transformation of 15
+    //the width of the side labels is 50 and adjustment for the transformation of 15 and padding of 15
+    const currentPosX = width - 50 - (2 * 15);
     let currentPosY = 50;
-    const currentHeight = globalLaneHeight;
     const currentWidth = 50;
+    //classifying the labels
     let entering = dataSideLabel
         .enter()
         .append("g")
         .attr("class", "careerLabelH")
         .attr("id", "diagram");
 
+    //creating each of the rectangles for the labels
     entering.append("rect")
         .attr("x", function (d) { d.posX = currentPosX; return currentPosX })
         .attr("y", function (d, i) {
@@ -1377,6 +1612,7 @@ function sideLabel() {
         .style("stroke-width", "2px")
         .style("stroke", "black");
 
+        //creating the text for each of the side labels and properly spacing them
     entering.append("text")
         .text(function (d) { return d.name })
         .style("font-weight", "bold")
@@ -1392,17 +1628,16 @@ function sideLabel() {
             /*
             implimenting the transformation (unlike in other 
             cases where objects have been moved globally)
-            we must transform locally so rotation occours
+            we must transform locally so rotation occurs
             around the text origin
             */
 
             currentText
-                .attr("transform", function (d) { return `translate(${newPosX},${newPosY}) rotate(90)` });
+                .attr("transform", function () { return `translate(${newPosX},${newPosY}) rotate(90)` });
         })
 }
-
+//simply used to remove all the links from the diagram and resetn the diagram to its default state
 function linkRemoval() {
-    tooltip.attr("display", "none")
     svg.selectAll("line").remove();
     svg.selectAll("#jobBox")
         .transition()
@@ -1416,41 +1651,47 @@ function linkRemoval() {
         .style("opacity", "1.0")
         .style("font-weight", "normal");
 }
+//used for highlighting the selected node
 function selectedNodes() {
-    //d3.selectAll("#job").style("opacity","0.3");
+    //ensures all font is not bolded
     svg.selectAll("#jobText").style("font-weight", "normal");
+    //causes the tooltip to disapear
     tooltip.style("opacity", 0);
+    //lets the program know that an animation is in progress and is not compeleted
     nodeAnimationCompleted = false;
     dataLinks
         .enter()
         .each(function (d, i) {
             //if the source has been found this means the node has targets and these will be highlighted as well
             if (d.source == currentSource) {
-
+                //NOTE: variable creation not needed but makes it easier to understand whats going on
+                /*
+                    Remember when we classified each job node with is name after removing special characters? 
+                    Well here is where that comes in handy because we know the manipulation we did to create the class
+                    we can recreate this to find which node to highlight
+                */
                 let sourceNode = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('/','')
-                    .replaceAll('(','')
-                    .replaceAll(')','')
+                    .replaceAll('/', '')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
                     .split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
                     .style("fill", "#D3D3D3").style("opacity", "1.0");
-                //.style("fill", "skyblue").style("opacity", "1.0");
 
                 let targetNodes = d3.select(`.${data.jobs[d.target].name
-                    .replaceAll('/','')
-                    .replaceAll('(','')
-                    .replaceAll(')','')
+                    .replaceAll('/', '')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
                     .split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
                     .style("fill", "white").style("opacity", "1.0");
-                //.style("fill", "PaleVioletRed").style("opacity", "1.0");
 
                 let sourceText = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('/','')
-                    .replaceAll('(','')
-                    .replaceAll(')','')
+                    .replaceAll('/', '')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
                     .split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
@@ -1458,9 +1699,9 @@ function selectedNodes() {
                     .style("font-weight", "bold");
 
                 let targetText = d3.select(`.${data.jobs[d.target].name
-                    .replaceAll('/','')
-                    .replaceAll('(','')
-                    .replaceAll(')','')
+                    .replaceAll('/', '')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
                     .split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
@@ -1470,18 +1711,18 @@ function selectedNodes() {
             else if (d.source != currentSource && data.jobs[currentSource].name != null) {
                 tooltip.style("display", "none");
                 let sourceNode = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('(','')
-                    .replaceAll(')','')
-                    .replaceAll('/','')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
+                    .replaceAll('/', '')
                     .split(" ").join("")}`).select("rect")
                     .transition()
                     .duration(600)
                     .style("fill", "#D3D3D3").style("opacity", "1.0");
 
                 let sourceText = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('(','')
-                    .replaceAll(')','')
-                    .replaceAll('/','')
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
+                    .replaceAll('/', '')
                     .split(" ").join("")}`).select("text")
                     .transition()
                     .duration(600)
@@ -1498,6 +1739,11 @@ function selectedNodes() {
 this is code is used to wrap text in d3 js based on spacing
 if their is a space within the text this will generate a new line*/
 function wrap(text, width) {
+    /*
+        take the text element and break it up into tspan elements depending 
+        these elements will be children of the text and be broken up 
+        and spaced depending on padding
+    */
     text.each(function () {
         var text = d3.select(this),
             words = text.text().split(/\s+/).reverse(),
