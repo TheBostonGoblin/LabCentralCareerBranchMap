@@ -1207,7 +1207,6 @@ let jobs = d3.selectAll("#job")
                 <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
             `)
                 .style("display", "block");
-                tooltip.style("font-size","20px");
 
             d3.selectAll(".toolTipHTML")
                 .style("border-bottom", "2px solid black")

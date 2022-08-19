@@ -1168,25 +1168,47 @@ let jobs = d3.selectAll("#job")
     .on("mouseover", function (d) {
         //Ensures the tooltip scales with the diagram. Although extremely small dimensions are not accounted for
         let viewPortWidth = window.innerWidth
+        console.log(viewPortWidth);
         if (viewPortWidth >= 1500) {
             tooltip.style("font-size", "17px");
+          
             tooltip.style("max-width", "250px");
         }
         else if (viewPortWidth < 1500 && viewPortWidth >= 1200) {
+          
             tooltip.style("font-size", "15px");
             tooltip.style("max-width", "220px");
         }
         else if (viewPortWidth < 1200 && viewPortWidth >= 900) {
+          
             tooltip.style("font-size", "12px");
             tooltip.style("max-width", "200px");
         }
         else if (viewPortWidth < 900 && viewPortWidth >= 600) {
+          
             tooltip.style("font-size", "10px");
             tooltip.style("max-width", "120px");
         }
         else if (viewPortWidth < 600) {
+          
             tooltip.style("font-size", "9px");
             tooltip.style("max-width", "100px");
+        }
+      
+      if (viewPortWidth >= 1500) {
+            d3.select("#position").style("font-size","17px")
+        }
+        else if (viewPortWidth < 1500 && viewPortWidth >= 1200) {
+            d3.select("#position").style("font-size","15px")
+        }
+        else if (viewPortWidth < 1200 && viewPortWidth >= 900) {
+            d3.select("#position").style("font-size","12px")
+        }
+        else if (viewPortWidth < 900 && viewPortWidth >= 600) {
+            d3.select("#position").style("font-size","10px")
+        }
+        else if (viewPortWidth < 600) {
+            d3.select("#position").style("font-size","9px")
         }
 
         //ensures that the fade in animation is completed
@@ -1194,7 +1216,7 @@ let jobs = d3.selectAll("#job")
             //Datum is used to obtain data from a HTML element
             let overNodeData = d3.select(d.path[1]).datum();
             tooltip.html(`
-                <h4 class="toolTipHTML" id="position">${overNodeData.name}</h4>
+                <p class="toolTipHTML" id="position">${overNodeData.name}</p>
                 <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
                 <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
                 <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
@@ -1202,12 +1224,12 @@ let jobs = d3.selectAll("#job")
                 <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
             `)
                 .style("display", "block");
-
+d3.select("#position").style("font-weight","bold");
             d3.selectAll(".toolTipHTML")
                 .style("border-bottom", "2px solid black")
                 .style("color", "#24211D");
           
-          d3.select("#position").style("font-size","20px")
+          
             //controls the opacity animation that will have the tooltip fade in and out
             tooltip.transition()
                 .duration(500)
