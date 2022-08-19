@@ -940,7 +940,7 @@ const flyOutSpace = 400;
 const svgWidth = 1200;
 const width = svgWidth;
 const height = 800;
-const body = d3.select("body")
+const body = d3.select(".content-wrapper .content div")
     .style("-moz-user-select", "none")
     .style("-khtml-user-select", "none")
     .style("-webkit-user-select", "none")
@@ -950,7 +950,7 @@ const body = d3.select("body")
 /*The wrapper is used to contain the svg-container ensuring 
 and ensure everything within is accociated with the diagram
 This is primaily to ensure that auto margin and automatic scaling works properly*/
-const wrapper = d3.select("body")
+const wrapper = body
     .append("div")
     .attr("id", "chartId");
 
@@ -995,7 +995,7 @@ let currentSource = null;
 let nodeAnimationCompleted = true;
 
 
-const tooltip = d3.select("#chartId")
+const tooltip = d3.select("body")
     .append("div")
     .style("position", "absolute")
     .attr("class", "tooltip")
@@ -1007,17 +1007,9 @@ const tooltip = d3.select("#chartId")
     .style("viibility", "hidden")
     .style("text-align", "center")
     .style("display", "none")
-    .html(`
-        <h4 class="toolTipHTML" id="pos">NULL</h4>
-        <h5 class="toolTipHTML" id="salary">Salary: NULL</h5>
-        <h5 class="toolTipHTML" id="reqEDU">Required Eduction: NULL</h5>
-        <h5 class="toolTipHTML" id="desEDU">Desired Eduction: NULL</h5>
-        <h5 class="toolTipHTML" id="reqEXP">Required Expirence: NULL</h5>
-        <h5 class="toolTipHTML" id="desEXP">Desired Expirence: NULL</h5>
-        `)
-        .style("font-size","2px");
+	.style("z-index",100);
+  
 
-        d3.select("#pos").style("font-size","5px");
 //Creation of data variable used later for binding data to HTML Elements
 const dataSegments = svg.selectAll("segment").data(data.segments);
 const dataTopLabel = svg.selectAll("tLabel").data(data.careerPaths);
@@ -1123,6 +1115,7 @@ function flyOutCreation() {
     let headerText = flyOutCard
         .append("text")
         .text("N/A")
+    	.style("font-size", "16px")
         .attr("font-weight", "bold")
         .attr("class", "Position")
         .attr("id", "headerText");
@@ -1141,6 +1134,7 @@ function flyOutCreation() {
     flyOutData.enter()
         .append("text")
         .attr("font-weight", "bold")
+  		.style("font-size", "18px")
         .text(function (d, i) { return `${d.name}:` })
         .attr("x", CardContentX + paddingSpace)
         .attr("y", function (d, i) {
@@ -1151,6 +1145,7 @@ function flyOutCreation() {
     flyOutData.enter()
         .append("text")
         .attr("font-weight", "normal")
+  		.style("font-size", "17px")
         .attr("class", function (d) { return d.name.split(" ").join("") })
         .attr("id", "flyOutText")
         .attr("x", CardContentX + paddingSpace)
@@ -1199,7 +1194,7 @@ let jobs = d3.selectAll("#job")
             //Datum is used to obtain data from a HTML element
             let overNodeData = d3.select(d.path[1]).datum();
             tooltip.html(`
-                <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
+                <h4 class="toolTipHTML" id="position">${overNodeData.name}</h4>
                 <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
                 <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
                 <h5 class="toolTipHTML" id="desEDU">Desired Eduction: ${overNodeData.eduDes}</h5>
@@ -1207,11 +1202,12 @@ let jobs = d3.selectAll("#job")
                 <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
             `)
                 .style("display", "block");
-                tooltip.style("font-size","20px");
 
             d3.selectAll(".toolTipHTML")
                 .style("border-bottom", "2px solid black")
                 .style("color", "#24211D");
+          
+          d3.select("#position").style("font-size","20px")
             //controls the opacity animation that will have the tooltip fade in and out
             tooltip.transition()
                 .duration(500)
@@ -1238,7 +1234,7 @@ let jobs = d3.selectAll("#job")
                 return `${event.pageY - currentHeight - (currentHeight / 8)}px`;
             }
             else {
-                return `${event.pageY + (currentHeight / 8)}px`;
+                return `${event.pageY + (currentHeight / 8) }px`;
             }
 
         }).style("left", function () {
@@ -1281,11 +1277,11 @@ let jobs = d3.selectAll("#job")
             });
 
         //ensures that flyout content text is displayed once touched
-        d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
-        d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
-        d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
-        d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
-        d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
+        d3.select(".Salary").text(overNodeData.salary).style("font-size", "20px").call(wrap, 300);
+        d3.select(".RequiredEducation").text(overNodeData.eduReq).style("font-size", "20px").call(wrap, 300);
+        d3.select(".DesiredEducation").text(overNodeData.eduDes).style("font-size", "20px").call(wrap, 300);
+        d3.select(".RequiredExpirence").text(overNodeData.reqExp).style("font-size", "20px").call(wrap, 300);
+        d3.select(".DesiredExpirence").text(overNodeData.desExp).style("font-size", "20px").call(wrap, 300);
 
         //calls generate links function
         generateLinks(this);
@@ -1294,17 +1290,16 @@ let jobs = d3.selectAll("#job")
         let overNodeData = d3.select(d.path[1]).datum();
         let headerText = d3.select(".Position")
         headerText.text(overNodeData.name);
-        console.log(d3.select(".Position").node().getComputedTextLength());
-        let yTextAdjust = 0;
-        let headerLength = d3.select(".Position").node().getComputedTextLength();
-        if(headerLength <325){
+     let yTextAdjust = null;
+        if(d3.select(".Position").node().getComputedTextLength() <320){
             headerText.style("font-size","20px");
-            yTextAdjust = 5;
+            yTextAdjust = 0;
         }
         else{
             headerText.style("font-size","15px");
-            yTextAdjust = 0;
+            yTextAdjust = 5;
         }
+      
         let bboxHeader = headerText.node().getBBox();
         console.log(bboxHeader);
 
@@ -1316,11 +1311,11 @@ let jobs = d3.selectAll("#job")
                 return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - yTextAdjust;
             });
 
-        d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
-        d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
-        d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
-        d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
-        d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
+        d3.select(".Salary").text(overNodeData.salary).style("font-size", "17px").call(wrap, 300);
+        d3.select(".RequiredEducation").text(overNodeData.eduReq).style("font-size", "17px").call(wrap, 300);
+        d3.select(".DesiredEducation").text(overNodeData.eduDes).style("font-size", "17px").call(wrap, 300);
+        d3.select(".RequiredExpirence").text(overNodeData.reqExp).style("font-size", "17px").call(wrap, 300);
+        d3.select(".DesiredExpirence").text(overNodeData.desExp).style("font-size", "17px").call(wrap, 300);
 
         generateLinks(this);
     });
@@ -1345,6 +1340,7 @@ function jobsCreation() {
             return newName
         })
         .append("text")
+    	.style("font-size", "16px")
         .attr("x", function (d) { return d.posX })
         .attr("y", function (d) { return d.posY })
         .attr("id", "jobText")
