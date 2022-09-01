@@ -944,8 +944,7 @@ const body = d3.select("body")
     .style("-moz-user-select", "none")
     .style("-khtml-user-select", "none")
     .style("-webkit-user-select", "none")
-    .style("user-select", "none")
-    .style("font-family", " Arial, Helvetica, sans-serif");
+    .style("user-select", "none");
 
 /*The wrapper is used to contain the svg-container ensuring 
 and ensure everything within is accociated with the diagram
@@ -1043,6 +1042,7 @@ const cardHeaderWidth = cardWidth;
 const cardHeaderHeight = cardHeight / 10;
 
 //Calling all functionsfor creation of the diagram
+body.style("font-family", " Arial, Helvetica, sans-serif");
 swimingLaneCreation(4, 3);
 topLabels();
 sideLabel();
@@ -1050,7 +1050,7 @@ jobsCreation();
 flyOutCreation();
 
 //ensures that all text is Helvetica
-body.style("font-family", " Arial, Helvetica, sans-serif");
+
 
 //ensures the diagrma is moved to the side for the fly out and accounts for padding
 svg.selectAll("#diagram")
@@ -1422,7 +1422,7 @@ function generateLinks(selectedNode) {
     svg.selectAll("#jobBox").style("fill", "white");
     svg.selectAll("#jobBox").style("opacity", "0.3");
     svg.selectAll("#jobText").style("opacity", "0.3");
-    svg.selectAll("line").remove();
+    svg.selectAll(".link").remove();
     let sourceX = null;
     let sourceY = null;
     let targetX = null;
@@ -1516,15 +1516,17 @@ function swimingLaneCreation(columnNum, rowNum) {
 
     //lines for the outline of the diagram
     svg.append("line")
+        .attr("class","pLine")//permanent Line
         .attr("x1", 0 + flyOutSpace + 15)
         .attr("y1", 50 + 15)
         .attr("x2", 0 + flyOutSpace + 15)
         .attr("y2", 50 + 15 + (height - 80))
         .style("stroke", "black")
-        .style("stroke-width", "2px")
+        .style("stroke-width", "2px");
 
     svg.append("line")
         .attr("x1", 0 + flyOutSpace + 15)
+        .attr("class","pLine")//permanent Line
         .attr("y1", 50 + 15 + (height - 80))
         .attr("x2", 0 + flyOutSpace + 15 + (width - 80))
         .attr("y2", 50 + 15 + (height - 80))
@@ -1629,9 +1631,9 @@ function sideLabel() {
     entering.append("text")
         .text(function (d) { return d.name })
         .style("font-weight", "bold")
+        .style("font-size", "17px")
         .each(function (d) {
             let currentText = d3.select(this);
-            let parentNode = d3.select(this.parentNode);
             let bbox = currentText.node().getBBox();
 
             //because the items are rotated 90 degrees height is affecting the x axis instead of the Y and vis versa so the differnce is the width - text(height)
@@ -1651,7 +1653,7 @@ function sideLabel() {
 }
 //simply used to remove all the links from the diagram and resetn the diagram to its default state
 function linkRemoval() {
-    svg.selectAll("line").remove();
+    svg.selectAll(".link").remove();
     svg.selectAll("#jobBox")
         .transition()
         .duration(600)
