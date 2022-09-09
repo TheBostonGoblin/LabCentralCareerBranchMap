@@ -935,78 +935,81 @@ const data = {
     ]
 }
 
-//setting up svg (Scaleable Vector Graphic: Ensures that when the diagram is re-sized that it resoluation stays constant)
-const flyOutSpace = 400;
-const svgWidth = 1200;
-const width = svgWidth;
-const height = 800;
-const body = d3.select("body")
-    .style("-moz-user-select", "none")
-    .style("-khtml-user-select", "none")
-    .style("-webkit-user-select", "none")
-    .style("user-select", "none");
+//d3.json("./data/diagramData.json", function (data) {
 
-/*The wrapper is used to contain the svg-container ensuring 
-and ensure everything within is accociated with the diagram
-This is primaily to ensure that auto margin and automatic scaling works properly*/
-const wrapper = d3.select("body")
-    .append("div")
-    .attr("id", "chartId");
+    console.log(data);
+    //setting up svg (Scaleable Vector Graphic: Ensures that when the diagram is re-sized that it resoluation stays constant)
+    const flyOutSpace = 400;
+    const svgWidth = 1200;
+    const width = svgWidth;
+    const height = 800;
+    const body = d3.select("body")
+        .style("-moz-user-select", "none")
+        .style("-khtml-user-select", "none")
+        .style("-webkit-user-select", "none")
+        .style("user-select", "none");
 
-//the svg contain will contain the svg all style's are to ensure proper scaling of the diagram in differing viewports
-const svgContainer = d3.select("div#chartId")
-    .append("div")
-    .classed("svg-container", true)
-    .style("display", "block")
-    .style("max-width", "1500px")
-    .style("position", "relative")
-    .style("width", "100%")
-    .style("padding-bottom", "1%")
-    .style("vertical-align", "top")
-    .style("overflow", "hidden")
-    .style("margin", "auto");
+    /*The wrapper is used to contain the svg-container ensuring 
+    and ensure everything within is accociated with the diagram
+    This is primaily to ensure that auto margin and automatic scaling works properly*/
+    const wrapper = d3.select("body")
+        .append("div")
+        .attr("id", "chartId");
 
-//additional style to ensure centering of diagram within the webpage
-/*Note: these wrappers and containers are to protect the diagram from outside CSS 
-and make the CSS that needs to be implimented is implimented*/
-const svg = svgContainer
-    .append("svg")
-    .attr("id", "diagramSVG")
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", `0 0 ${width + flyOutSpace} ${height}`)
-    .style("display", "inline-block")
-    .style("position", "relative")
-    .style("top", "10px")
-    .style("left", "0");
+    //the svg contain will contain the svg all style's are to ensure proper scaling of the diagram in differing viewports
+    const svgContainer = d3.select("div#chartId")
+        .append("div")
+        .classed("svg-container", true)
+        .style("display", "block")
+        .style("max-width", "1500px")
+        .style("position", "relative")
+        .style("width", "100%")
+        .style("padding-bottom", "1%")
+        .style("vertical-align", "top")
+        .style("overflow", "hidden")
+        .style("margin", "auto");
 
-/*creating the grey background for the diagram*/
-svg.append("rect")
-    .attr("width", `${width + flyOutSpace}`)
-    .attr("height", `${height}`)
-    .attr("fill", "#D3D3D3")
-    .attr("stroke-width", "5px")
-    .attr("stroke", "black");
+    //additional style to ensure centering of diagram within the webpage
+    /*Note: these wrappers and containers are to protect the diagram from outside CSS 
+    and make the CSS that needs to be implimented is implimented*/
+    const svg = svgContainer
+        .append("svg")
+        .attr("id", "diagramSVG")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", `0 0 ${width + flyOutSpace} ${height}`)
+        .style("display", "inline-block")
+        .style("position", "relative")
+        .style("top", "10px")
+        .style("left", "0");
 
-//Global variable tracking a nodes source due to how diagrams are selected and linked this must be global
-let currentSource = null;
+    /*creating the grey background for the diagram*/
+    svg.append("rect")
+        .attr("width", `${width + flyOutSpace}`)
+        .attr("height", `${height}`)
+        .attr("fill", "#D3D3D3")
+        .attr("stroke-width", "5px")
+        .attr("stroke", "black");
 
-//when a node is clicked the tooltip will disappear breifly to allow for better view of connections
-let nodeAnimationCompleted = true;
+    //Global variable tracking a nodes source due to how diagrams are selected and linked this must be global
+    let currentSource = null;
+
+    //when a node is clicked the tooltip will disappear breifly to allow for better view of connections
+    let nodeAnimationCompleted = true;
 
 
-const tooltip = d3.select("#chartId")
-    .append("div")
-    .style("position", "absolute")
-    .attr("class", "tooltip")
-    .style("opacity", 0)
-    .style("background-color", "cornsilk")
-    .style("border", "solid 3px black")
-    .style("border-radius", "5px")
-    .style("padding", "5px")
-    .style("viibility", "hidden")
-    .style("text-align", "center")
-    .style("display", "none")
-    .html(`
+    const tooltip = d3.select("#chartId")
+        .append("div")
+        .style("position", "absolute")
+        .attr("class", "tooltip")
+        .style("opacity", 0)
+        .style("background-color", "cornsilk")
+        .style("border", "solid 3px black")
+        .style("border-radius", "5px")
+        .style("padding", "5px")
+        .style("viibility", "hidden")
+        .style("text-align", "center")
+        .style("display", "none")
+        .html(`
         <h4 class="toolTipHTML" id="pos">NULL</h4>
         <h5 class="toolTipHTML" id="salary">Salary: NULL</h5>
         <h5 class="toolTipHTML" id="reqEDU">Required Eduction: NULL</h5>
@@ -1014,191 +1017,191 @@ const tooltip = d3.select("#chartId")
         <h5 class="toolTipHTML" id="reqEXP">Required Expirence: NULL</h5>
         <h5 class="toolTipHTML" id="desEXP">Desired Expirence: NULL</h5>
         `)
-        .style("font-size","2px");
+        .style("font-size", "2px");
 
-        d3.select("#pos").style("font-size","5px");
-//Creation of data variable used later for binding data to HTML Elements
-const dataSegments = svg.selectAll("segment").data(data.segments);
-const dataTopLabel = svg.selectAll("tLabel").data(data.careerPaths);
-const dataSideLabel = svg.selectAll("sLabel").data(data.careerStage);
-const dataJobs = svg.selectAll("job").data(data.jobs);
-const dataLinks = svg.selectAll("link").data(data.links);
-const flyOutData = svg.selectAll("tooltipData").data(data.flyOut);
-let globalLaneWidth;
-let globalLaneHeight;
+    d3.select("#pos").style("font-size", "5px");
+    //Creation of data variable used later for binding data to HTML Elements
+    const dataSegments = svg.selectAll("segment").data(data.segments);
+    const dataTopLabel = svg.selectAll("tLabel").data(data.careerPaths);
+    const dataSideLabel = svg.selectAll("sLabel").data(data.careerStage);
+    const dataJobs = svg.selectAll("job").data(data.jobs);
+    const dataLinks = svg.selectAll("link").data(data.links);
+    const flyOutData = svg.selectAll("tooltipData").data(data.flyOut);
+    let globalLaneWidth;
+    let globalLaneHeight;
 
-//Manual Padding used thorughout diagram creation
-const paddingSpace = 15;
+    //Manual Padding used thorughout diagram creation
+    const paddingSpace = 15;
 
-//Flyout Card Global Constants
-const cardWidth = (flyOutSpace - 15);
-const cardHeight = 600;
-const cardX = paddingSpace;
-const cardY = (height / 2) - (cardHeight / 2);
-//Flyout Card Header Constants
-const cardHeaderX = cardX;
-const cardHeaderY = cardY;
-const cardHeaderWidth = cardWidth;
-const cardHeaderHeight = cardHeight / 10;
+    //Flyout Card Global Constants
+    const cardWidth = (flyOutSpace - 15);
+    const cardHeight = 600;
+    const cardX = paddingSpace;
+    const cardY = (height / 2) - (cardHeight / 2);
+    //Flyout Card Header Constants
+    const cardHeaderX = cardX;
+    const cardHeaderY = cardY;
+    const cardHeaderWidth = cardWidth;
+    const cardHeaderHeight = cardHeight / 10;
 
-//Calling all functionsfor creation of the diagram
-body.style("font-family", " Arial, Helvetica, sans-serif");
-swimingLaneCreation(4, 3);
-topLabels();
-sideLabel();
-jobsCreation();
-flyOutCreation();
+    //Calling all functionsfor creation of the diagram
+    body.style("font-family", " Arial, Helvetica, sans-serif");
+    swimingLaneCreation(4, 3);
+    topLabels();
+    sideLabel();
+    jobsCreation();
+    flyOutCreation();
 
-//ensures that all text is Helvetica
-
-
-//ensures the diagrma is moved to the side for the fly out and accounts for padding
-svg.selectAll("#diagram")
-    .attr("transform", `translate(${flyOutSpace + paddingSpace},${paddingSpace})`);
+    //ensures that all text is Helvetica
 
 
-//a function used to create the flyout
-function flyOutCreation() {
-    svg.append("rect")
-        .attr("x", cardX)
-        .attr("y", cardY)
-        .attr("width", cardWidth)
-        .attr("height", cardHeight)
-        .style("rx", 10)
-        .style("ry", 10)
-        .style("stroke-width", "5px")
-        .style("stroke", "black")
-
-    const flyOutCard = svg
-        .append("g")
-        .attr("id", "flyOut")
-        .attr("class", "daigram");
+    //ensures the diagrma is moved to the side for the fly out and accounts for padding
+    svg.selectAll("#diagram")
+        .attr("transform", `translate(${flyOutSpace + paddingSpace},${paddingSpace})`);
 
 
-    flyOutCard
-        .append("rect")
-        .attr("x", `${cardX}px`)
-        .attr("y", `${cardY}px`)
-        .attr("width", `${cardWidth}px`)
-        .attr("height", `${cardHeight}px`)
-        .style("fill", "#c3dbb6")
-        .style("rx", 10)
-        .style("ry", 10);
+    //a function used to create the flyout
+    function flyOutCreation() {
+        svg.append("rect")
+            .attr("x", cardX)
+            .attr("y", cardY)
+            .attr("width", cardWidth)
+            .attr("height", cardHeight)
+            .style("rx", 10)
+            .style("ry", 10)
+            .style("stroke-width", "5px")
+            .style("stroke", "black")
 
-    flyOutCard
-        .append("rect")
-        .attr("id", "cardHeader")
-        .attr("x", `${cardHeaderX}px`)
-        .attr("y", `${cardHeaderY}px`)
-        .attr("width", `${cardHeaderWidth}px`)
-        .attr("height", `${cardHeaderHeight}px`)
-        .style("fill", "#ffff")
-        .style("rx", 10)
-        .style("ry", 10)
-    flyOutCard
-        .append("rect")
-        .attr("x", `${cardHeaderX}px`)
-        .attr("y", `${cardHeaderY + (cardHeaderHeight - 5)}px`)
-        .attr("width", `${cardHeaderWidth}px`)
-        .style("fill", "#ffff")
-        .attr("height", `${5}px`);
-
-    const CardContentX = paddingSpace + 15;
-    const CardContentY = cardHeaderY + cardHeaderHeight + paddingSpace;
-    const CardContentWidth = flyOutSpace - (30 + paddingSpace);
-    const CardContentHeight = cardHeight - (paddingSpace * 2) - cardHeaderHeight;
-    flyOutCard
-        .append("rect")
-        .attr("id", "card Content")
-        .attr("x", `${CardContentX}px`)
-        .attr("y", `${CardContentY}px`)
-        .attr("width", `${CardContentWidth}`)
-        .attr("height", `${CardContentHeight}px`)
-        .style("fill", "#F8F8F8")
-        .style("rx", 10)
-        .style("ry", 10);
-
-    console.log(CardContentHeight)
-
-    let headerText = flyOutCard
-        .append("text")
-        .text("N/A")
-        .attr("font-weight", "bold")
-        .attr("class", "Position")
-        .attr("id", "headerText");
-
-    let bboxHeader = headerText.node().getBBox();
+        const flyOutCard = svg
+            .append("g")
+            .attr("id", "flyOut")
+            .attr("class", "daigram");
 
 
-    headerText.attr("x", function () {
-        return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
-    })
-        .attr("y", function () {
-            return cardHeaderY + ((cardHeaderHeight - bboxHeader.height) - 5);
+        flyOutCard
+            .append("rect")
+            .attr("x", `${cardX}px`)
+            .attr("y", `${cardY}px`)
+            .attr("width", `${cardWidth}px`)
+            .attr("height", `${cardHeight}px`)
+            .style("fill", "#c3dbb6")
+            .style("rx", 10)
+            .style("ry", 10);
+
+        flyOutCard
+            .append("rect")
+            .attr("id", "cardHeader")
+            .attr("x", `${cardHeaderX}px`)
+            .attr("y", `${cardHeaderY}px`)
+            .attr("width", `${cardHeaderWidth}px`)
+            .attr("height", `${cardHeaderHeight}px`)
+            .style("fill", "#ffff")
+            .style("rx", 10)
+            .style("ry", 10)
+        flyOutCard
+            .append("rect")
+            .attr("x", `${cardHeaderX}px`)
+            .attr("y", `${cardHeaderY + (cardHeaderHeight - 5)}px`)
+            .attr("width", `${cardHeaderWidth}px`)
+            .style("fill", "#ffff")
+            .attr("height", `${5}px`);
+
+        const CardContentX = paddingSpace + 15;
+        const CardContentY = cardHeaderY + cardHeaderHeight + paddingSpace;
+        const CardContentWidth = flyOutSpace - (30 + paddingSpace);
+        const CardContentHeight = cardHeight - (paddingSpace * 2) - cardHeaderHeight;
+        flyOutCard
+            .append("rect")
+            .attr("id", "card Content")
+            .attr("x", `${CardContentX}px`)
+            .attr("y", `${CardContentY}px`)
+            .attr("width", `${CardContentWidth}`)
+            .attr("height", `${CardContentHeight}px`)
+            .style("fill", "#F8F8F8")
+            .style("rx", 10)
+            .style("ry", 10);
+
+        console.log(CardContentHeight)
+
+        let headerText = flyOutCard
+            .append("text")
+            .text("N/A")
+            .attr("font-weight", "bold")
+            .attr("class", "Position")
+            .attr("id", "headerText");
+
+        let bboxHeader = headerText.node().getBBox();
+
+
+        headerText.attr("x", function () {
+            return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
         })
+            .attr("y", function () {
+                return cardHeaderY + ((cardHeaderHeight - bboxHeader.height) - 5);
+            })
 
-    //Creating the labels for each of the flyout's content text(Creates the bolded "Salary:" text you see)
-    flyOutData.enter()
-        .append("text")
-        .attr("font-weight", "bold")
-        .text(function (d, i) { return `${d.name}:` })
-        .attr("x", CardContentX + paddingSpace)
-        .attr("y", function (d, i) {
-            return CardContentY + paddingSpace * 2 + ((CardContentWidth / 4) * i)
+        //Creating the labels for each of the flyout's content text(Creates the bolded "Salary:" text you see)
+        flyOutData.enter()
+            .append("text")
+            .attr("font-weight", "bold")
+            .text(function (d, i) { return `${d.name}:` })
+            .attr("x", CardContentX + paddingSpace)
+            .attr("y", function (d, i) {
+                return CardContentY + paddingSpace * 2 + ((CardContentWidth / 4) * i)
 
-        });
-    //Fills the text for each of the flyout information
-    flyOutData.enter()
-        .append("text")
-        .attr("font-weight", "normal")
-        .attr("class", function (d) { return d.name.split(" ").join("") })
-        .attr("id", "flyOutText")
-        .attr("x", CardContentX + paddingSpace)
-        .attr("y", function (d, i) {
-            let offSet = 25;
-            return offSet + CardContentY + paddingSpace * 2 + ((CardContentWidth / 4) * i)
+            });
+        //Fills the text for each of the flyout information
+        flyOutData.enter()
+            .append("text")
+            .attr("font-weight", "normal")
+            .attr("class", function (d) { return d.name.split(" ").join("") })
+            .attr("id", "flyOutText")
+            .attr("x", CardContentX + paddingSpace)
+            .attr("y", function (d, i) {
+                let offSet = 25;
+                return offSet + CardContentY + paddingSpace * 2 + ((CardContentWidth / 4) * i)
 
-        });
+            });
 
-}
-
-
+    }
 
 
-//when you click on the diagram the destroys all links and returns the diagram to its default state
-d3.selectAll("#diagram").on("click", linkRemoval);
 
-//All job nodes will have mouse over, on click, on touch, and mouse out functionality
-let jobs = d3.selectAll("#job")
-    .on("mouseover", function (d) {
-        //Ensures the tooltip scales with the diagram. Although extremely small dimensions are not accounted for
-        let viewPortWidth = window.innerWidth
-        if (viewPortWidth >= 1500) {
-            tooltip.style("font-size", "17px");
-            tooltip.style("max-width", "250px");
-        }
-        else if (viewPortWidth < 1500 && viewPortWidth >= 1200) {
-            tooltip.style("font-size", "15px");
-            tooltip.style("max-width", "220px");
-        }
-        else if (viewPortWidth < 1200 && viewPortWidth >= 900) {
-            tooltip.style("font-size", "12px");
-            tooltip.style("max-width", "200px");
-        }
-        else if (viewPortWidth < 900 && viewPortWidth >= 600) {
-            tooltip.style("font-size", "10px");
-            tooltip.style("max-width", "120px");
-        }
-        else if (viewPortWidth < 600) {
-            tooltip.style("font-size", "9px");
-            tooltip.style("max-width", "100px");
-        }
 
-        //ensures that the fade in animation is completed
-        if (nodeAnimationCompleted) {
-            //Datum is used to obtain data from a HTML element
-            let overNodeData = d3.select(d.path[1]).datum();
-            tooltip.html(`
+    //when you click on the diagram the destroys all links and returns the diagram to its default state
+    d3.selectAll("#diagram").on("click", linkRemoval);
+
+    //All job nodes will have mouse over, on click, on touch, and mouse out functionality
+    let jobs = d3.selectAll("#job")
+        .on("mouseover", function (d) {
+            //Ensures the tooltip scales with the diagram. Although extremely small dimensions are not accounted for
+            let viewPortWidth = window.innerWidth
+            if (viewPortWidth >= 1500) {
+                tooltip.style("font-size", "17px");
+                tooltip.style("max-width", "250px");
+            }
+            else if (viewPortWidth < 1500 && viewPortWidth >= 1200) {
+                tooltip.style("font-size", "15px");
+                tooltip.style("max-width", "220px");
+            }
+            else if (viewPortWidth < 1200 && viewPortWidth >= 900) {
+                tooltip.style("font-size", "12px");
+                tooltip.style("max-width", "200px");
+            }
+            else if (viewPortWidth < 900 && viewPortWidth >= 600) {
+                tooltip.style("font-size", "10px");
+                tooltip.style("max-width", "120px");
+            }
+            else if (viewPortWidth < 600) {
+                tooltip.style("font-size", "9px");
+                tooltip.style("max-width", "100px");
+            }
+
+            //ensures that the fade in animation is completed
+            if (nodeAnimationCompleted) {
+                //Datum is used to obtain data from a HTML element
+                let overNodeData = d3.select(d.path[1]).datum();
+                tooltip.html(`
                 <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
                 <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
                 <h5 class="toolTipHTML" id="reqEDU">Required Eduction: ${overNodeData.eduReq}</h5>
@@ -1206,607 +1209,608 @@ let jobs = d3.selectAll("#job")
                 <h5 class="toolTipHTML" id="reqEXP">Required Expirence: ${overNodeData.reqExp}</h5>
                 <h5 class="toolTipHTML" id="desEXP">Desired Expirence: ${overNodeData.desExp}</h5>
             `)
-                .style("display", "block");
+                    .style("display", "block");
 
-            d3.selectAll(".toolTipHTML")
-                .style("border-bottom", "2px solid black")
-                .style("color", "#24211D");
-            //controls the opacity animation that will have the tooltip fade in and out
-            tooltip.transition()
-                .duration(500)
-                .style("opacity", 1);
+                d3.selectAll(".toolTipHTML")
+                    .style("border-bottom", "2px solid black")
+                    .style("color", "#24211D");
+                //controls the opacity animation that will have the tooltip fade in and out
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 1);
 
 
-        }
+            }
 
-    })
-    .on("mousemove", function (event) {
+        })
+        .on("mousemove", function (event) {
 
-        /*this code primarily ensures that the tooltip with always be above the job nodes and
-        that the tooltip will be always contained within the diagram*/
-        let toolTipBox = document.querySelector(".tooltip");
-        let currentWidth = toolTipBox.offsetWidth;
-        let currentHeight = toolTipBox.offsetHeight;
-        let svgElem = document.querySelector("#diagramSVG");
-        let svgBBox = svgElem.getBoundingClientRect();
-        //top
-        tooltip.style("top", function () {
+            /*this code primarily ensures that the tooltip with always be above the job nodes and
+            that the tooltip will be always contained within the diagram*/
+            let toolTipBox = document.querySelector(".tooltip");
+            let currentWidth = toolTipBox.offsetWidth;
+            let currentHeight = toolTipBox.offsetHeight;
+            let svgElem = document.querySelector("#diagramSVG");
+            let svgBBox = svgElem.getBoundingClientRect();
+            //top
+            tooltip.style("top", function () {
 
-            if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top - window.scrollY > 0) {
+                if ((event.pageY - currentHeight - (currentHeight / 8)) - svgBBox.top - window.scrollY > 0) {
 
-                return `${event.pageY - currentHeight - (currentHeight / 8)}px`;
+                    return `${event.pageY - currentHeight - (currentHeight / 8)}px`;
+                }
+                else {
+                    return `${event.pageY + (currentHeight / 8)}px`;
+                }
+
+            }).style("left", function () {
+
+                if ((event.pageX - (currentWidth / 2)) <= svgBBox.left) {
+                    return `${svgBBox.left}px`;
+                    // this will keep the tooltip within the html page(ive tried to keep it within the svg element but its behavior was inconsistant)
+                }
+                else if ((event.pageX + (currentWidth / 2)) >= svgBBox.right) {
+                    return `${svgBBox.right - currentWidth}px`;
+                }
+                else {
+                    return `${event.pageX - (currentWidth / 2)}px`;
+                }
+            });
+        })
+        .on("mouseout", function () {
+            if (nodeAnimationCompleted) {
+                //the tooltip will no longer be displayed once mouse is out, this is to ensure that the tooltip doesnt effect on hover functionality
+                tooltip.transition()
+                    .delay(150)
+                    .duration(500)
+                    .style("opacity", 0)
+                    .on("end", function () { tooltip.style("display", "none") });
+            }
+        })
+        //On touch and on click preform the same task
+        .on("touchstart", function (d) {
+            //gets data from the job nodes
+            let overNodeData = d3.select(d.path[1]).datum();
+            //ensures that flyout header data is displayed
+            let headerText = d3.select(".Position")
+            headerText.text(overNodeData.name);
+            let bboxHeader = headerText.node().getBBox();
+            headerText.attr("x", function () {
+                return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
+            })
+                .attr("y", function () {
+                    return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - 5;
+                });
+
+            //ensures that flyout content text is displayed once touched
+            d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
+            d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
+            d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
+            d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
+            d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
+
+            //calls generate links function
+            generateLinks(this);
+        })
+        .on("click", function (d) {
+            let overNodeData = d3.select(d.path[1]).datum();
+            let headerText = d3.select(".Position")
+            headerText.text(overNodeData.name);
+            console.log(d3.select(".Position").node().getComputedTextLength());
+            let yTextAdjust = 0;
+            let headerLength = d3.select(".Position").node().getComputedTextLength();
+            if (headerLength < 325) {
+                headerText.style("font-size", "20px");
+                yTextAdjust = 5;
             }
             else {
-                return `${event.pageY + (currentHeight / 8)}px`;
+                headerText.style("font-size", "15px");
+                yTextAdjust = 0;
             }
+            let bboxHeader = headerText.node().getBBox();
+            console.log(bboxHeader);
 
-        }).style("left", function () {
+            console.log(headerText);
+            headerText.attr("x", function () {
+                return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
+            })
+                .attr("y", function () {
+                    return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - yTextAdjust;
+                });
 
-            if ((event.pageX - (currentWidth / 2)) <= svgBBox.left) {
-                return `${svgBBox.left}px`;
-                // this will keep the tooltip within the html page(ive tried to keep it within the svg element but its behavior was inconsistant)
-            }
-            else if ((event.pageX + (currentWidth / 2)) >= svgBBox.right) {
-                return `${svgBBox.right-currentWidth}px`;
-            }
-            else {
-                return `${event.pageX - (currentWidth / 2)}px`;
-            }
+            d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
+            d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
+            d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
+            d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
+            d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
+
+            generateLinks(this);
         });
-    })
-    .on("mouseout", function () {
-        if (nodeAnimationCompleted) {
-            //the tooltip will no longer be displayed once mouse is out, this is to ensure that the tooltip doesnt effect on hover functionality
-            tooltip.transition()
-                .delay(150)
-                .duration(500)
-                .style("opacity", 0)
-                .on("end", function () { tooltip.style("display", "none") });
-        }
-    })
-    //On touch and on click preform the same task
-    .on("touchstart", function (d) {
-        //gets data from the job nodes
-        let overNodeData = d3.select(d.path[1]).datum();
-        //ensures that flyout header data is displayed
-        let headerText = d3.select(".Position")
-        headerText.text(overNodeData.name);
-        let bboxHeader = headerText.node().getBBox();
-        headerText.attr("x", function () {
-            return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
-        })
-            .attr("y", function () {
-                return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - 5;
-            });
 
-        //ensures that flyout content text is displayed once touched
-        d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
-        d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
-        d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
-        d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
-        d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
+    //creates all the jobs based on dataJobs
+    function jobsCreation() {
+        let currentGElement = null;
+        let enteringText = dataJobs
+            .enter()
+            .append("g")
+            .attr("x", function (d) { return d.posX })
+            .attr("y", function (d) { return d.posY })
+            .attr("id", "job")
+            .attr("class", function (d) {
+                //in order for classification to work special characters are removed 
+                let newName = d.name
+                    .replaceAll('(', '')
+                    .replaceAll(')', '')
+                    .replaceAll('/', '');
+                newName = newName.split(" ").join("");
 
-        //calls generate links function
-        generateLinks(this);
-    })
-    .on("click", function (d) {
-        let overNodeData = d3.select(d.path[1]).datum();
-        let headerText = d3.select(".Position")
-        headerText.text(overNodeData.name);
-        console.log(d3.select(".Position").node().getComputedTextLength());
-        let yTextAdjust = 0;
-        let headerLength = d3.select(".Position").node().getComputedTextLength();
-        if(headerLength <325){
-            headerText.style("font-size","20px");
-            yTextAdjust = 5;
-        }
-        else{
-            headerText.style("font-size","15px");
-            yTextAdjust = 0;
-        }
-        let bboxHeader = headerText.node().getBBox();
-        console.log(bboxHeader);
+                return newName
+            })
+            .append("text")
+            .attr("x", function (d) { return d.posX })
+            .attr("y", function (d) { return d.posY })
+            .attr("id", "jobText")
+            .attr("class", function (d) { return d.name })
+            .text(function (d) { return d.name })
+            .call(wrap, 30)
+            .each(function (d, i) {
 
-        console.log(headerText);
-        headerText.attr("x", function () {
-            return cardHeaderX + ((cardHeaderWidth - bboxHeader.width) / 2);
-        })
-            .attr("y", function () {
-                return cardHeaderY + ((cardHeaderHeight - bboxHeader.height)) - yTextAdjust;
-            });
-
-        d3.select(".Salary").text(overNodeData.salary).call(wrap, 300);
-        d3.select(".RequiredEducation").text(overNodeData.eduReq).call(wrap, 300);
-        d3.select(".DesiredEducation").text(overNodeData.eduDes).call(wrap, 300);
-        d3.select(".RequiredExpirence").text(overNodeData.reqExp).call(wrap, 300);
-        d3.select(".DesiredExpirence").text(overNodeData.desExp).call(wrap, 300);
-
-        generateLinks(this);
-    });
-
-//creates all the jobs based on dataJobs
-function jobsCreation() {
-    let currentGElement = null;
-    let enteringText = dataJobs
-        .enter()
-        .append("g")
-        .attr("x", function (d) { return d.posX })
-        .attr("y", function (d) { return d.posY })
-        .attr("id", "job")
-        .attr("class", function (d) {
-            //in order for classification to work special characters are removed 
-            let newName = d.name
-                .replaceAll('(', '')
-                .replaceAll(')', '')
-                .replaceAll('/', '');
-            newName = newName.split(" ").join("");
-
-            return newName
-        })
-        .append("text")
-        .attr("x", function (d) { return d.posX })
-        .attr("y", function (d) { return d.posY })
-        .attr("id", "jobText")
-        .attr("class", function (d) { return d.name })
-        .text(function (d) { return d.name })
-        .call(wrap, 30)
-        .each(function (d, i) {
-
-            /*
-                When creating the job nodes if they are not centered and wrapped there is no displacement
-                but when wrapped and centered, the node is displaced seemingly randomly horizonally and vertically
-                there for I create 2 instances of the nodes one where this is no wrapping and another where their is.
-                I then get the difference in the x direction and fix the horizonal displacement. Vertical displacement is
-                fixed during wrapping.
-            */
-           //creation of first node box(No wrapping)
-            let objectToAppend = d3.select(this.parentNode);
-            let padding = 20;
-            let pastX = null;
-            let newX = null;
-            let pastbbox = objectToAppend.node().getBBox();
-            objectToAppend.append("rect")
-                .attr("id", "dumbRect")
-                .attr("x", function () {
-                    pastX = pastbbox.x - (padding / 2);
-                    return pastbbox.x - (padding / 2);
-                })
-                .attr("y", function () { return pastbbox.y - (padding / 2) })
-                .attr("width", function () { return pastbbox.width + padding })
-                .attr("height", function () { return pastbbox.height + padding })
-                .remove();
+                /*
+                    When creating the job nodes if they are not centered and wrapped there is no displacement
+                    but when wrapped and centered, the node is displaced seemingly randomly horizonally and vertically
+                    there for I create 2 instances of the nodes one where this is no wrapping and another where their is.
+                    I then get the difference in the x direction and fix the horizonal displacement. Vertical displacement is
+                    fixed during wrapping.
+                */
+                //creation of first node box(No wrapping)
+                let objectToAppend = d3.select(this.parentNode);
+                let padding = 20;
+                let pastX = null;
+                let newX = null;
+                let pastbbox = objectToAppend.node().getBBox();
+                objectToAppend.append("rect")
+                    .attr("id", "dumbRect")
+                    .attr("x", function () {
+                        pastX = pastbbox.x - (padding / 2);
+                        return pastbbox.x - (padding / 2);
+                    })
+                    .attr("y", function () { return pastbbox.y - (padding / 2) })
+                    .attr("width", function () { return pastbbox.width + padding })
+                    .attr("height", function () { return pastbbox.height + padding })
+                    .remove();
 
                 //creation of second node box with wrapping and centering
-            d3.selectAll(this.children).style("text-anchor", "middle");
-            let bbox = objectToAppend.node().getBBox();
-            newX = bbox.x - (padding / 2);
+                d3.selectAll(this.children).style("text-anchor", "middle");
+                let bbox = objectToAppend.node().getBBox();
+                newX = bbox.x - (padding / 2);
 
-            let difference = Math.abs(pastX - newX);
-            objectToAppend.append("rect")
-                .attr("x", bbox.x - (padding / 2))
-                .attr("y", bbox.y - (padding / 2))
-                .attr("width", function (d) { d.width = bbox.width; return bbox.width + padding })
-                .attr("height", function (d) { d.height = bbox.height; return bbox.height + padding })
-                .attr("rx", 6)
-                .attr("ry", 6)
-                .attr("id", "jobBox")
-                .style("fill", "white")
-                .style("stroke-width", "1.5px")
-                .style("stroke", "black");
+                let difference = Math.abs(pastX - newX);
+                objectToAppend.append("rect")
+                    .attr("x", bbox.x - (padding / 2))
+                    .attr("y", bbox.y - (padding / 2))
+                    .attr("width", function (d) { d.width = bbox.width; return bbox.width + padding })
+                    .attr("height", function (d) { d.height = bbox.height; return bbox.height + padding })
+                    .attr("rx", 6)
+                    .attr("ry", 6)
+                    .attr("id", "jobBox")
+                    .style("fill", "white")
+                    .style("stroke-width", "1.5px")
+                    .style("stroke", "black");
                 //translating the node by the difference found in the Y and X (Y handed during wrapping function)
-            objectToAppend.attr("transform", `translate(${difference},${-objectToAppend.datum().yAdjustment})`);
+                objectToAppend.attr("transform", `translate(${difference},${-objectToAppend.datum().yAdjustment})`);
 
 
 
 
-        })
-        //The text is then risen so it will be above the newly created job boxes
-        .raise();
-
-}
-function generateLinks(selectedNode) {
-
-    //when links are generated tooltip is nolonger displayed to allow for viewing of the diagram
-    tooltip.style("display", "none");
-    let source = null;
-    //looking for the selected job node and finding which place does it have in the job array
-    for (let x = 0; x < data.jobs.length; x++) {
-        if (data.jobs[x].name == selectedNode.__data__.name) {//get the second child element this will ALWAYS be the text element
-            source = x;
-            break;
-        }
+            })
+            //The text is then risen so it will be above the newly created job boxes
+            .raise();
 
     }
-    //setting up for generating links by lowing opacity of every jobnode
-    currentSource = source;
-    svg.selectAll("#jobBox").style("fill", "white");
-    svg.selectAll("#jobBox").style("opacity", "0.3");
-    svg.selectAll("#jobText").style("opacity", "0.3");
-    svg.selectAll(".link").remove();
-    let sourceX = null;
-    let sourceY = null;
-    let targetX = null;
-    let targetY = null;
+    function generateLinks(selectedNode) {
 
-    //links are generated using the data from the selected source
-    dataLinks
-        .enter()
-        .each(function (d) {
-            const objectToAppend = d3.select(this);
-            if (d.source == source) {
-                sourceX = (data.jobs[d.source].posX + (data.jobs[d.source].width / 2));
-                sourceY = (data.jobs[d.source].posY - (data.jobs[d.source].height / 2) - 1);
-                targetX = (data.jobs[d.target].posX + (data.jobs[d.target].width / 2));
-                targetY = (data.jobs[d.target].posY - (data.jobs[d.target].height / 2));
+        //when links are generated tooltip is nolonger displayed to allow for viewing of the diagram
+        tooltip.style("display", "none");
+        let source = null;
+        //looking for the selected job node and finding which place does it have in the job array
+        for (let x = 0; x < data.jobs.length; x++) {
+            if (data.jobs[x].name == selectedNode.__data__.name) {//get the second child element this will ALWAYS be the text element
+                source = x;
+                break;
             }
-            objectToAppend.append("line")
-                .attr("class", "link")
-                .attr("x1", sourceX)
-                .attr("y1", sourceY)
-                .attr("x2", sourceX)
-                .attr("y2", sourceY)
-                .attr("stroke-width", "3px")
-                .attr("stroke", "white")
-                .attr("fill", "none")
-                .transition()
-                .duration(1500)
-                .attr("x2", targetX)
-                .attr("y2", targetY);
 
-        });
+        }
+        //setting up for generating links by lowing opacity of every jobnode
+        currentSource = source;
+        svg.selectAll("#jobBox").style("fill", "white");
+        svg.selectAll("#jobBox").style("opacity", "0.3");
+        svg.selectAll("#jobText").style("opacity", "0.3");
+        svg.selectAll(".link").remove();
+        let sourceX = null;
+        let sourceY = null;
+        let targetX = null;
+        let targetY = null;
 
-    //node creation is than called and all job nodes are raised so links are under the nodes
-    selectedNodes();
-    d3.selectAll("#job").raise();
+        //links are generated using the data from the selected source
+        dataLinks
+            .enter()
+            .each(function (d) {
+                const objectToAppend = d3.select(this);
+                if (d.source == source) {
+                    sourceX = (data.jobs[d.source].posX + (data.jobs[d.source].width / 2));
+                    sourceY = (data.jobs[d.source].posY - (data.jobs[d.source].height / 2) - 1);
+                    targetX = (data.jobs[d.target].posX + (data.jobs[d.target].width / 2));
+                    targetY = (data.jobs[d.target].posY - (data.jobs[d.target].height / 2));
+                }
+                objectToAppend.append("line")
+                    .attr("class", "link")
+                    .attr("x1", sourceX)
+                    .attr("y1", sourceY)
+                    .attr("x2", sourceX)
+                    .attr("y2", sourceY)
+                    .attr("stroke-width", "3px")
+                    .attr("stroke", "white")
+                    .attr("fill", "none")
+                    .transition()
+                    .duration(1500)
+                    .attr("x2", targetX)
+                    .attr("y2", targetY);
 
+            });
 
-};
-function swimingLaneCreation(columnNum, rowNum) {
-
-    //ensures that each color codes sectino of the diagram has its proper width height and position
-    //the starting section position will always be 0,50
-    let currentPosX = 0;
-    let currentPosY = 50;
-    //the width and height of each section is the max width of the diagram divided by the number of each row and column
-    // the -80 is acounting for the horizonal padding 15*2 and vertical padding 15*2 in additino to the fact that the 
-    //height / width of the labels were 50 so 50+30 = 80;
-    const laneWidth = (width - 80) / columnNum;
-    const laneHeight = (height - 80) / rowNum;
-
-    //Lane Dimensions are stored for when used to create labels for the diagram
-    globalLaneWidth = laneWidth;
-    globalLaneHeight = laneHeight;
-
-    //creating each of the sections if the number of columns = the current section displace the Y by section height and reset X to Zero
-    let entering = dataSegments
-        .enter()
-        .append("rect")
-        .attr("x", function (a, i) {
-            if (i == 0) {
-                return currentPosX;
-            }
-            else if (i % columnNum == 0) {
-                currentPosX = 0;
-                return currentPosX;
-            }
-            else {
-                currentPosX += laneWidth;
-                return currentPosX;
-            }
-        })
-        .attr("y", function (a, i) {
-            if (i == 0) {
-                return currentPosY;
-            }
-            else if (i % columnNum == 0) {
-                currentPosY += laneHeight;
-
-                return currentPosY;
-            }
-            else {
-                return currentPosY;
-            }
-        })
-        .attr("width", `${laneWidth}`)
-        .attr("height", `${laneHeight}`)
-        .attr("fill", function (d) {//color is stored and used in the data
-            return d.color;
-        })
-        .attr("id", "diagram");
-
-    //lines for the outline of the diagram
-    svg.append("line")
-        .attr("class","pLine")//permanent Line
-        .attr("x1", 0 + flyOutSpace + 15)
-        .attr("y1", 50 + 15)
-        .attr("x2", 0 + flyOutSpace + 15)
-        .attr("y2", 50 + 15 + (height - 80))
-        .style("stroke", "black")
-        .style("stroke-width", "2px");
-
-    svg.append("line")
-        .attr("x1", 0 + flyOutSpace + 15)
-        .attr("class","pLine")//permanent Line
-        .attr("y1", 50 + 15 + (height - 80))
-        .attr("x2", 0 + flyOutSpace + 15 + (width - 80))
-        .attr("y2", 50 + 15 + (height - 80))
-        .style("stroke", "black")
-        .style("stroke-width", "2px")
-};
-
-function topLabels() {
-    /* */
-    let currentPosX = 0;
-    const currentPosY = 0;
-    let currentWidth = globalLaneWidth;
-    const currentHeight = 50;
-
-    let entering = dataTopLabel
-        .enter()
-        .append("g")
-        .attr("class", "careerLabelV")
-        .attr("id", "diagram");
-
-    entering.append("rect")
-        .attr("x", function (d, i) {
-            if (i == 0) {
-                d.posY = currentPosY;
-                d.posX = currentPosX;
-                return currentPosX;
-            }
-            else {
-                currentPosX += currentWidth;
-                d.posX = currentPosX;
-                return currentPosX;
-            }
-        })
-        .attr("y", function (d) { d.posY = currentPosY; return currentPosY; })
-        .attr("width", function (d) { d.width = currentWidth; return currentWidth })
-        .attr("height", function (d) { d.height = currentHeight; return currentHeight })
-        .attr("fill", "white")
-        .attr("id", "vRect")
-        .style("stroke-width", "2px")
-        .style("stroke", "black");
+        //node creation is than called and all job nodes are raised so links are under the nodes
+        selectedNodes();
+        d3.selectAll("#job").raise();
 
 
-    entering
-        .append("text")
-        .text(function (d) { return d.name })
-        .style("font-size", "14.5px")
-        .style("font-weight", "bold")
-        .each(function (d) {
+    };
+    function swimingLaneCreation(columnNum, rowNum) {
 
-            let currentText = d3.select(this);
-            let objectToAppend = d3.select(this.parentNode);
+        //ensures that each color codes sectino of the diagram has its proper width height and position
+        //the starting section position will always be 0,50
+        let currentPosX = 0;
+        let currentPosY = 50;
+        //the width and height of each section is the max width of the diagram divided by the number of each row and column
+        // the -80 is acounting for the horizonal padding 15*2 and vertical padding 15*2 in additino to the fact that the 
+        //height / width of the labels were 50 so 50+30 = 80;
+        const laneWidth = (width - 80) / columnNum;
+        const laneHeight = (height - 80) / rowNum;
 
-            let bbox = currentText.node().getBBox();//bbox is created to get the demensions and position of each of the labels
+        //Lane Dimensions are stored for when used to create labels for the diagram
+        globalLaneWidth = laneWidth;
+        globalLaneHeight = laneHeight;
 
-            let newPosX = d.posX + (d.width - bbox.width) / 2;//the difference in width /2 will give us the centered X
-            let newPosY = d.posY + (d.height - (bbox.height));//the differnce in height will give you 
+        //creating each of the sections if the number of columns = the current section displace the Y by section height and reset X to Zero
+        let entering = dataSegments
+            .enter()
+            .append("rect")
+            .attr("x", function (a, i) {
+                if (i == 0) {
+                    return currentPosX;
+                }
+                else if (i % columnNum == 0) {
+                    currentPosX = 0;
+                    return currentPosX;
+                }
+                else {
+                    currentPosX += laneWidth;
+                    return currentPosX;
+                }
+            })
+            .attr("y", function (a, i) {
+                if (i == 0) {
+                    return currentPosY;
+                }
+                else if (i % columnNum == 0) {
+                    currentPosY += laneHeight;
 
-            currentText
-                .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
-                .attr("y", function (d) { return newPosY });//accounting for transformation
+                    return currentPosY;
+                }
+                else {
+                    return currentPosY;
+                }
+            })
+            .attr("width", `${laneWidth}`)
+            .attr("height", `${laneHeight}`)
+            .attr("fill", function (d) {//color is stored and used in the data
+                return d.color;
+            })
+            .attr("id", "diagram");
 
-            currentText.raise();
-        });
-    d3.selectAll(".careerLabel");
-}
+        //lines for the outline of the diagram
+        svg.append("line")
+            .attr("class", "pLine")//permanent Line
+            .attr("x1", 0 + flyOutSpace + 15)
+            .attr("y1", 50 + 15)
+            .attr("x2", 0 + flyOutSpace + 15)
+            .attr("y2", 50 + 15 + (height - 80))
+            .style("stroke", "black")
+            .style("stroke-width", "2px");
 
-function sideLabel() {
+        svg.append("line")
+            .attr("x1", 0 + flyOutSpace + 15)
+            .attr("class", "pLine")//permanent Line
+            .attr("y1", 50 + 15 + (height - 80))
+            .attr("x2", 0 + flyOutSpace + 15 + (width - 80))
+            .attr("y2", 50 + 15 + (height - 80))
+            .style("stroke", "black")
+            .style("stroke-width", "2px")
+    };
 
-    //the width of the side labels is 50 and adjustment for the transformation of 15 and padding of 15
-    const currentPosX = width - 50 - (2 * 15);
-    let currentPosY = 50;
-    const currentWidth = 50;
-    //classifying the labels
-    let entering = dataSideLabel
-        .enter()
-        .append("g")
-        .attr("class", "careerLabelH")
-        .attr("id", "diagram");
+    function topLabels() {
+        /* */
+        let currentPosX = 0;
+        const currentPosY = 0;
+        let currentWidth = globalLaneWidth;
+        const currentHeight = 50;
 
-    //creating each of the rectangles for the labels
-    entering.append("rect")
-        .attr("x", function (d) { d.posX = currentPosX; return currentPosX })
-        .attr("y", function (d, i) {
-            if (i == 0) {
+        let entering = dataTopLabel
+            .enter()
+            .append("g")
+            .attr("class", "careerLabelV")
+            .attr("id", "diagram");
 
-                d.posY = currentPosY;
-                return currentPosY;
-            }
-            else {
-                currentPosY += globalLaneHeight;
-                d.posY = currentPosY;
-                return currentPosY;
-            }
-        })
-        .attr("width", function (d) { d.width = currentWidth; return currentWidth })
-        .attr("height", function (d) { d.height = globalLaneHeight; return globalLaneHeight })
-        .attr("fill", "white")
-        .style("stroke-width", "2px")
-        .style("stroke", "black");
+        entering.append("rect")
+            .attr("x", function (d, i) {
+                if (i == 0) {
+                    d.posY = currentPosY;
+                    d.posX = currentPosX;
+                    return currentPosX;
+                }
+                else {
+                    currentPosX += currentWidth;
+                    d.posX = currentPosX;
+                    return currentPosX;
+                }
+            })
+            .attr("y", function (d) { d.posY = currentPosY; return currentPosY; })
+            .attr("width", function (d) { d.width = currentWidth; return currentWidth })
+            .attr("height", function (d) { d.height = currentHeight; return currentHeight })
+            .attr("fill", "white")
+            .attr("id", "vRect")
+            .style("stroke-width", "2px")
+            .style("stroke", "black");
+
+
+        entering
+            .append("text")
+            .text(function (d) { return d.name })
+            .style("font-size", "14.5px")
+            .style("font-weight", "bold")
+            .each(function (d) {
+
+                let currentText = d3.select(this);
+                let objectToAppend = d3.select(this.parentNode);
+
+                let bbox = currentText.node().getBBox();//bbox is created to get the demensions and position of each of the labels
+
+                let newPosX = d.posX + (d.width - bbox.width) / 2;//the difference in width /2 will give us the centered X
+                let newPosY = d.posY + (d.height - (bbox.height));//the differnce in height will give you 
+
+                currentText
+                    .attr("x", function (d) { return newPosX })//gets x position from width and increasing starting at zero transformation already accounted for
+                    .attr("y", function (d) { return newPosY });//accounting for transformation
+
+                currentText.raise();
+            });
+        d3.selectAll(".careerLabel");
+    }
+
+    function sideLabel() {
+
+        //the width of the side labels is 50 and adjustment for the transformation of 15 and padding of 15
+        const currentPosX = width - 50 - (2 * 15);
+        let currentPosY = 50;
+        const currentWidth = 50;
+        //classifying the labels
+        let entering = dataSideLabel
+            .enter()
+            .append("g")
+            .attr("class", "careerLabelH")
+            .attr("id", "diagram");
+
+        //creating each of the rectangles for the labels
+        entering.append("rect")
+            .attr("x", function (d) { d.posX = currentPosX; return currentPosX })
+            .attr("y", function (d, i) {
+                if (i == 0) {
+
+                    d.posY = currentPosY;
+                    return currentPosY;
+                }
+                else {
+                    currentPosY += globalLaneHeight;
+                    d.posY = currentPosY;
+                    return currentPosY;
+                }
+            })
+            .attr("width", function (d) { d.width = currentWidth; return currentWidth })
+            .attr("height", function (d) { d.height = globalLaneHeight; return globalLaneHeight })
+            .attr("fill", "white")
+            .style("stroke-width", "2px")
+            .style("stroke", "black");
 
         //creating the text for each of the side labels and properly spacing them
-    entering.append("text")
-        .text(function (d) { return d.name })
-        .style("font-weight", "bold")
-        .style("font-size", "17px")
-        .each(function (d) {
-            let currentText = d3.select(this);
-            let bbox = currentText.node().getBBox();
+        entering.append("text")
+            .text(function (d) { return d.name })
+            .style("font-weight", "bold")
+            .style("font-size", "17px")
+            .each(function (d) {
+                let currentText = d3.select(this);
+                let bbox = currentText.node().getBBox();
 
-            //because the items are rotated 90 degrees height is affecting the x axis instead of the Y and vis versa so the differnce is the width - text(height)
-            let newPosX = d.posX + (d.width - bbox.height) / 2;
-            let newPosY = d.posY + (d.height - bbox.width) / 2;
+                //because the items are rotated 90 degrees height is affecting the x axis instead of the Y and vis versa so the differnce is the width - text(height)
+                let newPosX = d.posX + (d.width - bbox.height) / 2;
+                let newPosY = d.posY + (d.height - bbox.width) / 2;
 
-            /*
-            implimenting the transformation (unlike in other 
-            cases where objects have been moved globally)
-            we must transform locally so rotation occurs
-            around the text origin
-            */
-
-            currentText
-                .attr("transform", function () { return `translate(${newPosX},${newPosY}) rotate(90)` });
-        })
-}
-//simply used to remove all the links from the diagram and resetn the diagram to its default state
-function linkRemoval() {
-    svg.selectAll(".link").remove();
-    svg.selectAll("#jobBox")
-        .transition()
-        .duration(600)
-        .style("fill", "white")
-        .style("opacity", "1.0");
-
-    svg.selectAll("#jobText")
-        .transition()
-        .duration(600)
-        .style("opacity", "1.0")
-        .style("font-weight", "normal");
-}
-//used for highlighting the selected node
-function selectedNodes() {
-    //ensures all font is not bolded
-    svg.selectAll("#jobText").style("font-weight", "normal");
-    //causes the tooltip to disapear
-    tooltip.style("opacity", 0);
-    //lets the program know that an animation is in progress and is not compeleted
-    nodeAnimationCompleted = false;
-    dataLinks
-        .enter()
-        .each(function (d, i) {
-            //if the source has been found this means the node has targets and these will be highlighted as well
-            if (d.source == currentSource) {
-                //NOTE: variable creation not needed but makes it easier to understand whats going on
                 /*
-                    Remember when we classified each job node with is name after removing special characters? 
-                    Well here is where that comes in handy because we know the manipulation we did to create the class
-                    we can recreate this to find which node to highlight
+                implimenting the transformation (unlike in other 
+                cases where objects have been moved globally)
+                we must transform locally so rotation occurs
+                around the text origin
                 */
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('/', '')
-                    .replaceAll('(', '')
-                    .replaceAll(')', '')
-                    .split(" ").join("")}`).select("rect")
-                    .transition()
-                    .duration(600)
-                    .style("fill", "#D3D3D3").style("opacity", "1.0");
 
-                let targetNodes = d3.select(`.${data.jobs[d.target].name
-                    .replaceAll('/', '')
-                    .replaceAll('(', '')
-                    .replaceAll(')', '')
-                    .split(" ").join("")}`).select("rect")
-                    .transition()
-                    .duration(600)
-                    .style("fill", "white").style("opacity", "1.0");
+                currentText
+                    .attr("transform", function () { return `translate(${newPosX},${newPosY}) rotate(90)` });
+            })
+    }
+    //simply used to remove all the links from the diagram and resetn the diagram to its default state
+    function linkRemoval() {
+        svg.selectAll(".link").remove();
+        svg.selectAll("#jobBox")
+            .transition()
+            .duration(600)
+            .style("fill", "white")
+            .style("opacity", "1.0");
 
-                let sourceText = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('/', '')
-                    .replaceAll('(', '')
-                    .replaceAll(')', '')
-                    .split(" ").join("")}`).select("text")
-                    .transition()
-                    .duration(600)
-                    .style("opacity", "1.0")
-                    .style("font-weight", "bold");
+        svg.selectAll("#jobText")
+            .transition()
+            .duration(600)
+            .style("opacity", "1.0")
+            .style("font-weight", "normal");
+    }
+    //used for highlighting the selected node
+    function selectedNodes() {
+        //ensures all font is not bolded
+        svg.selectAll("#jobText").style("font-weight", "normal");
+        //causes the tooltip to disapear
+        tooltip.style("opacity", 0);
+        //lets the program know that an animation is in progress and is not compeleted
+        nodeAnimationCompleted = false;
+        dataLinks
+            .enter()
+            .each(function (d, i) {
+                //if the source has been found this means the node has targets and these will be highlighted as well
+                if (d.source == currentSource) {
+                    //NOTE: variable creation not needed but makes it easier to understand whats going on
+                    /*
+                        Remember when we classified each job node with is name after removing special characters? 
+                        Well here is where that comes in handy because we know the manipulation we did to create the class
+                        we can recreate this to find which node to highlight
+                    */
+                    let sourceNode = d3.select(`.${data.jobs[currentSource].name
+                        .replaceAll('/', '')
+                        .replaceAll('(', '')
+                        .replaceAll(')', '')
+                        .split(" ").join("")}`).select("rect")
+                        .transition()
+                        .duration(600)
+                        .style("fill", "#D3D3D3").style("opacity", "1.0");
 
-                let targetText = d3.select(`.${data.jobs[d.target].name
-                    .replaceAll('/', '')
-                    .replaceAll('(', '')
-                    .replaceAll(')', '')
-                    .split(" ").join("")}`).select("text")
-                    .transition()
-                    .duration(600)
-                    .style("opacity", "1.0");
+                    let targetNodes = d3.select(`.${data.jobs[d.target].name
+                        .replaceAll('/', '')
+                        .replaceAll('(', '')
+                        .replaceAll(')', '')
+                        .split(" ").join("")}`).select("rect")
+                        .transition()
+                        .duration(600)
+                        .style("fill", "white").style("opacity", "1.0");
+
+                    let sourceText = d3.select(`.${data.jobs[currentSource].name
+                        .replaceAll('/', '')
+                        .replaceAll('(', '')
+                        .replaceAll(')', '')
+                        .split(" ").join("")}`).select("text")
+                        .transition()
+                        .duration(600)
+                        .style("opacity", "1.0")
+                        .style("font-weight", "bold");
+
+                    let targetText = d3.select(`.${data.jobs[d.target].name
+                        .replaceAll('/', '')
+                        .replaceAll('(', '')
+                        .replaceAll(')', '')
+                        .split(" ").join("")}`).select("text")
+                        .transition()
+                        .duration(600)
+                        .style("opacity", "1.0");
+                }
+                //in the event that the node has no target. It will simply be the only highlighted node
+                else if (d.source != currentSource && data.jobs[currentSource].name != null) {
+                    tooltip.style("display", "none");
+                    let sourceNode = d3.select(`.${data.jobs[currentSource].name
+                        .replaceAll('(', '')
+                        .replaceAll(')', '')
+                        .replaceAll('/', '')
+                        .split(" ").join("")}`).select("rect")
+                        .transition()
+                        .duration(600)
+                        .style("fill", "#D3D3D3").style("opacity", "1.0");
+
+                    let sourceText = d3.select(`.${data.jobs[currentSource].name
+                        .replaceAll('(', '')
+                        .replaceAll(')', '')
+                        .replaceAll('/', '')
+                        .split(" ").join("")}`).select("text")
+                        .transition()
+                        .duration(600)
+                        .style("opacity", "1.0")
+                        .style("font-weight", "bold");
+                    //.on("end",setTimeout(function(){nodeAnimationCompleted = true;},100));
+                }
+                setTimeout(function () { nodeAnimationCompleted = true; }, 1200);
+
+            });
+    };
+
+    /*Citing code (Mike, B (Feb 2022) D3 JS V3. https://bl.ocks.org/mbostock/7555321)
+    this is code is used to wrap text in d3 js based on spacing
+    if their is a space within the text this will generate a new line*/
+    function wrap(text, width) {
+        /*
+            take the text element and break it up into tspan elements depending 
+            these elements will be children of the text and be broken up 
+            and spaced depending on padding
+        */
+        text.each(function () {
+            var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 17.6,//px
+                x = text.attr("x"),
+                y = text.attr("y"),
+                dy = 0,
+                tspan = text.text(null)
+                    .append("tspan")
+                    .attr("x", x)
+                    .attr("y", y)
+                    .attr("dy", function () { return dy + "px" });
+            while (word = words.pop()) {
+                if (word == "for") {
+                    console.log("bop");
+                }
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > width) {
+                    line.pop();
+                    tspan.text("  ");
+                    tspan.text(line.join(" "));
+                    line = [" " + word];
+                    tspan = text.append("tspan")
+                        .attr("x", function (d) {
+                            let newNumber = parseInt(x);
+                            return parseInt(newNumber)
+                        })
+                        .attr("y", y)
+                        .attr("dy", ++lineNumber * lineHeight + dy + "px")
+                        .text(word);
+                }
+
             }
-            //in the event that the node has no target. It will simply be the only highlighted node
-            else if (d.source != currentSource && data.jobs[currentSource].name != null) {
-                tooltip.style("display", "none");
-                let sourceNode = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('(', '')
-                    .replaceAll(')', '')
-                    .replaceAll('/', '')
-                    .split(" ").join("")}`).select("rect")
-                    .transition()
-                    .duration(600)
-                    .style("fill", "#D3D3D3").style("opacity", "1.0");
-
-                let sourceText = d3.select(`.${data.jobs[currentSource].name
-                    .replaceAll('(', '')
-                    .replaceAll(')', '')
-                    .replaceAll('/', '')
-                    .split(" ").join("")}`).select("text")
-                    .transition()
-                    .duration(600)
-                    .style("opacity", "1.0")
-                    .style("font-weight", "bold");
-                //.on("end",setTimeout(function(){nodeAnimationCompleted = true;},100));
+            /*
+            the code used to wrap text within the each of the job nodes also displaces them
+            from their original position we store the re-adjustment of the Y position within the 
+            node to use later in job creation to re-adjust the position to its proper location
+            */
+            let undefinedTest = d3.select(this.parentNode).datum();
+            if (undefinedTest != undefined) {
+                let adjustedY = lineNumber * lineHeight + dy;
+                d3.select(this.parentNode).datum().yAdjustment = adjustedY;
             }
-            setTimeout(function () { nodeAnimationCompleted = true; }, 1200);
+
 
         });
-};
-
-/*Citing code (Mike, B (Feb 2022) D3 JS V3. https://bl.ocks.org/mbostock/7555321)
-this is code is used to wrap text in d3 js based on spacing
-if their is a space within the text this will generate a new line*/
-function wrap(text, width) {
-    /*
-        take the text element and break it up into tspan elements depending 
-        these elements will be children of the text and be broken up 
-        and spaced depending on padding
-    */
-    text.each(function () {
-        var text = d3.select(this),
-            words = text.text().split(/\s+/).reverse(),
-            word,
-            line = [],
-            lineNumber = 0,
-            lineHeight = 17.6,//px
-            x = text.attr("x"),
-            y = text.attr("y"),
-            dy = 0,
-            tspan = text.text(null)
-                .append("tspan")
-                .attr("x", x)
-                .attr("y", y)
-                .attr("dy", function () { return dy + "px" });
-        while (word = words.pop()) {
-            if (word == "for") {
-                console.log("bop");
-            }
-            line.push(word);
-            tspan.text(line.join(" "));
-            if (tspan.node().getComputedTextLength() > width) {
-                line.pop();
-                tspan.text("  ");
-                tspan.text(line.join(" "));
-                line = [" " + word];
-                tspan = text.append("tspan")
-                    .attr("x", function (d) {
-                        let newNumber = parseInt(x);
-                        return parseInt(newNumber)
-                    })
-                    .attr("y", y)
-                    .attr("dy", ++lineNumber * lineHeight + dy + "px")
-                    .text(word);
-            }
-
-        }
-        /*
-        the code used to wrap text within the each of the job nodes also displaces them
-        from their original position we store the re-adjustment of the Y position within the 
-        node to use later in job creation to re-adjust the position to its proper location
-        */
-        let undefinedTest = d3.select(this.parentNode).datum();
-        if (undefinedTest != undefined) {
-            let adjustedY = lineNumber * lineHeight + dy;
-            d3.select(this.parentNode).datum().yAdjustment = adjustedY;
-        }
-
-
-    });
-}
+    }
+//});
