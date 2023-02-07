@@ -1200,7 +1200,7 @@ const data = {
             //ensures that the fade in animation is completed
             if (nodeAnimationCompleted) {
                 //Datum is used to obtain data from a HTML element
-                let overNodeData = d3.select(d.path[1]).datum();
+                let overNodeData = d3.select(d.currentTarget).datum();
                 tooltip.html(`
                 <h3 class="toolTipHTML" id="position">${overNodeData.name}</h3>
                 <h5 class="toolTipHTML" id="salary">Salary: ${overNodeData.salary}</h5>
@@ -1293,7 +1293,7 @@ const data = {
             generateLinks(this);
         })
         .on("click", function (d) {
-            let overNodeData = d3.select(d.path[1]).datum();
+            let overNodeData = d3.select(d.currentTarget).datum();
             let headerText = d3.select(".Position")
             headerText.text(overNodeData.name);
             console.log(d3.select(".Position").node().getComputedTextLength());
@@ -1651,7 +1651,7 @@ const data = {
                 */
 
                 currentText
-                    .attr("transform", function () { return `translate(${newPosX},${newPosY}) rotate(90)` });
+                    .attr("transform", function () { return `translate(${newPosX},${newPosY}) rotate(89.9)` });
             })
     }
     //simply used to remove all the links from the diagram and resetn the diagram to its default state
