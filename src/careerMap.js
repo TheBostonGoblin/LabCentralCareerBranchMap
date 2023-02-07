@@ -1270,7 +1270,7 @@ const data = {
         //On touch and on click preform the same task
         .on("touchstart", function (d) {
             //gets data from the job nodes
-            let overNodeData = d3.select(d.path[1]).datum();
+            let overNodeData = d3.select(d.currentTarget).datum();
             //ensures that flyout header data is displayed
             let headerText = d3.select(".Position")
             headerText.text(overNodeData.name);
